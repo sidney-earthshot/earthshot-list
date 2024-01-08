@@ -1,21 +1,31 @@
-import { useState } from "react";
-import { IconCaretDownFilled } from "@tabler/icons-react";
+import { useState, useRef } from "react";
+import { IconCaretDownFilled, IconPlus, IconTorii } from "@tabler/icons-react";
 
 import "./App.css";
 
 function App() {
   const [email, setEmail] = useState("");
+  const [search, setSearch] = useState("");
+
+  const filterRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("logged in");
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+  };
+
+  const focusFilter = () => {
+    filterRef.current && filterRef.current.focus();
   };
 
   return (
     <>
       {/* gif background */}
       <div
-        className={`w-full flex flex-col bg-sky-500 h-screen bg-[url('/public/tokyo.gif')] bg-no-repeat bg-cover`}
+        className={`w-full flex flex-col bg-sky-500 h-screen bg-[url('/tokyo.gif')] bg-no-repeat bg-cover`}
       >
         {/* hold profile top left */}
         <div className="flex items-center p-5 h-fit">
@@ -49,7 +59,7 @@ function App() {
             </div>
           </div>
 
-          {/* card */}
+          {/* card sign in */}
           <div className="bg-white p-6 shadow-lg rounded-xl w-80 m-2">
             <img
               className="w-full h-[150px] object-cover rounded-xl hover:opacity-80 hover:cursor-pointer"
@@ -109,7 +119,58 @@ function App() {
       </div>
 
       {/* filters and search bar */}
-      
+      <div className="">
+        <div className="flex justify-between">
+          <div className="flex items-center space-x-4 ml-16">
+            <button className="border rounded-lg shadow-sm px-3 py-2 text-red-600 font-bold border-red-600 hover:bg-red-600 hover:text-white">
+              Filters
+            </button>
+            <form onSubmit={handleSearch}>
+              <input
+                type="text"
+                ref={filterRef}
+                placeholder="Search or filter..."
+                value={search}
+                className="font-bold border border-gray-300 rounded-full shadow-sm px-3 py-3 my-5 focus:outline-none focus:border-red-300 focus:ring-2 focus:ring-red-300 hover:bg-gray-100"
+              ></input>
+            </form>
+            <button
+              className="flex items-center absolute left-[340px] bg-red-600 rounded-full p-1"
+              onClick={focusFilter}
+            >
+              <IconPlus className="" color="white" />
+            </button>
+          </div>
+
+          <div className="flex items-center mr-16 space-x-4 [&>*]:py-2 [&>*]:px-8 [&>*]:font-bold">
+            <button className="border border-gray-300 rounded-xl shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-100">
+              Grid View
+            </button>
+            <button className="border border-gray-300 rounded-xl shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-100">
+              Sort by
+            </button>
+          </div>
+        </div>
+
+        <div className="[&>*]:text-gray-400 [&>*]:py-2 [&>*]:px-3 [&>*]:font-bold space-x-4 ml-16 flex">
+          <button className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black">
+            <IconTorii />
+            Grid View
+          </button>
+          <button className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black">
+            <IconTorii />
+            Grid View
+          </button>
+          <button className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black">
+            <IconTorii />
+            Grid View
+          </button>
+          <button className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black">
+            <IconTorii />
+            Grid View
+          </button>
+        </div>
+      </div>
     </>
   );
 }
