@@ -25,7 +25,6 @@ function App() {
           ></img>
           <IconCaretDownFilled style={{ color: "white" }} />
         </div>
-
         {/* holds title and right sign in */}
         <div className="flex items-center justify-evenly h-screen p-5 w-full ">
           <div className="flex flex-col items-start w-[600px] [&>*]:m-2">
@@ -76,6 +75,41 @@ function App() {
           </div>
         </div>
       </div>
+      {/* companies logos */}
+
+      <div className="flex justify-center m-7 [&>*]:w-16 [&>*]:mx-5 ">
+        <img
+          className=""
+          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
+        ></img>
+        <img
+          className=""
+          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
+        ></img>
+        <img
+          className=""
+          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
+        ></img>
+        <img
+          className=""
+          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
+        ></img>
+        <img
+          className=""
+          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
+        ></img>
+        <img
+          className=""
+          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
+        ></img>
+        <img
+          className=""
+          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
+        ></img>
+      </div>
+
+      {/* filters and search bar */}
+      
     </>
   );
 }
