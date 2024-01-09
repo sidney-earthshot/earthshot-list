@@ -3,6 +3,8 @@ import { IconCaretDownFilled, IconPlus, IconTorii } from "@tabler/icons-react";
 
 import "./App.css";
 
+import CountryCard from "./components/CountryCard";
+
 function App() {
   const [email, setEmail] = useState("");
   const [search, setSearch] = useState("");
@@ -155,21 +157,52 @@ function App() {
         <div className="[&>*]:text-gray-400 [&>*]:py-2 [&>*]:px-3 [&>*]:font-bold space-x-4 ml-16 flex">
           <button className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black">
             <IconTorii />
-            Grid View
+            Asia
           </button>
           <button className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black">
             <IconTorii />
-            Grid View
+            Europe
           </button>
           <button className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black">
             <IconTorii />
-            Grid View
+            Latin America
           </button>
           <button className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black">
             <IconTorii />
-            Grid View
+            North America
           </button>
         </div>
+      </div>
+
+      {/* main grid section */}
+      <div className="grid grid-cols-9 gap-8 mx-16">
+        <CountryCard />
+
+        <CountryCard />
+
+        <CountryCard />
+
+        <CountryCard />
+
+        <CountryCard />
+
+        <CountryCard />
+
+        <CountryCard />
+
+        <CountryCard />
+
+        <CountryCard />
+
+        <CountryCard />
+
+        <CountryCard />
+
+        <CountryCard />
+
+        <CountryCard />
+
+        <CountryCard />
       </div>
     </>
   );
