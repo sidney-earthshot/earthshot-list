@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { IconCaretDownFilled, IconPlus, IconTorii } from "@tabler/icons-react";
+import { IconCaretDownFilled, IconPlus, IconTorii, IconWifi } from "@tabler/icons-react";
 
 import "./App.css";
 
