@@ -61,7 +61,7 @@ export default function CountryModal({ visible, onClose }) {
             className={`bg-black rounded-t-lg h-full flex justify-between bg-[rgba(0,0,0,0.5)]`}
           >
             <div className="text-white text-xs flex items-end">
-              <p className="text-gray-400">
+              <p className="text-gray-400 p-1">
                 Cost of Living {">>"} Asia {">>"} Thailand {">>"} Bangkok
               </p>
             </div>
@@ -72,7 +72,7 @@ export default function CountryModal({ visible, onClose }) {
                 Favourite
               </button>
             </div>
-            <div className="flex flex-col justify-end items-end">
+            <div className="flex flex-col justify-end items-end p-1">
               <p className="text-gray-400">5/5</p>
               <p className="text-gray-400">3099 reviews</p>
               <div className="flex space-x-1">
@@ -88,7 +88,7 @@ export default function CountryModal({ visible, onClose }) {
 
         {/* tabs */}
         <div className="w-full flex h-[60px] shadow-sm border-b-2">
-          <div className="flex justify-center bg-gray-100">
+          <div className="flex justify-center bg-gray-100 hover:bg-gray-300">
             <button
               className="w-10 flex items-center justify-center"
               onClick={() => scrollTabs("left")}
@@ -100,21 +100,69 @@ export default function CountryModal({ visible, onClose }) {
             className="flex overflow-x-auto [&>*]:p-5 [&>*]:flex-shrink-0"
             ref={tabsContainerRef}
           >
-            <Tab name={"Score"} />
-            <Tab name={"Digital Nomad Guide"} />
-            <Tab name={"People"} />
-            <Tab name={"Cost of Living"} />
-            <Tab name={"Pros and Cons"} />
-            <Tab name={"Photos"} />
-            <Tab name={"Reviews"} />
-            <Tab name={"Weather"} />
-            <Tab name={"Extra Tab"} />
-            <Tab name={"Extra Tab"} />
-            <Tab name={"Extra Tab"} />
-            <Tab name={"Extra Tab"} />
+            <Tab
+              name={"Score"}
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+            />
+            <Tab
+              name={"Digital Nomad Guide"}
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+            />
+            <Tab
+              name={"People"}
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+            />
+            <Tab
+              name={"Cost of Living"}
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+            />
+            <Tab
+              name={"Pros and Cons"}
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+            />
+            <Tab
+              name={"Photos"}
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+            />
+            <Tab
+              name={"Reviews"}
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+            />
+            <Tab
+              name={"Weather"}
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+            />
+            <Tab
+              name={"Extra Tab 1"}
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+            />
+            <Tab
+              name={"Extra Tab 2"}
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+            />
+            <Tab
+              name={"Extra Tab 3"}
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+            />
+            <Tab
+              name={"Extra Tab 4"}
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+            />
           </div>
 
-          <div className="flex justify-center bg-gray-100">
+          <div className="flex justify-center bg-gray-100 hover:bg-gray-300">
             <button
               className="w-10 flex items-center justify-center"
               onClick={() => scrollTabs("right")}
