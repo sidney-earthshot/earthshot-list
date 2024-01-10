@@ -18,6 +18,7 @@ import {
 } from "@tabler/icons-react";
 
 import Tab from "./Tab";
+import TabContent from "./TabContent";
 
 export default function CountryModal({ visible, onClose }) {
   if (!visible) return null;
@@ -53,6 +54,7 @@ export default function CountryModal({ visible, onClose }) {
       onClick={handleClickClose}
       id="modal_container"
     >
+      {/* top image */}
       <div className="bg-white p-0 rounded-lg w-5/6 h-[1100px]">
         <div
           className={`bg-[url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=2388&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-[center_bottom_500px] w-full h-1/5 rounded-t-lg`}
@@ -97,7 +99,7 @@ export default function CountryModal({ visible, onClose }) {
             </button>
           </div>
           <div
-            className="flex overflow-x-auto [&>*]:p-5 [&>*]:flex-shrink-0"
+            className="flex overflow-x-auto [&>*]:p-5 [&>*]:flex-shrink-0 scrollbar-none"
             ref={tabsContainerRef}
           >
             <Tab
@@ -171,11 +173,14 @@ export default function CountryModal({ visible, onClose }) {
             </button>
           </div>
         </div>
-      </div>
 
-      <button className="absolute right-8 top-10" onClick={onClose}>
-        <IconX color="white" size={40} />
-      </button>
+        <button className="absolute right-8 top-10" onClick={onClose}>
+          <IconX color="white" size={40} />
+        </button>
+
+        {/* tab content */}
+        <TabContent />
+      </div>
     </div>
   );
 }
