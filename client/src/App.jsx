@@ -194,31 +194,83 @@ function App() {
           }}
         />
 
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
 
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
 
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
 
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
 
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
 
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
 
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
 
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
 
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
 
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
 
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
 
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
 
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
       </div>
 
       <CountryModal visible={visibleModal} onClose={handleClose} />
