@@ -1,13 +1,21 @@
 import { useState, useRef } from "react";
-import { IconCaretDownFilled, IconPlus, IconTorii, IconWifi } from "@tabler/icons-react";
+import {
+  IconCaretDownFilled,
+  IconPlus,
+  IconTorii,
+  IconWifi,
+} from "@tabler/icons-react";
 
 import "./App.css";
 
 import CountryCard from "./components/CountryCard";
+import CountryModal from "./components/CountryModal";
 
 function App() {
   const [email, setEmail] = useState("");
   const [search, setSearch] = useState("");
+
+  const [visibleModal, setVisibleModal] = useState(false);
 
   const filterRef = useRef(null);
 
@@ -21,6 +29,10 @@ function App() {
 
   const focusFilter = () => {
     filterRef.current && filterRef.current.focus();
+  };
+
+  const handleClose = () => {
+    setVisibleModal(false);
   };
 
   return (
@@ -176,7 +188,11 @@ function App() {
 
       {/* main grid section */}
       <div className="grid grid-cols-9 gap-8 mx-16">
-        <CountryCard />
+        <CountryCard
+          handleModal={() => {
+            setVisibleModal(true);
+          }}
+        />
 
         <CountryCard />
 
@@ -204,6 +220,8 @@ function App() {
 
         <CountryCard />
       </div>
+
+      <CountryModal visible={visibleModal} onClose={handleClose} />
     </>
   );
 }
