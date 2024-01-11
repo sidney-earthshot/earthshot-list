@@ -19,12 +19,14 @@ function App() {
 
   const filterRef = useRef(null);
 
-  const handleSubmit = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
+
+    setSearch(e.target.value);
   };
 
   const focusFilter = () => {
@@ -44,13 +46,16 @@ function App() {
         {/* hold profile top left */}
         <div className="flex items-center p-5 h-fit">
           <img
-            className="w-10 h-10 rounded-full object-cover"
+            className="w-10 h-10 rounded-full object-cover hover:cursor-pointer"
             src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           ></img>
-          <IconCaretDownFilled style={{ color: "white" }} />
+          <IconCaretDownFilled
+            style={{ color: "white" }}
+            className="hover:cursor-pointer"
+          />
         </div>
         {/* holds title and right sign in */}
-        <div className="flex items-center justify-evenly h-screen p-5 w-full ">
+        <div className="flex xs:flex-col lg:flex-row items-center justify-evenly h-screen p-5 w-full ">
           <div className="flex flex-col items-start w-[600px] [&>*]:m-2">
             <p className="text-white text-7xl font-medium">🌎 Go nomad</p>
             <p className="text-white text-3xl font-normal">
@@ -79,7 +84,7 @@ function App() {
               className="w-full h-[150px] object-cover rounded-xl hover:opacity-80 hover:cursor-pointer"
               src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             ></img>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSignup}>
               <input
                 type="email"
                 id="email"
@@ -101,7 +106,7 @@ function App() {
       </div>
       {/* companies logos */}
 
-      <div className="flex justify-center m-7 [&>*]:w-16 [&>*]:mx-5 ">
+      <div className="flex justify-center m-7 [&>*]:w-16 [&>*]:mx-5 [&>*]:flex-shrink-0 overflow-x-auto">
         <img
           className=""
           src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
@@ -133,7 +138,7 @@ function App() {
       </div>
 
       {/* filters and search bar */}
-      <div className="">
+      <div className="flex flex-col">
         <div className="flex justify-between">
           <div className="flex items-center space-x-4 ml-16">
             <button className="border rounded-lg shadow-sm px-3 py-2 text-red-600 font-bold border-red-600 hover:bg-red-600 hover:text-white">
@@ -146,6 +151,7 @@ function App() {
                 placeholder="Search or filter..."
                 value={search}
                 className="font-bold border border-gray-300 rounded-full shadow-sm px-3 py-3 my-5 focus:outline-none focus:border-red-300 focus:ring-2 focus:ring-red-300 hover:bg-gray-100"
+                onChange={handleSearch}
               ></input>
             </form>
             <button
@@ -156,7 +162,8 @@ function App() {
             </button>
           </div>
 
-          <div className="flex items-center mr-16 space-x-4 [&>*]:py-2 [&>*]:px-8 [&>*]:font-bold">
+          {/* view buttons */}
+          <div className="flex items-center mr-16 space-x-4 [&>*]:py-2 [&>*]:px-8 [&>*]:font-bold xs:hidden">
             <button className="border border-gray-300 rounded-xl shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-100">
               Grid View
             </button>
@@ -166,7 +173,8 @@ function App() {
           </div>
         </div>
 
-        <div className="[&>*]:text-gray-400 [&>*]:py-2 [&>*]:px-3 [&>*]:font-bold space-x-4 ml-16 flex">
+        {/* filter buttons */}
+        <div className="[&>*]:text-gray-400 [&>*]:py-2 [&>*]:px-3 [&>*]:font-bold space-x-4 ml-16 xs:ml-8 flex [&>*]:flex-shrink-0 overflow-x-auto">
           <button className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black">
             <IconTorii />
             Asia
