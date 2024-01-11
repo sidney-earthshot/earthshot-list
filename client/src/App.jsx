@@ -187,7 +187,7 @@ function App() {
       </div>
 
       {/* main grid section */}
-      <div className="grid grid-cols-9 gap-8 mx-16">
+      <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7  place-items-center mx-8 gap-y-4">
         <CountryCard
           handleModal={() => {
             setVisibleModal(true);
