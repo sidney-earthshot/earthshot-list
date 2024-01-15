@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   IconCaretDownFilled,
   IconPlus,
@@ -16,6 +16,10 @@ function App() {
   const [search, setSearch] = useState("");
 
   const [visibleModal, setVisibleModal] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [locations, setLocations] = useState([]);
 
   const filterRef = useRef(null);
 
@@ -36,6 +40,38 @@ function App() {
   const handleClose = () => {
     setVisibleModal(false);
   };
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setIsLoading(true);
+
+      try {
+        const response = await fetch(`http://localhost:3000/api/locations`);
+        const cleaned = await response.json();
+
+        console.log(cleaned);
+        setLocations(cleaned);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="">Something went wrong! Please refresh the page.</div>
+    );
+  }
 
   return (
     <>
@@ -195,90 +231,18 @@ function App() {
       </div>
 
       {/* main grid section */}
-      <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7  place-items-center mx-8 gap-y-4">
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
-
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
-
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
-
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
-
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
-
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
-
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
-
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
-
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
-
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
-
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
-
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
-
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
-
-        <CountryCard
-          handleModal={() => {
-            setVisibleModal(true);
-          }}
-        />
+      <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7  place-items-center mx-8 gap-y-4 mb-4">
+        {locations.map((location) => {
+          return (
+            <CountryCard
+              key={location.city + location.country}
+              handleModal={() => {
+                setVisibleModal(true);
+              }}
+              info={location}
+            />
+          );
+        })}
       </div>
 
       <CountryModal visible={visibleModal} onClose={handleClose} />
