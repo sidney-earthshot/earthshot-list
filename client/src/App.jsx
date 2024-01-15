@@ -15,7 +15,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [locations, setLocations] = useState([]);
-  const [currentLocation, setCurrentLocation] = useState("")
+  const [currentLocation, setCurrentLocation] = useState("");
 
   const filterRef = useRef(null);
 
@@ -27,6 +27,7 @@ function App() {
     e.preventDefault();
 
     setSearch(e.target.value);
+    console.log(search);
   };
 
   const focusFilter = () => {
@@ -181,7 +182,7 @@ function App() {
                 ref={filterRef}
                 placeholder="Search or filter..."
                 value={search}
-                className="font-bold border border-gray-300 rounded-full shadow-sm px-3 py-3 my-5 focus:outline-none focus:border-red-300 focus:ring-2 focus:ring-red-300 hover:bg-gray-100"
+                className="font-bold border border-gray-300 rounded-full shadow-sm px-3 py-3 my-5 focus:outline-none focus:border-red-300 focus:ring-2 focus:ring-red-300 hover:bg-gray-100 flex"
                 onChange={handleSearch}
               ></input>
             </form>
@@ -227,18 +228,26 @@ function App() {
 
       {/* main grid section */}
       <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7  place-items-center mx-8 gap-y-4 mb-4">
-        {locations.map((location) => {
-          return (
-            <CountryCard
-              key={location.city + location.country}
-              handleModal={() => {
-                setVisibleModal(true);
-                setCurrentLocation(location)
-              }}
-              info={location}
-            />
-          );
-        })}
+        {locations
+          .filter((item) => {
+            return search.toLowerCase() === ""
+              ? item
+              : item.city.toLowerCase().includes(search) ||
+                  item.country.toLowerCase().includes(search);
+          })
+
+          .map((location) => {
+            return (
+              <CountryCard
+                key={location.city + location.country}
+                handleModal={() => {
+                  setVisibleModal(true);
+                  setCurrentLocation(location);
+                }}
+                info={location}
+              />
+            );
+          })}
       </div>
 
       {locations.map((location) => {

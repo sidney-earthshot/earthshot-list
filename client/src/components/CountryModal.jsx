@@ -9,7 +9,7 @@ import ScoreContent from "./ScoreContent";
 export default function CountryModal({ visible, onClose, info }) {
   if (!visible) return null;
 
-  const [currentTab, setCurrentTab] = useState("Scores");
+  const [currentTab, setCurrentTab] = useState("Score");
 
   const tabsContainerRef = useRef(null);
 
@@ -43,19 +43,21 @@ export default function CountryModal({ visible, onClose, info }) {
       {/* top image */}
       <div className="bg-white p-0 rounded-lg w-5/6 h-[1100px]">
         <div
-          className={`bg-[url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=2388&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-[center_bottom_500px] w-full h-1/5 rounded-t-lg`}
+          style={{ "--image-url": `url(${info.image_url})` }}
+          className={`bg-[image:var(--image-url)] bg-cover bg-[center_bottom_500px] w-full h-1/5 rounded-t-lg`}
         >
           <div
-            className={`bg-black rounded-t-lg h-full flex justify-between bg-[rgba(0,0,0,0.5)]`}
+            className={`rounded-t-lg h-full flex justify-between bg-[rgba(0,0,0,0.5)]`}
           >
             <div className="text-white text-xs flex items-end">
               <p className="text-gray-400 p-1">
-                Cost of Living {">>"} Asia {">>"} Thailand {">>"} Bangkok
+                Cost of Living {">>"} {info.continent} {">>"} {info.country}{" "}
+                {">>"} {info.city}
               </p>
             </div>
             <div className=" flex flex-col items-center justify-center space-y-2">
-              <h1 className="text-white font-bold text-5xl">Bangkok</h1>
-              <p className="text-white">Thailand</p>
+              <h1 className="text-white font-bold text-5xl">{info.city}</h1>
+              <p className="text-white">{info.country}</p>
               <button className="text-white font-bold border border-red-600 rounded-lg shadow-sm px-3 py-2 my-5 bg-red-600 hover:text-red-600 hover:bg-transparent">
                 Favourite
               </button>
@@ -165,11 +167,7 @@ export default function CountryModal({ visible, onClose, info }) {
         </button>
 
         {/* tab content */}
-        {currentTab === "Scores" ? (
-          <ScoreContent info={info} />
-        ) : (
-          <TabContent />
-        )}
+        {currentTab === "Score" ? <ScoreContent info={info} /> : <TabContent />}
       </div>
     </div>
   );
