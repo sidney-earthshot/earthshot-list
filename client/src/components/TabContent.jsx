@@ -1,24 +1,12 @@
 import React from "react";
 
 import {
-  IconCaretDownFilled,
-  IconPlus,
-  IconTorii,
-  IconWifi,
-  IconSun,
-  IconHeart,
-  IconX,
   IconStarFilled,
-  IconCash,
-  IconSatellite,
   IconThumbUpFilled,
-  IconShieldFilled,
-  IconChevronRight,
-  IconChevronLeft,
   IconHeartFilled,
 } from "@tabler/icons-react";
 
-export default function TabContent() {
+export default function TabContent({ info }) {
   return (
     <div className="text-black flex">
       {/* left */}

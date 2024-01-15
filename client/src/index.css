@@ -29,6 +29,11 @@ border w-6/12 rounded-full bg-gradient-to-r from-green-500 from-90% to-transpare
     /* Equivalent to 'from-green-500' at 90% opacity */ #22c55e 90%,
     /* Transition starts */ transparent 90%
   ); /* Equivalent to 'to-transparent' at 90% */
+  display: flex; /* Equivalent to 'flex' in Tailwind */
+  justify-content: center; /* Equivalent to 'justify-center' in Tailwind */
+  color: #ffffff; /* Equivalent to 'text-white' in Tailwind */
+  font-weight: bold; /* Equivalent to 'font-bold' in Tailwind */
+  padding: 0.25rem; /* Equivalent to 'p-1' in Tailwind, assuming the default Tailwind spacing scale where 1 unit = 0.25rem */
 }
 
 .bar-orange {
@@ -41,6 +46,11 @@ border w-6/12 rounded-full bg-gradient-to-r from-green-500 from-90% to-transpare
     #f97316 50%,
     /* Tailwind's red-500, starting at 50% */ transparent 50%
   ); /* Transition to transparent starting at 50% */
+  display: flex; /* Equivalent to 'flex' in Tailwind */
+  justify-content: center; /* Equivalent to 'justify-center' in Tailwind */
+  color: #ffffff; /* Equivalent to 'text-white' in Tailwind */
+  font-weight: bold; /* Equivalent to 'font-bold' in Tailwind */
+  padding: 0.25rem; /* Equivalent to 'p-1' in Tailwind, assuming the default Tailwind spacing scale where 1 unit = 0.25rem */
 }
 
 .bar-red {
@@ -53,4 +63,9 @@ border w-6/12 rounded-full bg-gradient-to-r from-green-500 from-90% to-transpare
     #dc2626 30%,
     /* Tailwind's red-500, starting at 30% */ transparent 30%
   ); /* Transition to transparent starting at 30% */
+  display: flex; /* Equivalent to 'flex' in Tailwind */
+  justify-content: center; /* Equivalent to 'justify-center' in Tailwind */
+  color: #ffffff; /* Equivalent to 'text-white' in Tailwind */
+  font-weight: bold; /* Equivalent to 'font-bold' in Tailwind */
+  padding: 0.25rem; /* Equivalent to 'p-1' in Tailwind, assuming the default Tailwind spacing scale where 1 unit = 0.25rem */
 }

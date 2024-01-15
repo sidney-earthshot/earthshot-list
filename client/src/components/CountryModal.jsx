@@ -1,26 +1,12 @@
 import React, { useRef, useState } from "react";
 
-import {
-  IconCaretDownFilled,
-  IconPlus,
-  IconTorii,
-  IconWifi,
-  IconSun,
-  IconHeart,
-  IconX,
-  IconStarFilled,
-  IconCash,
-  IconSatellite,
-  IconThumbUpFilled,
-  IconShieldFilled,
-  IconChevronRight,
-  IconChevronLeft,
-} from "@tabler/icons-react";
+import { IconX, IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
 
 import Tab from "./Tab";
 import TabContent from "./TabContent";
+import ScoreContent from "./ScoreContent";
 
-export default function CountryModal({ visible, onClose }) {
+export default function CountryModal({ visible, onClose, info }) {
   if (!visible) return null;
 
   const [currentTab, setCurrentTab] = useState("Scores");
@@ -179,7 +165,11 @@ export default function CountryModal({ visible, onClose }) {
         </button>
 
         {/* tab content */}
-        <TabContent />
+        {currentTab === "Scores" ? (
+          <ScoreContent info={info} />
+        ) : (
+          <TabContent />
+        )}
       </div>
     </div>
   );

@@ -1,9 +1,6 @@
 import React from "react";
 
 import {
-  IconCaretDownFilled,
-  IconPlus,
-  IconTorii,
   IconWifi,
   IconSun,
   IconHeart,
@@ -14,8 +11,6 @@ import {
   IconThumbUpFilled,
   IconShieldFilled,
 } from "@tabler/icons-react";
-
-import CountryModal from "./CountryModal";
 
 export default function CountryCard({ handleModal, info }) {
   return (

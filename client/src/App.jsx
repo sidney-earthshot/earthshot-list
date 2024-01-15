@@ -1,10 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import {
-  IconCaretDownFilled,
-  IconPlus,
-  IconTorii,
-  IconWifi,
-} from "@tabler/icons-react";
+import { IconCaretDownFilled, IconPlus, IconTorii } from "@tabler/icons-react";
 
 import "./App.css";
 
@@ -20,6 +15,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [locations, setLocations] = useState([]);
+  const [currentLocation, setCurrentLocation] = useState("")
 
   const filterRef = useRef(null);
 
@@ -49,7 +45,6 @@ function App() {
         const response = await fetch(`http://localhost:3000/api/locations`);
         const cleaned = await response.json();
 
-        console.log(cleaned);
         setLocations(cleaned);
       } catch (err) {
         setError(err);
@@ -63,7 +58,7 @@ function App() {
 
   if (isLoading) {
     return (
-      <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg>
+      <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg>
     );
   }
 
@@ -238,6 +233,7 @@ function App() {
               key={location.city + location.country}
               handleModal={() => {
                 setVisibleModal(true);
+                setCurrentLocation(location)
               }}
               info={location}
             />
@@ -245,7 +241,16 @@ function App() {
         })}
       </div>
 
-      <CountryModal visible={visibleModal} onClose={handleClose} />
+      {locations.map((location) => {
+        return (
+          <CountryModal
+            key={location.city + location.country}
+            visible={visibleModal}
+            onClose={handleClose}
+            info={currentLocation}
+          />
+        );
+      })}
     </>
   );
 }
