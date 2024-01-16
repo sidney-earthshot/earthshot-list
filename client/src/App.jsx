@@ -1,5 +1,15 @@
 import { useState, useRef, useEffect } from "react";
-import { IconCaretDownFilled, IconPlus, IconTorii } from "@tabler/icons-react";
+import {
+  IconCaretDownFilled,
+  IconPlus,
+  IconTorii,
+  IconCurrencyEuro,
+  IconBallAmericanFootball,
+  IconBallFootball,
+  IconMountain,
+  IconRipple,
+  IconCactus,
+} from "@tabler/icons-react";
 
 import "./App.css";
 
@@ -19,6 +29,37 @@ function App() {
   const [currentLocation, setCurrentLocation] = useState("");
 
   const filterRef = useRef(null);
+
+  const filterButtons = [
+    { name: "Asia", icon: <IconTorii /> },
+    { name: "Europe", icon: <IconCurrencyEuro /> },
+    { name: "North America", icon: <IconBallAmericanFootball /> },
+    { name: "South America", icon: <IconBallFootball /> },
+    { name: "Africa", icon: <IconMountain /> },
+    { name: "Oceania", icon: <IconRipple /> },
+    { name: "Middle East", icon: <IconCactus /> },
+  ];
+
+  const logos = [
+    {
+      url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
+    },
+    {
+      url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
+    },
+    {
+      url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
+    },
+    {
+      url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
+    },
+    {
+      url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
+    },
+    {
+      url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
+    },
+  ];
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -140,40 +181,17 @@ function App() {
           </div>
         </div>
       </div>
+
       {/* companies logos */}
 
       <div className="flex justify-center m-7 [&>*]:w-16 [&>*]:mx-5 [&>*]:flex-shrink-0 overflow-x-auto">
-        <img
-          className=""
-          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
-        ></img>
-        <img
-          className=""
-          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
-        ></img>
-        <img
-          className=""
-          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
-        ></img>
-        <img
-          className=""
-          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
-        ></img>
-        <img
-          className=""
-          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
-        ></img>
-        <img
-          className=""
-          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
-        ></img>
-        <img
-          className=""
-          src="https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg"
-        ></img>
+        {logos.map((logo) => {
+          return <img className="" src={logo.url}></img>;
+        })}
       </div>
 
       {/* filters and search bar */}
+
       <div className="flex flex-col">
         <div className="flex justify-between">
           <div className="flex items-center space-x-4 ml-16">
@@ -199,7 +217,7 @@ function App() {
           </div>
 
           {/* view buttons */}
-          <div className="flex items-center mr-16 space-x-4 [&>*]:py-2 [&>*]:px-8 [&>*]:font-bold xs:hidden">
+          <div className="sm:flex items-center mr-16 space-x-4 [&>*]:py-2 [&>*]:px-8 [&>*]:font-bold xs:hidden">
             <button className="border border-gray-300 rounded-xl shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-100">
               Grid View
             </button>
@@ -211,31 +229,23 @@ function App() {
 
         {/* filter buttons */}
         <div className="[&>*]:text-gray-400 [&>*]:py-2 [&>*]:px-3 [&>*]:font-bold space-x-4 ml-16 xs:ml-8 flex [&>*]:flex-shrink-0 overflow-x-auto">
-          <button
-            className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black"
-            onClick={() => {
-              if (!search) {
-                handleSearchContinent("asia");
-              } else {
-                handleSearchContinent("");
-              }
-            }}
-          >
-            <IconTorii />
-            Asia
-          </button>
-          <button className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black">
-            <IconTorii />
-            Europe
-          </button>
-          <button className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black">
-            <IconTorii />
-            Latin America
-          </button>
-          <button className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black">
-            <IconTorii />
-            North America
-          </button>
+          {filterButtons.map((button) => {
+            return (
+              <button
+                className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black"
+                onClick={() => {
+                  if (search === button.name.toLocaleLowerCase()) {
+                    setSearch("");
+                  } else {
+                    setSearch(button.name.toLowerCase());
+                  }
+                }}
+              >
+                {button.icon}
+                {button.name}
+              </button>
+            );
+          })}
         </div>
       </div>
 
