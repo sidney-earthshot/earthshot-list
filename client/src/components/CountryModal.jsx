@@ -68,7 +68,7 @@ export default function CountryModal({ visible, onClose, info }) {
               <div className="flex space-x-1">
                 <p className="text-white">Photo</p>
                 <p className="text-gray-400">By</p>
-                <p className="text-white">Jezael Melgoza</p>
+                <p className="text-white">{info.image_author}</p>
                 <p className="text-gray-400">via</p>
                 <p className="text-white">Unsplash</p>
               </div>
@@ -137,16 +137,6 @@ export default function CountryModal({ visible, onClose, info }) {
             />
             <Tab
               name={"Extra Tab 2"}
-              currentTab={currentTab}
-              setCurrentTab={setCurrentTab}
-            />
-            <Tab
-              name={"Extra Tab 3"}
-              currentTab={currentTab}
-              setCurrentTab={setCurrentTab}
-            />
-            <Tab
-              name={"Extra Tab 4"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
             />

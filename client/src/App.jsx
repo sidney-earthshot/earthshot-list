@@ -14,6 +14,7 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+
   const [locations, setLocations] = useState([]);
   const [currentLocation, setCurrentLocation] = useState("");
 
@@ -27,7 +28,10 @@ function App() {
     e.preventDefault();
 
     setSearch(e.target.value);
-    console.log(search);
+  };
+
+  const handleSearchContinent = (continent) => {
+    setSearch(continent);
   };
 
   const focusFilter = () => {
@@ -207,7 +211,16 @@ function App() {
 
         {/* filter buttons */}
         <div className="[&>*]:text-gray-400 [&>*]:py-2 [&>*]:px-3 [&>*]:font-bold space-x-4 ml-16 xs:ml-8 flex [&>*]:flex-shrink-0 overflow-x-auto">
-          <button className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black">
+          <button
+            className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black"
+            onClick={() => {
+              if (!search) {
+                handleSearchContinent("asia");
+              } else {
+                handleSearchContinent("");
+              }
+            }}
+          >
             <IconTorii />
             Asia
           </button>
@@ -227,15 +240,15 @@ function App() {
       </div>
 
       {/* main grid section */}
-      <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7  place-items-center mx-8 gap-y-4 mb-4">
+      <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7  place-items-center mx-8 gap-y-4 mb-6">
         {locations
           .filter((item) => {
             return search.toLowerCase() === ""
               ? item
               : item.city.toLowerCase().includes(search) ||
-                  item.country.toLowerCase().includes(search);
+                  item.country.toLowerCase().includes(search) ||
+                  item.continent.toLowerCase().includes(search);
           })
-
           .map((location) => {
             return (
               <CountryCard
