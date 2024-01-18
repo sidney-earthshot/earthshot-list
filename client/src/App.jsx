@@ -72,7 +72,44 @@ function App() {
   };
 
   const handleSearchContinent = (continent) => {
-    setSearch(continent);
+    setSearch((prevSearch) => {
+      // Split the search string into words, reduce has accumulator as [], word as current word, if previous was north of south, will add america and append to item in array, same logic for middle east
+
+      let searchTerms = prevSearch
+        .split(" ")
+        .reduce((acc, word) => {
+          console.log(acc);
+          if (
+            acc.length > 0 &&
+            (acc[acc.length - 1] === "North" ||
+              acc[acc.length - 1] === "South") &&
+            word === "America"
+          ) {
+            acc[acc.length - 1] += ` ${word}`;
+          } else if (
+            acc.length > 0 &&
+            acc[acc.length - 1] === "Middle" &&
+            word === "East"
+          ) {
+            acc[acc.length - 1] += ` ${word}`;
+          } else {
+            acc.push(word);
+          }
+          return acc;
+        }, [])
+        .filter(Boolean);
+      const index = searchTerms.indexOf(continent);
+
+      if (index !== -1) {
+        // remove continent if found in search
+        searchTerms.splice(index, 1);
+      } else {
+        // Add the continent if not found in search
+        searchTerms.push(continent);
+      }
+
+      return searchTerms.join(" ");
+    });
   };
 
   const focusFilter = () => {
@@ -81,6 +118,21 @@ function App() {
 
   const handleClose = () => {
     setVisibleModal(false);
+  };
+
+  const checkNestedItem = (obj, searchTerms) => {
+    for (let key in obj) {
+      if (typeof obj[key] === "string") {
+        if (searchTerms.some((term) => obj[key].toLowerCase().includes(term))) {
+          return true;
+        }
+      } else if (typeof obj[key] === "object") {
+        if (checkNestedItem(obj[key], searchTerms)) {
+          return true;
+        }
+      }
+    }
+    return false;
   };
 
   useEffect(() => {
@@ -185,8 +237,8 @@ function App() {
       {/* companies logos */}
 
       <div className="flex justify-center m-7 [&>*]:w-16 [&>*]:mx-5 [&>*]:flex-shrink-0 overflow-x-auto">
-        {logos.map((logo) => {
-          return <img className="" src={logo.url}></img>;
+        {logos.map((logo, i) => {
+          return <img key={logo.url + i} className="" src={logo.url}></img>;
         })}
       </div>
 
@@ -228,18 +280,26 @@ function App() {
         </div>
 
         {/* filter buttons */}
-        <div className="[&>*]:text-gray-400 [&>*]:py-2 [&>*]:px-3 [&>*]:font-bold space-x-4 ml-16 xs:ml-8 flex [&>*]:flex-shrink-0 overflow-x-auto">
+        {/* [&>*]:text-gray-400 [&>*]:py-2 [&>*]:px-3 [&>*]:font-bold space-x-4 ml-16 xs:ml-8 flex [&>*]:flex-shrink-0 overflow-x-auto */}
+
+        <div className="[&>*]:py-2 [&>*]:px-3 [&>*]:font-bold space-x-4 ml-16 xs:ml-8 flex [&>*]:flex-shrink-0 overflow-x-auto">
           {filterButtons.map((button) => {
+            //regex tests for whole expression, i for insensitive case
+
+            const regex = new RegExp(`\\b${button.name}\\b`, "i");
+
+            // test looks for name in search
+            const isActive = regex.test(search);
+
+            const buttonClasses = isActive
+              ? "border-solid border-red-600 bg-red-600 text-white "
+              : "border-gray-300 text-gray-400 hover:bg-gray-200 hover:text-black";
+
             return (
               <button
-                className="border-dashed border-2 border-gray-300 rounded-full shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-200 flex hover:text-black"
-                onClick={() => {
-                  if (search === button.name.toLocaleLowerCase()) {
-                    setSearch("");
-                  } else {
-                    setSearch(button.name.toLowerCase());
-                  }
-                }}
+                key={button.name}
+                className={`border-dashed border-2 border-gray-300 rounded-full shadow-md px-3 my-5 flex ${buttonClasses}`}
+                onClick={() => handleSearchContinent(button.name)}
               >
                 {button.icon}
                 {button.name}
@@ -250,14 +310,24 @@ function App() {
       </div>
 
       {/* main grid section */}
-      <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7  place-items-center mx-8 gap-y-4 mb-6">
+      <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7  place-items-center mx-8 gap-y-4 min-h-96">
         {locations
           .filter((item) => {
-            return search.toLowerCase() === ""
-              ? item
-              : item.city.toLowerCase().includes(search) ||
-                  item.country.toLowerCase().includes(search) ||
-                  item.continent.toLowerCase().includes(search);
+            const searchWords = search.toLowerCase().split(" ");
+
+            // return search.toLowerCase() === ""
+            //   ? item
+            //   : item.city.toLowerCase().includes(search) ||
+            //       item.country.toLowerCase().includes(search) ||
+            //       item.continent.toLowerCase().includes(search);
+
+            // return searchWords.every(word =>
+            //   item.city.toLowerCase().includes(word) ||
+            //   item.country.toLowerCase().includes(word) ||
+            //   item.continent.toLowerCase().includes(word)
+            // );
+
+            return checkNestedItem(item, searchWords);
           })
           .map((location) => {
             return (
