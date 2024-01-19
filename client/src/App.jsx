@@ -16,8 +16,79 @@ import "./App.css";
 import CountryCard from "./components/CountryCard";
 import CountryModal from "./components/CountryModal";
 
+const filters = [
+  {
+    category: "General",
+    buttons: ["Income Class", "Population > 1 000 000", "LDC Group"],
+  },
+  {
+    category: "Food and Agriculture",
+    buttons: ["Retail Food Waste", "Cost of Nutrient Adequacy"],
+  },
+  {
+    category: "Healthcare",
+    buttons: ["Travel Time", "Life Expectancy"],
+  },
+  {
+    category: "Water",
+    buttons: ["Drinking Water Quality", "Fecal Amount"],
+  },
+  {
+    category: "Energy",
+    buttons: ["Primary Consumption", "Coal", "Solar"],
+  },
+  {
+    category: "Affordable Housing",
+    buttons: [
+      "Price per Sqft",
+      "Average Household Income",
+      "Building Code Compliance Rate",
+    ],
+  },
+  {
+    category: "Environment",
+    buttons: [],
+  },
+  {
+    category: "Economic Prosperity",
+    buttons: [],
+  },
+];
+
+const continentButtons = [
+  { name: "Asia", icon: <IconTorii /> },
+  { name: "Europe", icon: <IconCurrencyEuro /> },
+  { name: "North America", icon: <IconBallAmericanFootball /> },
+  { name: "South America", icon: <IconBallFootball /> },
+  { name: "Africa", icon: <IconMountain /> },
+  { name: "Oceania", icon: <IconRipple /> },
+  { name: "Middle East", icon: <IconCactus /> },
+];
+
+const logos = [
+  {
+    url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
+  },
+  {
+    url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
+  },
+  {
+    url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
+  },
+  {
+    url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
+  },
+  {
+    url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
+  },
+  {
+    url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
+  },
+];
+
 function App() {
   const [email, setEmail] = useState("");
+
   const [search, setSearch] = useState("");
 
   const [visibleModal, setVisibleModal] = useState(false);
@@ -28,38 +99,9 @@ function App() {
   const [locations, setLocations] = useState([]);
   const [currentLocation, setCurrentLocation] = useState("");
 
+  const [isFilterExpanded, setIsFilterExpanded] = useState(false);
+
   const filterRef = useRef(null);
-
-  const filterButtons = [
-    { name: "Asia", icon: <IconTorii /> },
-    { name: "Europe", icon: <IconCurrencyEuro /> },
-    { name: "North America", icon: <IconBallAmericanFootball /> },
-    { name: "South America", icon: <IconBallFootball /> },
-    { name: "Africa", icon: <IconMountain /> },
-    { name: "Oceania", icon: <IconRipple /> },
-    { name: "Middle East", icon: <IconCactus /> },
-  ];
-
-  const logos = [
-    {
-      url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
-    },
-    {
-      url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
-    },
-    {
-      url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
-    },
-    {
-      url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
-    },
-    {
-      url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
-    },
-    {
-      url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
-    },
-  ];
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -135,6 +177,10 @@ function App() {
     return false;
   };
 
+  const toggleFilter = () => {
+    setIsFilterExpanded(!isFilterExpanded);
+  };
+
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
@@ -170,7 +216,8 @@ function App() {
     <>
       {/* gif background */}
       <div
-        className={`w-full flex flex-col bg-sky-500 h-screen bg-[url('/tokyo.gif')] bg-no-repeat bg-cover`}
+        // was h-full
+        className={`w-full flex flex-col bg-sky-500 h-96 bg-[url('/tokyo.gif')] bg-no-repeat bg-cover`}
       >
         {/* hold profile top left */}
         <div className="flex items-center p-5 h-fit">
@@ -247,7 +294,10 @@ function App() {
       <div className="flex flex-col">
         <div className="flex justify-between">
           <div className="flex items-center space-x-4 ml-16">
-            <button className="border rounded-lg shadow-sm px-3 py-2 text-red-600 font-bold border-red-600 hover:bg-red-600 hover:text-white">
+            <button
+              className="border rounded-lg shadow-sm px-3 py-2 text-red-600 font-bold border-red-600 hover:bg-red-600 hover:text-white"
+              onClick={toggleFilter}
+            >
               Filters
             </button>
             <form onSubmit={handleSearch}>
@@ -279,11 +329,34 @@ function App() {
           </div>
         </div>
 
-        {/* filter buttons */}
+        {/* expanded filter and filter buttons */}
         {/* [&>*]:text-gray-400 [&>*]:py-2 [&>*]:px-3 [&>*]:font-bold space-x-4 ml-16 xs:ml-8 flex [&>*]:flex-shrink-0 overflow-x-auto */}
 
+        <div
+          className={`transition-all duration-500 ease-in-out ${isFilterExpanded ? "h-96 opacity-100" : "h-0 opacity-0 invisible "} bg-red-500 overflow-y-auto`}
+        >
+          {filters.map((filter) => {
+            return (
+              <>
+                <div className="flex border-b-2 text-white text-xl p-4 mx-4">
+                  {filter.category}
+                </div>
+                <div className="flex items-center mt-4 ml-4 pb-4 [&>*]:p-2 [&>*]:mx-1 overflow-x-auto">
+                  {filter.buttons.map((button) => {
+                    return (
+                      <button className="border-2 rounded-full text-white flex-shrink-0">
+                        {button}
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            );
+          })}
+        </div>
+
         <div className="[&>*]:py-2 [&>*]:px-3 [&>*]:font-bold space-x-4 ml-16 xs:ml-8 flex [&>*]:flex-shrink-0 overflow-x-auto">
-          {filterButtons.map((button) => {
+          {continentButtons.map((button) => {
             //regex tests for whole expression, i for insensitive case
 
             const regex = new RegExp(`\\b${button.name}\\b`, "i");
