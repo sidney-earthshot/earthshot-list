@@ -16,6 +16,8 @@ import "./App.css";
 import CountryCard from "./components/CountryCard";
 import CountryModal from "./components/CountryModal";
 
+import { checkNestedItem } from "./functions/check";
+
 const filters = [
   {
     category: "General",
@@ -113,7 +115,7 @@ function App() {
     setSearch(e.target.value);
   };
 
-  const handleSearchContinent = (continent) => {
+  const handleFilterContinent = (continent) => {
     setSearch((prevSearch) => {
       // Split the search string into words, reduce has accumulator as [], word as current word, if previous was north of south, will add america and append to item in array, same logic for middle east
 
@@ -162,21 +164,6 @@ function App() {
     setVisibleModal(false);
   };
 
-  const checkNestedItem = (obj, searchTerms) => {
-    for (let key in obj) {
-      if (typeof obj[key] === "string") {
-        if (searchTerms.some((term) => obj[key].toLowerCase().includes(term))) {
-          return true;
-        }
-      } else if (typeof obj[key] === "object") {
-        if (checkNestedItem(obj[key], searchTerms)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-
   const toggleFilter = () => {
     setIsFilterExpanded(!isFilterExpanded);
   };
@@ -217,26 +204,25 @@ function App() {
       {/* gif background */}
       <div
         // was h-full
-        className={`w-full flex flex-col bg-sky-500 h-96 bg-[url('/tokyo.gif')] bg-no-repeat bg-cover`}
+        className={`w-full flex flex-col bg-sky-500 h-[500px] bg-[url('/tokyo.gif')] bg-no-repeat bg-cover`}
       >
         {/* hold profile top left */}
         <div className="flex items-center p-5 h-fit">
           <img
-            className="w-10 h-10 rounded-full object-cover hover:cursor-pointer"
+            className="w-10 h-10 rounded-full object-cover hover:cursor-pointer shadow-md"
             src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           ></img>
           <IconCaretDownFilled
             style={{ color: "white" }}
-            className="hover:cursor-pointer"
+            className="hover:cursor-pointer shadow-md"
           />
         </div>
         {/* holds title and right sign in */}
         <div className="flex xs:flex-col lg:flex-row items-center justify-evenly h-screen p-5 w-full ">
           <div className="flex flex-col items-start w-[600px] [&>*]:m-2">
-            <p className="text-white text-7xl font-medium">🌎 Go nomad</p>
-            <p className="text-white text-3xl font-normal">
-              Join a global community of remote workers living and travelling
-              around the world
+            <p className="text-white text-5xl font-medium">🌎 Learn more about our world</p>
+            <p className="text-white text-2xl font-normal">
+              Explore the problems that each country faces with over 200 listings
             </p>
             <div className="flex">
               <img
@@ -295,7 +281,7 @@ function App() {
         <div className="flex justify-between">
           <div className="flex items-center space-x-4 ml-16">
             <button
-              className="border rounded-lg shadow-sm px-3 py-2 text-red-600 font-bold border-red-600 hover:bg-red-600 hover:text-white"
+              className={`border rounded-lg shadow-md px-3 py-2 font-bold border-red-600  hover:text-white ${isFilterExpanded ? "text-white bg-red-600" : "text-red-600 hover:bg-red-600"}`}
               onClick={toggleFilter}
             >
               Filters
@@ -306,12 +292,12 @@ function App() {
                 ref={filterRef}
                 placeholder="Search or filter..."
                 value={search}
-                className="font-bold border border-gray-300 rounded-full shadow-sm px-3 py-3 my-5 focus:outline-none focus:border-red-300 focus:ring-2 focus:ring-red-300 hover:bg-gray-100 flex"
+                className="font-bold border border-gray-300 rounded-full shadow-md px-3 py-3 my-5 focus:outline-none focus:border-red-300 focus:ring-2 focus:ring-red-300 hover:bg-gray-100 flex w-96"
                 onChange={handleSearch}
               ></input>
             </form>
             <button
-              className="flex items-center absolute left-[340px] bg-red-600 rounded-full p-1"
+              className="flex items-center absolute left-[480px] bg-red-600 rounded-full p-1"
               onClick={focusFilter}
             >
               <IconPlus className="" color="white" />
@@ -320,10 +306,10 @@ function App() {
 
           {/* view buttons */}
           <div className="sm:flex items-center mr-16 space-x-4 [&>*]:py-2 [&>*]:px-8 [&>*]:font-bold xs:hidden">
-            <button className="border border-gray-300 rounded-xl shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-100">
+            <button className="border border-gray-300 rounded-xl shadow-md px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-100">
               Grid View
             </button>
-            <button className="border border-gray-300 rounded-xl shadow-sm px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-100">
+            <button className="border border-gray-300 rounded-xl shadow-md px-3 my-5 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600 hover:bg-gray-100">
               Sort by
             </button>
           </div>
@@ -344,7 +330,7 @@ function App() {
                 <div className="flex items-center mt-4 ml-4 pb-4 [&>*]:p-2 [&>*]:mx-1 overflow-x-auto">
                   {filter.buttons.map((button) => {
                     return (
-                      <button className="border-2 rounded-full text-white flex-shrink-0">
+                      <button className="border-2 rounded-full text-white flex-shrink-0 shadow-md">
                         {button}
                       </button>
                     );
@@ -372,7 +358,7 @@ function App() {
               <button
                 key={button.name}
                 className={`border-dashed border-2 border-gray-300 rounded-full shadow-md px-3 my-5 flex ${buttonClasses}`}
-                onClick={() => handleSearchContinent(button.name)}
+                onClick={() => handleFilterContinent(button.name)}
               >
                 {button.icon}
                 {button.name}
