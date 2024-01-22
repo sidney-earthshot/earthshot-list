@@ -22,15 +22,13 @@ export default function CountryCard({ handleModal, info }) {
       {/* top */}
       <div className="flex justify-between m-4 group-hover:hidden">
         <h1 className="text-white font-bold text-2xl underline underline-offset-8">
-          {info.rank}
+          {"Rank 1"}
         </h1>
 
         <div className="flex items-center">
           <IconWifi color="white" />
           <div className="flex flex-col items-center">
-            <div className="text-white font-bold text-xl">
-              {info.internet_speed}
-            </div>
+            <div className="text-white font-bold text-xl">{"89"}</div>
             <p className="text-white font-bold text-xs">Mbps</p>
           </div>
         </div>
@@ -38,8 +36,8 @@ export default function CountryCard({ handleModal, info }) {
 
       {/* tittle */}
       <div className="flex flex-col items-center group-hover:hidden">
-        <h1 className="text-white font-medium text-4xl">{info.city}</h1>
-        <h2 className="text-white">{info.country}</h2>
+        <h1 className="text-white font-medium text-4xl">{"City Name"}</h1>
+        <h2 className="text-white">{"Country Name"}</h2>
       </div>
 
       {/* bottom */}
@@ -54,9 +52,7 @@ export default function CountryCard({ handleModal, info }) {
           </div>
 
           <div className="flex flex-col items-end">
-            <p className="text-white font-semibold text-xl">
-              {`$${info.average_rent}`} / mo
-            </p>
+            <p className="text-white font-semibold text-xl">{`$500`} / mo</p>
             <p className="text-white font-medium text-[10px]">FOR A NOMAD</p>
           </div>
         </div>
@@ -79,15 +75,7 @@ export default function CountryCard({ handleModal, info }) {
               />
               <p className="text-white">Overall</p>
             </div>
-            <div
-              className={`${
-                info.overview.overall >= 3.6
-                  ? "bar-green"
-                  : info.overall <= 2.5
-                  ? "bar-red"
-                  : "bar-orange"
-              }`}
-            ></div>
+            <div className={`bar-green`}></div>
           </div>
 
           <div className="flex justify-between mx-4">
@@ -95,15 +83,7 @@ export default function CountryCard({ handleModal, info }) {
               <IconCash color="green" size={15} />
               <p className="text-white">Cost</p>
             </div>
-            <div
-              className={`${
-                info.overview.cost >= 3.6
-                  ? "bar-green"
-                  : info.overall <= 2.5
-                  ? "bar-red"
-                  : "bar-orange"
-              }`}
-            ></div>
+            <div className={`bar-green`}></div>
           </div>
 
           <div className="flex justify-between mx-4">
@@ -111,15 +91,7 @@ export default function CountryCard({ handleModal, info }) {
               <IconSatellite color="gray" size={15} />
               <p className="text-white">Internet</p>
             </div>
-            <div
-              className={`${
-                info.overview.internet >= 3.6
-                  ? "bar-green"
-                  : info.overall <= 2.5
-                  ? "bar-red"
-                  : "bar-orange"
-              }`}
-            ></div>
+            <div className={`bar-green`}></div>
           </div>
 
           <div className="flex justify-between mx-4">
@@ -131,15 +103,7 @@ export default function CountryCard({ handleModal, info }) {
               />
               <p className="text-white">Liked</p>
             </div>
-            <div
-              className={`${
-                info.overview.liked >= 3.6
-                  ? "bar-green"
-                  : info.overall <= 2.5
-                  ? "bar-red"
-                  : "bar-orange"
-              }`}
-            ></div>
+            <div className={`bar-green`}></div>
           </div>
 
           <div className="flex justify-between mx-4">
@@ -151,19 +115,7 @@ export default function CountryCard({ handleModal, info }) {
               />
               <p className="text-white">Safety</p>
             </div>
-            <div
-              className={`${
-                info.overview.safety >= 3.6
-                  ? "bar-green"
-                  : info.overall <= 2.5
-                  ? "bar-red"
-                  : "bar-orange"
-              }`}
-            ></div>
-          </div>
-
-          <div className="flex justify-center">
-            <p className="text-white">Love living here</p>
+            <div className={`bar-green`}></div>
           </div>
         </div>
       </div>

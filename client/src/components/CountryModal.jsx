@@ -4,7 +4,8 @@ import { IconX, IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
 
 import Tab from "./Tab";
 import TabContent from "./TabContent";
-import ScoreContent from "./ScoreContent";
+import Benchmark from "./Benchmark";
+import FoodAgriculture from "./FoodAgriculture";
 
 export default function CountryModal({ visible, onClose, info }) {
   if (!visible) return null;
@@ -49,22 +50,19 @@ export default function CountryModal({ visible, onClose, info }) {
           <div
             className={`rounded-t-lg h-full flex justify-between bg-[rgba(0,0,0,0.5)]`}
           >
-            <div className="text-white text-xs flex items-end">
-              <p className="text-gray-400 p-1">
-                Cost of Living {">>"} {info.continent} {">>"} {info.country}{" "}
-                {">>"} {info.city}
-              </p>
+            <div className="text-white text-xs flex items-end w-1/3">
+              <p className="text-gray-400 p-1">Information Updated: 2024</p>
             </div>
-            <div className=" flex flex-col items-center justify-center space-y-2">
+
+            <div className=" flex flex-col items-center justify-center space-y-2 w-1/3">
               <h1 className="text-white font-bold text-5xl">{info.city}</h1>
               <p className="text-white">{info.country}</p>
               <button className="text-white font-bold border border-red-600 rounded-lg shadow-sm px-3 py-2 my-5 bg-red-600 hover:text-red-600 hover:bg-transparent">
                 Favourite
               </button>
             </div>
-            <div className="flex flex-col justify-end items-end p-1">
-              <p className="text-gray-400">5/5</p>
-              <p className="text-gray-400">3099 reviews</p>
+
+            <div className="flex flex-col justify-end items-end p-1 w-1/3">
               <div className="flex space-x-1">
                 <p className="text-white">Photo</p>
                 <p className="text-gray-400">By</p>
@@ -91,52 +89,42 @@ export default function CountryModal({ visible, onClose, info }) {
             ref={tabsContainerRef}
           >
             <Tab
-              name={"Score"}
+              name={"Benchmark"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
             />
             <Tab
-              name={"Digital Nomad Guide"}
+              name={"Food and Agriculture"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
             />
             <Tab
-              name={"People"}
+              name={"Healthcare"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
             />
             <Tab
-              name={"Cost of Living"}
+              name={"Water"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
             />
             <Tab
-              name={"Pros and Cons"}
+              name={"Energy"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
             />
             <Tab
-              name={"Photos"}
+              name={"Affordable Housing"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
             />
             <Tab
-              name={"Reviews"}
+              name={"Environment"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
             />
             <Tab
-              name={"Weather"}
-              currentTab={currentTab}
-              setCurrentTab={setCurrentTab}
-            />
-            <Tab
-              name={"Extra Tab 1"}
-              currentTab={currentTab}
-              setCurrentTab={setCurrentTab}
-            />
-            <Tab
-              name={"Extra Tab 2"}
+              name={"Economic Prosperity"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
             />
@@ -157,7 +145,11 @@ export default function CountryModal({ visible, onClose, info }) {
         </button>
 
         {/* tab content */}
-        {currentTab === "Score" ? <ScoreContent info={info} /> : <TabContent />}
+        {currentTab === "Benchmark" ? (
+          <TabContent info={info} />
+        ) : (
+          <TabContent />
+        )}
       </div>
     </div>
   );

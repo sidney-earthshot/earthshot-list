@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   IconCaretDownFilled,
   IconPlus,
@@ -49,11 +49,11 @@ const filters = [
   },
   {
     category: "Environment",
-    buttons: [],
+    buttons: ["Option 1"],
   },
   {
     category: "Economic Prosperity",
-    buttons: [],
+    buttons: ["Option 2"],
   },
 ];
 
@@ -95,7 +95,7 @@ function App() {
 
   const [visibleModal, setVisibleModal] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
   const [locations, setLocations] = useState([]);
@@ -173,7 +173,7 @@ function App() {
       setIsLoading(true);
 
       try {
-        const response = await fetch(`http://localhost:3000/api/locations`);
+        const response = await fetch(`http://localhost:3000/api/countries`);
         const cleaned = await response.json();
 
         setLocations(cleaned);
@@ -186,12 +186,6 @@ function App() {
 
     fetchPosts();
   }, []);
-
-  if (isLoading) {
-    return (
-      <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg>
-    );
-  }
 
   if (error) {
     return (
@@ -220,9 +214,12 @@ function App() {
         {/* holds title and right sign in */}
         <div className="flex xs:flex-col lg:flex-row items-center justify-evenly h-screen p-5 w-full ">
           <div className="flex flex-col items-start w-[600px] [&>*]:m-2">
-            <p className="text-white text-5xl font-medium">🌎 Learn more about our world</p>
+            <p className="text-white text-5xl font-medium">
+              🌎 Learn more about our world
+            </p>
             <p className="text-white text-2xl font-normal">
-              Explore the problems that each country faces with over 200 listings
+              Explore the problems that each country faces with over 200
+              available countries
             </p>
             <div className="flex">
               <img
@@ -321,22 +318,31 @@ function App() {
         <div
           className={`transition-all duration-500 ease-in-out ${isFilterExpanded ? "h-96 opacity-100" : "h-0 opacity-0 invisible "} bg-red-500 overflow-y-auto`}
         >
-          {filters.map((filter) => {
+          {filters.map((filter, filterInd) => {
             return (
-              <>
-                <div className="flex border-b-2 text-white text-xl p-4 mx-4">
+              <React.Fragment key={`filter_${filter.category}`}>
+                <div
+                  key={`filter_${filterInd}_header`}
+                  className="flex border-b-2 text-white text-xl p-4 mx-4"
+                >
                   {filter.category}
                 </div>
-                <div className="flex items-center mt-4 ml-4 pb-4 [&>*]:p-2 [&>*]:mx-1 overflow-x-auto">
-                  {filter.buttons.map((button) => {
+                <div
+                  key={`filter_${filterInd}_buttons`}
+                  className="flex items-center mt-4 ml-4 pb-4 [&>*]:p-2 [&>*]:mx-1 overflow-x-auto"
+                >
+                  {filter.buttons.map((button, buttonInd) => {
                     return (
-                      <button className="border-2 rounded-full text-white flex-shrink-0 shadow-md">
+                      <button
+                        key={`filter_${filterInd}_button_${buttonInd}`}
+                        className="border-2 rounded-full text-white flex-shrink-0 shadow-md"
+                      >
                         {button}
                       </button>
                     );
                   })}
                 </div>
-              </>
+              </React.Fragment>
             );
           })}
         </div>
@@ -369,49 +375,81 @@ function App() {
       </div>
 
       {/* main grid section */}
-      <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7  place-items-center mx-8 gap-y-4 min-h-96">
-        {locations
-          .filter((item) => {
-            const searchWords = search.toLowerCase().split(" ");
 
-            // return search.toLowerCase() === ""
-            //   ? item
-            //   : item.city.toLowerCase().includes(search) ||
-            //       item.country.toLowerCase().includes(search) ||
-            //       item.continent.toLowerCase().includes(search);
+      {isLoading ? (
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7  place-items-center mx-8 gap-y-4 min-h-96">
+          <div
+            className={`animate-pulse w-11/12 h-72 rounded-xl flex flex-col justify-center items-center border-4`}
+          >
+            <div className="animate-pulse w-6/12 h-5 border-4 rounded-xl mb-2"></div>
+            <div className="animate-pulse w-5/12 h-4 border-4 rounded-xl"></div>
+          </div>
+          <div
+            className={`animate-pulse w-11/12 h-72 rounded-xl flex flex-col justify-center items-center border-4`}
+          >
+            <div className="animate-pulse w-6/12 h-5 border-4 rounded-xl mb-2"></div>
+            <div className="animate-pulse w-5/12 h-4 border-4 rounded-xl"></div>
+          </div>
+          <div
+            className={`animate-pulse w-11/12 h-72 rounded-xl flex flex-col justify-center items-center border-4`}
+          >
+            <div className="animate-pulse w-6/12 h-5 border-4 rounded-xl mb-2"></div>
+            <div className="animate-pulse w-5/12 h-4 border-4 rounded-xl"></div>
+          </div>
+          <div
+            className={`animate-pulse w-11/12 h-72 rounded-xl flex flex-col justify-center items-center border-4`}
+          >
+            <div className="animate-pulse w-6/12 h-5 border-4 rounded-xl mb-2"></div>
+            <div className="animate-pulse w-5/12 h-4 border-4 rounded-xl"></div>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7  place-items-center mx-8 gap-y-4 min-h-96">
+            {locations
+              .filter((item) => {
+                const searchWords = search.toLowerCase().split(" ");
 
-            // return searchWords.every(word =>
-            //   item.city.toLowerCase().includes(word) ||
-            //   item.country.toLowerCase().includes(word) ||
-            //   item.continent.toLowerCase().includes(word)
-            // );
+                // return search.toLowerCase() === ""
+                //   ? item
+                //   : item.city.toLowerCase().includes(search) ||
+                //       item.country.toLowerCase().includes(search) ||
+                //       item.continent.toLowerCase().includes(search);
 
-            return checkNestedItem(item, searchWords);
-          })
-          .map((location) => {
+                // return searchWords.every(word =>
+                //   item.city.toLowerCase().includes(word) ||
+                //   item.country.toLowerCase().includes(word) ||
+                //   item.continent.toLowerCase().includes(word)
+                // );
+
+                return checkNestedItem(item, searchWords);
+              })
+              .map((location, i) => {
+                return (
+                  <CountryCard
+                    key={location.name + " Card"}
+                    handleModal={() => {
+                      setVisibleModal(true);
+                      setCurrentLocation(location);
+                    }}
+                    info={location}
+                  />
+                );
+              })}
+          </div>
+
+          {locations.map((location, i) => {
             return (
-              <CountryCard
-                key={location.city + location.country}
-                handleModal={() => {
-                  setVisibleModal(true);
-                  setCurrentLocation(location);
-                }}
-                info={location}
+              <CountryModal
+                key={location.name + " Modal"}
+                visible={visibleModal}
+                onClose={handleClose}
+                info={currentLocation}
               />
             );
           })}
-      </div>
-
-      {locations.map((location) => {
-        return (
-          <CountryModal
-            key={location.city + location.country}
-            visible={visibleModal}
-            onClose={handleClose}
-            info={currentLocation}
-          />
-        );
-      })}
+        </>
+      )}
     </>
   );
 }
