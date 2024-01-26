@@ -10,7 +10,7 @@ import FoodAgriculture from "./FoodAgriculture";
 export default function CountryModal({ visible, onClose, info }) {
   if (!visible) return null;
 
-  const [currentTab, setCurrentTab] = useState("Score");
+  const [currentTab, setCurrentTab] = useState("Benchmark");
 
   const tabsContainerRef = useRef(null);
 

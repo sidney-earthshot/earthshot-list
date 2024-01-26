@@ -15,12 +15,12 @@ import {
 export default function CountryCard({ handleModal, info }) {
   return (
     <div
-      style={{ "--image-url": `url(${info.image_url})` }}
-      className={`bg-[image:var(--image-url)] bg-cover w-11/12 h-72 rounded-xl flex flex-col justify-between hover:cursor-pointer group`}
+      style={{ "--image-url": `url(${info["Image URL"]})` }}
+      className={`bg-[image:var(--image-url)] bg-cover w-11/12 h-72 rounded-xl flex flex-col justify-center hover:cursor-pointer group`}
       onClick={handleModal}
     >
       {/* top */}
-      <div className="flex justify-between m-4 group-hover:hidden">
+      {/* <div className="flex justify-between m-4 group-hover:hidden">
         <h1 className="text-white font-bold text-2xl underline underline-offset-8">
           {"Rank 1"}
         </h1>
@@ -32,16 +32,15 @@ export default function CountryCard({ handleModal, info }) {
             <p className="text-white font-bold text-xs">Mbps</p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* tittle */}
-      <div className="flex flex-col items-center group-hover:hidden">
-        <h1 className="text-white font-medium text-4xl">{"City Name"}</h1>
-        <h2 className="text-white">{"Country Name"}</h2>
+      <div className="flex flex-col items-center justify-center group-hover:hidden">
+        <h1 className="text-white font-medium xs:text-2xl 2xl:text-3xl">{info["Country"]}</h1>
       </div>
 
       {/* bottom */}
-      <div className="group-hover:hidden">
+      {/* <div className="group-hover:hidden">
         <div className="flex justify-between m-4">
           <div className="flex items-center">
             <IconSun color="yellow" />
@@ -56,7 +55,7 @@ export default function CountryCard({ handleModal, info }) {
             <p className="text-white font-medium text-[10px]">FOR A NOMAD</p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* stats hidden */}
       <div className="hidden group-hover:block bg-black h-full rounded-lg bg-opacity-70">

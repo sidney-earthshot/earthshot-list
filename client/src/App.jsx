@@ -176,6 +176,8 @@ function App() {
         const response = await fetch(`http://localhost:3000/api/countries`);
         const cleaned = await response.json();
 
+        console.log(cleaned)
+
         setLocations(cleaned);
       } catch (err) {
         setError(err);
@@ -405,7 +407,7 @@ function App() {
         </div>
       ) : (
         <>
-          <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7  place-items-center mx-8 gap-y-4 min-h-96">
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center mx-8 gap-y-4 min-h-96 mb-8">
             {locations
               .filter((item) => {
                 const searchWords = search.toLowerCase().split(" ");
@@ -427,7 +429,7 @@ function App() {
               .map((location, i) => {
                 return (
                   <CountryCard
-                    key={location.name + " Card"}
+                    key={location.Country + " Card"}
                     handleModal={() => {
                       setVisibleModal(true);
                       setCurrentLocation(location);
@@ -441,7 +443,7 @@ function App() {
           {locations.map((location, i) => {
             return (
               <CountryModal
-                key={location.name + " Modal"}
+                key={location.Country + " Modal"}
                 visible={visibleModal}
                 onClose={handleClose}
                 info={currentLocation}
