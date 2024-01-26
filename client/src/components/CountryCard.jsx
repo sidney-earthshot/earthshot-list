@@ -16,7 +16,7 @@ export default function CountryCard({ handleModal, info }) {
   return (
     <div
       style={{ "--image-url": `url(${info["Image URL"]})` }}
-      className={`bg-[image:var(--image-url)] bg-cover w-11/12 h-72 rounded-xl flex flex-col justify-center hover:cursor-pointer group`}
+      className={`group flex h-72 w-11/12 flex-col justify-center rounded-xl bg-[image:var(--image-url)] bg-cover hover:cursor-pointer`}
       onClick={handleModal}
     >
       {/* top */}
@@ -36,7 +36,9 @@ export default function CountryCard({ handleModal, info }) {
 
       {/* tittle */}
       <div className="flex flex-col items-center justify-center group-hover:hidden">
-        <h1 className="text-white font-medium xs:text-2xl 2xl:text-3xl">{info["Country"]}</h1>
+        <h1 className="font-medium text-white xs:text-2xl 2xl:text-3xl">
+          {info["Country"]}
+        </h1>
       </div>
 
       {/* bottom */}
@@ -58,14 +60,14 @@ export default function CountryCard({ handleModal, info }) {
       </div> */}
 
       {/* stats hidden */}
-      <div className="hidden group-hover:block bg-black h-full rounded-lg bg-opacity-70">
-        <div className="flex justify-between m-4">
+      <div className="hidden h-full rounded-lg bg-black bg-opacity-70 group-hover:block">
+        <div className="m-4 flex justify-between">
           <IconHeart color="white" size={30} />
           <IconX color="white" size={30} />
         </div>
 
         <div className="flex flex-col space-y-2">
-          <div className="flex justify-between mx-4">
+          <div className="mx-4 flex justify-between">
             <div className="flex items-center">
               <IconStarFilled
                 color="white"
@@ -77,7 +79,7 @@ export default function CountryCard({ handleModal, info }) {
             <div className={`bar-green`}></div>
           </div>
 
-          <div className="flex justify-between mx-4">
+          <div className="mx-4 flex justify-between">
             <div className="flex items-center">
               <IconCash color="green" size={15} />
               <p className="text-white">Cost</p>
@@ -85,7 +87,7 @@ export default function CountryCard({ handleModal, info }) {
             <div className={`bar-green`}></div>
           </div>
 
-          <div className="flex justify-between mx-4">
+          <div className="mx-4 flex justify-between">
             <div className="flex items-center">
               <IconSatellite color="gray" size={15} />
               <p className="text-white">Internet</p>
@@ -93,7 +95,7 @@ export default function CountryCard({ handleModal, info }) {
             <div className={`bar-green`}></div>
           </div>
 
-          <div className="flex justify-between mx-4">
+          <div className="mx-4 flex justify-between">
             <div className="flex items-center">
               <IconThumbUpFilled
                 color="white"
@@ -105,7 +107,7 @@ export default function CountryCard({ handleModal, info }) {
             <div className={`bar-green`}></div>
           </div>
 
-          <div className="flex justify-between mx-4">
+          <div className="mx-4 flex justify-between">
             <div className="flex items-center">
               <IconShieldFilled
                 color="white"

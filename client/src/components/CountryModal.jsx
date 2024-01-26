@@ -8,6 +8,7 @@ import Benchmark from "./Benchmark";
 import FoodAgriculture from "./FoodAgriculture";
 
 export default function CountryModal({ visible, onClose, info }) {
+
   if (!visible) return null;
 
   const [currentTab, setCurrentTab] = useState("Benchmark");
@@ -44,7 +45,7 @@ export default function CountryModal({ visible, onClose, info }) {
       {/* top image */}
       <div className="bg-white p-0 rounded-lg w-5/6 h-[1100px]">
         <div
-          style={{ "--image-url": `url(${info.image_url})` }}
+          style={{ "--image-url": `url(${info["Image URL"]})` }}
           className={`bg-[image:var(--image-url)] bg-cover bg-[center_bottom_500px] w-full h-1/5 rounded-t-lg`}
         >
           <div
@@ -55,7 +56,7 @@ export default function CountryModal({ visible, onClose, info }) {
             </div>
 
             <div className=" flex flex-col items-center justify-center space-y-2 w-1/3">
-              <h1 className="text-white font-bold text-5xl">{info.city}</h1>
+              <h1 className="text-white font-bold text-5xl">{info.Country}</h1>
               <p className="text-white">{info.country}</p>
               <button className="text-white font-bold border border-red-600 rounded-lg shadow-sm px-3 py-2 my-5 bg-red-600 hover:text-red-600 hover:bg-transparent">
                 Favourite
@@ -66,7 +67,7 @@ export default function CountryModal({ visible, onClose, info }) {
               <div className="flex space-x-1">
                 <p className="text-white">Photo</p>
                 <p className="text-gray-400">By</p>
-                <p className="text-white">{info.image_author}</p>
+                <p className="text-white">{info["Image author"]}</p>
                 <p className="text-gray-400">via</p>
                 <p className="text-white">Unsplash</p>
               </div>

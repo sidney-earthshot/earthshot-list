@@ -8,16 +8,16 @@ import {
 
 export default function TabContent({ info }) {
   return (
-    <div className="text-black flex">
+    <div className="flex text-black">
       {/* left */}
-      <div className="flex flex-col w-1/2 h-[800px] [&>*]:p-4 [&>*]:border [&>*]border-b-gray-200 [&>*]border-r-gray-200 overflow-y-auto">
+      <div className="[&>*]border-b-gray-200 [&>*]border-r-gray-200 flex h-[800px] w-1/2 flex-col overflow-y-auto [&>*]:border [&>*]:p-4">
         <div className="flex justify-between border border-b-gray-200 border-r-gray-200">
           <div className="flex items-center space-x-2">
             <IconStarFilled style={{ color: "yellow" }} size={20} />
             <p className="">Total Score</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-green-500 from-100% to-transparent to to-100% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-green-500 from-100% to-transparent to-100% p-1 font-bold text-white">
             5/5
           </div>
         </div>
@@ -28,7 +28,7 @@ export default function TabContent({ info }) {
             <p className="">Liked by members</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-green-500 from-90% to-transparent to to-90% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-green-500 from-90% to-transparent to-90% p-1 font-bold text-white">
             90% liked
           </div>
         </div>
@@ -39,7 +39,7 @@ export default function TabContent({ info }) {
             <p className="">Quality of Life</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-yellow-500 from-60% to-transparent to to-60% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-yellow-500 from-60% to-transparent to-60% p-1 font-bold text-white">
             Okay
           </div>
         </div>
@@ -50,7 +50,7 @@ export default function TabContent({ info }) {
             <p className="">Quality of Life</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-yellow-500 from-60% to-transparent to to-60% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-yellow-500 from-60% to-transparent to-60% p-1 font-bold text-white">
             Okay
           </div>
         </div>
@@ -61,7 +61,7 @@ export default function TabContent({ info }) {
             <p className="">Quality of Life</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-yellow-500 from-60% to-transparent to to-60% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-yellow-500 from-60% to-transparent to-60% p-1 font-bold text-white">
             Okay
           </div>
         </div>
@@ -72,7 +72,7 @@ export default function TabContent({ info }) {
             <p className="">Quality of Life</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-yellow-500 from-60% to-transparent to to-60% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-yellow-500 from-60% to-transparent to-60% p-1 font-bold text-white">
             Okay
           </div>
         </div>
@@ -83,7 +83,7 @@ export default function TabContent({ info }) {
             <p className="">Quality of Life</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-yellow-500 from-60% to-transparent to to-60% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-yellow-500 from-60% to-transparent to-60% p-1 font-bold text-white">
             Okay
           </div>
         </div>
@@ -94,7 +94,7 @@ export default function TabContent({ info }) {
             <p className="">Quality of Life</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-yellow-500 from-60% to-transparent to to-60% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-yellow-500 from-60% to-transparent to-60% p-1 font-bold text-white">
             Okay
           </div>
         </div>
@@ -105,7 +105,7 @@ export default function TabContent({ info }) {
             <p className="">Quality of Life</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-yellow-500 from-60% to-transparent to to-60% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-yellow-500 from-60% to-transparent to-60% p-1 font-bold text-white">
             Okay
           </div>
         </div>
@@ -116,7 +116,7 @@ export default function TabContent({ info }) {
             <p className="">Quality of Life</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-yellow-500 from-60% to-transparent to to-60% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-yellow-500 from-60% to-transparent to-60% p-1 font-bold text-white">
             Okay
           </div>
         </div>
@@ -127,7 +127,7 @@ export default function TabContent({ info }) {
             <p className="">Quality of Life</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-yellow-500 from-60% to-transparent to to-60% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-yellow-500 from-60% to-transparent to-60% p-1 font-bold text-white">
             Okay
           </div>
         </div>
@@ -138,7 +138,7 @@ export default function TabContent({ info }) {
             <p className="">Quality of Life</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-yellow-500 from-60% to-transparent to to-60% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-yellow-500 from-60% to-transparent to-60% p-1 font-bold text-white">
             Okay
           </div>
         </div>
@@ -149,7 +149,7 @@ export default function TabContent({ info }) {
             <p className="">Quality of Life</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-yellow-500 from-60% to-transparent to to-60% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-yellow-500 from-60% to-transparent to-60% p-1 font-bold text-white">
             Okay
           </div>
         </div>
@@ -160,7 +160,7 @@ export default function TabContent({ info }) {
             <p className="">Quality of Life</p>
           </div>
 
-          <div className="border w-6/12 bg-gray-400 rounded-full bg-gradient-to-r from-yellow-500 from-60% to-transparent to to-60% flex justify-center text-white font-bold p-1">
+          <div className="to flex w-6/12 justify-center rounded-full border bg-gray-400 bg-gradient-to-r from-yellow-500 from-60% to-transparent to-60% p-1 font-bold text-white">
             Okay
           </div>
         </div>
