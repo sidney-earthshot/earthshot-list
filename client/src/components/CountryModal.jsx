@@ -8,7 +8,6 @@ import Benchmark from "./Benchmark";
 import FoodAgriculture from "./FoodAgriculture";
 
 export default function CountryModal({ visible, onClose, info }) {
-
   if (!visible) return null;
 
   const [currentTab, setCurrentTab] = useState("Benchmark");
@@ -38,32 +37,33 @@ export default function CountryModal({ visible, onClose, info }) {
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-[100]"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-30"
       onClick={handleClickClose}
       id="modal_container"
     >
-      {/* top image */}
-      <div className="bg-white p-0 rounded-lg w-5/6 h-[1100px]">
+      <div className="h-[1100px] w-5/6 rounded-lg bg-white p-0">
+        {/* top image */}
+
         <div
           style={{ "--image-url": `url(${info["Image URL"]})` }}
-          className={`bg-[image:var(--image-url)] bg-cover bg-[center_bottom_500px] w-full h-1/5 rounded-t-lg`}
+          className={`h-1/5 w-full rounded-t-lg bg-[image:var(--image-url)] bg-cover bg-[center_bottom_500px]`}
         >
           <div
-            className={`rounded-t-lg h-full flex justify-between bg-[rgba(0,0,0,0.5)]`}
+            className={`flex h-full justify-between rounded-t-lg bg-[rgba(0,0,0,0.5)]`}
           >
-            <div className="text-white text-xs flex items-end w-1/3">
-              <p className="text-gray-400 p-1">Information Updated: 2024</p>
+            <div className="flex w-1/3 items-end text-xs text-white">
+              <p className="p-1 text-gray-400">Information Updated: 2024</p>
             </div>
 
-            <div className=" flex flex-col items-center justify-center space-y-2 w-1/3">
-              <h1 className="text-white font-bold text-5xl">{info.Country}</h1>
+            <div className=" flex w-1/3 flex-col items-center justify-center space-y-2">
+              <h1 className="text-5xl font-bold text-white">{info.Country}</h1>
               <p className="text-white">{info.country}</p>
-              <button className="text-white font-bold border border-red-600 rounded-lg shadow-sm px-3 py-2 my-5 bg-red-600 hover:text-red-600 hover:bg-transparent">
+              <button className="my-5 rounded-lg border border-red-600 bg-red-600 px-3 py-2 font-bold text-white shadow-sm hover:bg-transparent hover:text-red-600">
                 Favourite
               </button>
             </div>
 
-            <div className="flex flex-col justify-end items-end p-1 w-1/3">
+            <div className="flex w-1/3 flex-col items-end justify-end p-1">
               <div className="flex space-x-1">
                 <p className="text-white">Photo</p>
                 <p className="text-gray-400">By</p>
@@ -76,17 +76,17 @@ export default function CountryModal({ visible, onClose, info }) {
         </div>
 
         {/* tabs */}
-        <div className="w-full flex h-[60px] shadow-sm border-b-2">
+        <div className="h-1/12 flex w-full border-b-2 shadow-sm">
           <div className="flex justify-center bg-gray-100 hover:bg-gray-300">
             <button
-              className="w-10 flex items-center justify-center"
+              className="flex w-10 items-center justify-center"
               onClick={() => scrollTabs("left")}
             >
               <IconChevronLeft stroke={3} />
             </button>
           </div>
           <div
-            className="flex overflow-x-auto [&>*]:p-5 [&>*]:flex-shrink-0 scrollbar-none"
+            className="scrollbar-none flex overflow-x-auto [&>*]:flex-shrink-0 [&>*]:p-5"
             ref={tabsContainerRef}
           >
             <Tab
@@ -133,7 +133,7 @@ export default function CountryModal({ visible, onClose, info }) {
 
           <div className="flex justify-center bg-gray-100 hover:bg-gray-300">
             <button
-              className="w-10 flex items-center justify-center"
+              className="flex w-10 items-center justify-center"
               onClick={() => scrollTabs("right")}
             >
               <IconChevronRight stroke={3} />
@@ -147,7 +147,7 @@ export default function CountryModal({ visible, onClose, info }) {
 
         {/* tab content */}
         {currentTab === "Benchmark" ? (
-          <TabContent info={info} />
+          <Benchmark info={info} />
         ) : (
           <TabContent />
         )}
