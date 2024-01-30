@@ -69,3 +69,4 @@ border w-6/12 rounded-full bg-gradient-to-r from-green-500 from-90% to-transpare
   font-weight: bold; /* Equivalent to 'font-bold' in Tailwind */
   padding: 0.25rem; /* Equivalent to 'p-1' in Tailwind, assuming the default Tailwind spacing scale where 1 unit = 0.25rem */
 }
+

@@ -189,9 +189,7 @@ export default function Home() {
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
-
-      console.log(countryName)
-
+      
       if (countryName) {
         const response = await fetch(
           `http://localhost:3000/api/country/${countryName}`

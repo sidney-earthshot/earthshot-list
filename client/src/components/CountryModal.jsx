@@ -148,6 +148,8 @@ export default function CountryModal({ visible, onClose, info }) {
         {/* tab content */}
         {currentTab === "Benchmark" ? (
           <Benchmark info={info} />
+        ) : currentTab === "Food and Agriculture" ? (
+          <FoodAgriculture info={info} />
         ) : (
           <TabContent />
         )}
