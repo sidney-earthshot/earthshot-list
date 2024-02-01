@@ -6,6 +6,7 @@ import Tab from "./Tab";
 import TabContent from "./TabContent";
 import Benchmark from "./Benchmark";
 import FoodAgriculture from "./FoodAgriculture";
+import Healthcare from "./Healthcare";
 
 export default function CountryModal({ visible, onClose, info }) {
   if (!visible) return null;
@@ -37,16 +38,16 @@ export default function CountryModal({ visible, onClose, info }) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-30"
+      className="fixed inset-0 z-[100] flex h-full items-center justify-center bg-black bg-opacity-30"
       onClick={handleClickClose}
       id="modal_container"
     >
-      <div className="h-[1100px] w-5/6 rounded-lg bg-white p-0">
+      <div className="h-5/6 w-5/6 rounded-lg bg-white p-0">
         {/* top image */}
 
         <div
           style={{ "--image-url": `url(${info["Image URL"]})` }}
-          className={`h-1/5 w-full rounded-t-lg bg-[image:var(--image-url)] bg-cover bg-[center_bottom_500px]`}
+          className={`h-1/5 w-full rounded-t-lg bg-[image:var(--image-url)] bg-cover bg-[center_bottom_400px]`}
         >
           <div
             className={`flex h-full justify-between rounded-t-lg bg-[rgba(0,0,0,0.5)]`}
@@ -76,7 +77,7 @@ export default function CountryModal({ visible, onClose, info }) {
         </div>
 
         {/* tabs */}
-        <div className="h-1/12 flex w-full border-b-2 shadow-sm">
+        <div className="flex w-full border-b-2 shadow-sm">
           <div className="flex justify-center bg-gray-100 hover:bg-gray-300">
             <button
               className="flex w-10 items-center justify-center"
@@ -150,6 +151,8 @@ export default function CountryModal({ visible, onClose, info }) {
           <Benchmark info={info} />
         ) : currentTab === "Food and Agriculture" ? (
           <FoodAgriculture info={info} />
+        ) : currentTab === "Healthcare" ? (
+          <Healthcare info={info} />
         ) : (
           <TabContent />
         )}

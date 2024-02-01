@@ -1,11 +1,5 @@
 import { useState } from "react";
-import Chart from "chart.js/auto";
-import ChartDataLabels from "chartjs-plugin-datalabels";
-Chart.register(ChartDataLabels);
-import { Pie, Doughnut, Bar } from "react-chartjs-2";
-import Supply from "./Supply";
-import FoodWaste from "./FoodWaste";
-import Productivity from "./Productivity";
+import React from "react";
 
 const subCategories = [
   "Supply",
@@ -18,7 +12,7 @@ const subCategories = [
   "Malnutrition",
 ];
 
-export default function FoodAgriculture() {
+export default function Healthcare() {
   const [currentSubTab, setCurrentSubTab] = useState("Supply");
 
   return (
@@ -42,15 +36,7 @@ export default function FoodAgriculture() {
 
       {/* right */}
       <div className="w-5/6 bg-gray-600">
-        {currentSubTab === "Supply" ? (
-          <Supply />
-        ) : currentSubTab === "Food Waste per Capita" ? (
-          <FoodWaste />
-        ) : currentSubTab === "Productivity" ? (
-          <Productivity />
-        ) : (
-          <FoodWaste />
-        )}
+        right
       </div>
     </div>
   );

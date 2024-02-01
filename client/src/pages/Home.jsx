@@ -189,12 +189,14 @@ export default function Home() {
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
-      
+
       if (countryName) {
         const response = await fetch(
           `http://localhost:3000/api/country/${countryName}`
         );
         const cleaned = await response.json();
+
+        console.log ("cleaned", cleaned)
 
         setCurrentLocation(cleaned[0]);
         setVisibleModal(true);
