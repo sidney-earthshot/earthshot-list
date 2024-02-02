@@ -22,7 +22,7 @@ export default function NutrientDeficiency() {
     ],
     datasets: [
       {
-        label: "Amount in $USD",
+        label: "Prevalence",
         data: [1, 2, 4, 6, 7, 10, 2, 3, 6, 10, 2, 3],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
@@ -33,7 +33,7 @@ export default function NutrientDeficiency() {
     labels: ["Carbohydrates", "Proteins", "Fats"],
     datasets: [
       {
-        label: "Prevalence %",
+        label: "Prevalence",
         data: [2.46, 1.18, 20.0],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
@@ -64,6 +64,11 @@ export default function NutrientDeficiency() {
         offset: 10,
         formatter: function (value) {
           return `${value}%`;
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: (item) => `${item.dataset.label}: ${item.formattedValue}%`,
         },
       },
     },
@@ -124,6 +129,11 @@ export default function NutrientDeficiency() {
         offset: 10,
         formatter: function (value) {
           return `${value}%`;
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: (item) => `${item.dataset.label}: ${item.formattedValue}%`,
         },
       },
     },

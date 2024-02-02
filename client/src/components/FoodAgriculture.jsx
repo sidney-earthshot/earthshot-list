@@ -9,6 +9,7 @@ import Productivity from "./Productivity";
 import FoodSpoilage from "./FoodSpoilage";
 import CostFood from "./CostFood";
 import NutrientDeficiency from "./NutrientDeficiency";
+import Malnutrition from "./Malnutrition";
 
 const subCategories = [
   "Supply",
@@ -56,6 +57,8 @@ export default function FoodAgriculture() {
           <CostFood />
         ) : currentSubTab === "Nutrient Deficiency Prevalency" ? (
           <NutrientDeficiency />
+        ) : currentSubTab === "Malnutrition" ? (
+          <Malnutrition />
         ) : (
           <FoodWaste />
         )}
