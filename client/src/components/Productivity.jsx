@@ -5,7 +5,7 @@ Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
 export default function Productivity() {
-  const barRainfedData = {
+  const barData = {
     labels: [
       "Maize",
       "Rice",
@@ -44,8 +44,8 @@ export default function Productivity() {
     ],
   };
 
-  const barRainfedOptions = {
-    indexAxis: "y",
+  const barOptions = {
+    indexAxis: "x",
     responsive: true,
     maintainAspectRatio: true,
     aspectRatio: 1.8, //affects the height by adjusting ratio
@@ -65,8 +65,8 @@ export default function Productivity() {
         color: "white",
         anchor: "end",
         align: "end",
-        offset: 10,
-        formatter: function (value) {
+        offset: 5,
+        formatter: function (value, context) {
           return;
         },
       },
@@ -102,10 +102,12 @@ export default function Productivity() {
       },
     },
   };
+
   return (
-    <div className="">
+    <>
       <div className="flex flex-col p-3">
-        <Bar data={barRainfedData} options={barRainfedOptions} />
+        {/* rounded removes top left artefact */}
+        <Bar data={barData} options={barOptions} className="rounded-xl" /> 
       </div>
 
       <div className="grid grid-cols-3 gap-3 p-4">
@@ -177,6 +179,6 @@ export default function Productivity() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

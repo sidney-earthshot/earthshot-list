@@ -6,6 +6,9 @@ import { Pie, Doughnut, Bar } from "react-chartjs-2";
 import Supply from "./Supply";
 import FoodWaste from "./FoodWaste";
 import Productivity from "./Productivity";
+import FoodSpoilage from "./FoodSpoilage";
+import CostFood from "./CostFood";
+import NutrientDeficiency from "./NutrientDeficiency";
 
 const subCategories = [
   "Supply",
@@ -13,7 +16,6 @@ const subCategories = [
   "Productivity",
   "Food Spoilage",
   "Cost of Food",
-  "Current Expenditure",
   "Nutrient Deficiency Prevalency",
   "Malnutrition",
 ];
@@ -48,6 +50,12 @@ export default function FoodAgriculture() {
           <FoodWaste />
         ) : currentSubTab === "Productivity" ? (
           <Productivity />
+        ) : currentSubTab === "Food Spoilage" ? (
+          <FoodSpoilage />
+        ) : currentSubTab === "Cost of Food" ? (
+          <CostFood />
+        ) : currentSubTab === "Nutrient Deficiency Prevalency" ? (
+          <NutrientDeficiency />
         ) : (
           <FoodWaste />
         )}
