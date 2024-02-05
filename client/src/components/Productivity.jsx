@@ -110,7 +110,7 @@ export default function Productivity() {
         <Bar data={barData} options={barOptions} className="rounded-xl" /> 
       </div>
 
-      <div className="grid grid-cols-3 gap-3 p-4">
+      <div className="grid grid-cols-3 gap-3 mx-6">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-red-100 p-3">
             <h2 className="text-lg font-bold underline">

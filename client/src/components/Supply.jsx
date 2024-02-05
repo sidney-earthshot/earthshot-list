@@ -77,7 +77,6 @@ export default function Supply() {
       datalabels: {
         color: "white",
         formatter: function (value, context) {
-          console.log(context.dataset.data);
           return `${Math.round((value / (context.dataset.data[0] + context.dataset.data[1])) * 100)} %`;
         },
         font: {

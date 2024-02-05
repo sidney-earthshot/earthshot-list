@@ -84,7 +84,7 @@ export default function Malnutrition() {
     },
   };
   return (
-    <>
+    <div className="mt-12 mx-3">
       <div className="grid grid-cols-3 gap-3 p-4">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-red-100 p-3">
@@ -126,6 +126,6 @@ export default function Malnutrition() {
       <div className="mt-12 flex justify-center p-5">
         <Bar data={barData1} options={barOptions1} className="rounded-xl" />
       </div>
-    </>
+    </div>
   );
 }

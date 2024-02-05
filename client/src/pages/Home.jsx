@@ -69,13 +69,13 @@ const filters = [
 ];
 
 const continentButtons = [
-  { name: "Asia", icon: <IconTorii /> },
-  { name: "Europe", icon: <IconCurrencyEuro /> },
+  { name: "East Asia and Pacific", icon: <IconTorii /> },
+  { name: "South Asia", icon: <IconCurrencyEuro /> },
   { name: "North America", icon: <IconBallAmericanFootball /> },
-  { name: "South America", icon: <IconBallFootball /> },
-  { name: "Africa", icon: <IconMountain /> },
-  { name: "Oceania", icon: <IconRipple /> },
-  { name: "Middle East", icon: <IconCactus /> },
+  { name: "Latin America and the Caribbean", icon: <IconBallFootball /> },
+  { name: "Sub-Saharan Africa", icon: <IconMountain /> },
+  { name: "Europe and Central Asia", icon: <IconRipple /> },
+  { name: "Middle East and North Africa", icon: <IconCactus /> },
 ];
 
 const logos = [
@@ -196,8 +196,6 @@ export default function Home() {
         );
         const cleaned = await response.json();
 
-        console.log ("cleaned", cleaned)
-
         setCurrentLocation(cleaned[0]);
         setVisibleModal(true);
       } else {
@@ -224,6 +222,7 @@ export default function Home() {
       <div className="">Something went wrong! Please refresh the page.</div>
     );
   }
+  
   return (
     <>
       {/* gif background */}

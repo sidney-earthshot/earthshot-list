@@ -161,7 +161,7 @@ export default function CostFood() {
   };
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex flex-col mx-4 my-6">
       <div className="grid grid-cols-3 gap-3 p-4">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-red-100 p-3">
