@@ -4,13 +4,30 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function Supply() {
+export default function Supply({ info }) {
+  function gramsToNumber(string) {
+    // Use a regular expression to match numbers with optional decimal places
+    const match = string.match(/(\d+(\.\d+)?)/);
+    // The first captured group is the number, convert it to a float
+    return match ? parseFloat(match[0]) : null;
+  }
+
+  function calToNumber(string) {
+    // Remove commas and any non-digit characters except for the decimal point
+    const numericString = string.replace(/[^0-9.]+/g, "");
+    // Convert the cleaned string to a number
+    return parseFloat(numericString);
+  }
+
   const pieData = {
     labels: ["Animal Based", "Plant Based"],
     datasets: [
       {
         label: "Amount",
-        data: [41.25, 64.04],
+        data: [
+          gramsToNumber(info["Supply from animal-based foods"]),
+          gramsToNumber(info["Supply from plant-based foods"]),
+        ],
         backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
         borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
         borderWidth: 2,
@@ -34,6 +51,7 @@ export default function Supply() {
       datalabels: {
         color: "white",
         formatter: function (value, context) {
+          console.log(context);
           return `${Math.round((value / (context.dataset.data[0] + context.dataset.data[1])) * 100)} %`;
         },
         font: {
@@ -53,7 +71,11 @@ export default function Supply() {
     datasets: [
       {
         label: "Amount",
-        data: [1882, 1324],
+        data: [
+          calToNumber(info["Minimum dietary energy requirement"]),
+          calToNumber(info["Caloric supply per capita"]) -
+            calToNumber(info["Minimum dietary energy requirement"]),
+        ],
         backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
         borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
         borderWidth: 2,
@@ -91,7 +113,7 @@ export default function Supply() {
       subtitle: {
         display: true,
         color: "white",
-        text: "Daily Total: 3206 kcal",
+        text: `Daily Total: ${info["Caloric supply per capita"]} kcal`,
       },
     },
   };
@@ -101,7 +123,10 @@ export default function Supply() {
     datasets: [
       {
         label: "Amount",
-        data: [105.3, 105.15],
+        data: [
+          gramsToNumber(info["Protein supply per capita"]),
+          gramsToNumber(info["Fat supply per capita"]),
+        ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
     ],

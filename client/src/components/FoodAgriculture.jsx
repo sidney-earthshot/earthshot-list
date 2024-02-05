@@ -21,7 +21,7 @@ const subCategories = [
   "Malnutrition",
 ];
 
-export default function FoodAgriculture() {
+export default function FoodAgriculture({ info }) {
   const [currentSubTab, setCurrentSubTab] = useState("Supply");
 
   return (
@@ -46,21 +46,21 @@ export default function FoodAgriculture() {
       {/* right */}
       <div className="w-5/6 bg-gray-600">
         {currentSubTab === "Supply" ? (
-          <Supply />
+          <Supply info={info} />
         ) : currentSubTab === "Food Waste per Capita" ? (
-          <FoodWaste />
+          <FoodWaste info={info} />
         ) : currentSubTab === "Productivity" ? (
-          <Productivity />
+          <Productivity info={info} />
         ) : currentSubTab === "Food Spoilage" ? (
-          <FoodSpoilage />
+          <FoodSpoilage info={info} />
         ) : currentSubTab === "Cost of Food" ? (
-          <CostFood />
+          <CostFood info={info} />
         ) : currentSubTab === "Nutrient Deficiency Prevalency" ? (
-          <NutrientDeficiency />
+          <NutrientDeficiency info={info} />
         ) : currentSubTab === "Malnutrition" ? (
-          <Malnutrition />
+          <Malnutrition info={info} />
         ) : (
-          <FoodWaste />
+          <p>Error! Please Refresh</p>
         )}
       </div>
     </div>
