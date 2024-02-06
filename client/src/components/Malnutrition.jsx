@@ -23,8 +23,8 @@ export default function Malnutrition() {
   const barOptions1 = {
     indexAxis: "x",
     responsive: true,
-    maintainAspectRatio: true,
-    aspectRatio: 2, //affects the height by adjusting ratio
+    maintainAspectRatio: false,
+    aspectRatio: 1, //affects the height by adjusting ratio
     plugins: {
       legend: {
         display: false,
@@ -123,7 +123,7 @@ export default function Malnutrition() {
         </div>
       </div>
 
-      <div className="mt-12 flex justify-center p-5">
+      <div className="mt-20 flex justify-center p-5 h-96">
         <Bar data={barData1} options={barOptions1} className="rounded-xl" />
       </div>
     </div>

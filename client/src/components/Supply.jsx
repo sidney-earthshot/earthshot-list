@@ -191,16 +191,16 @@ export default function Supply({ info }) {
 
   return (
     <div className="">
-      <div className="flex h-96 justify-center py-4">
-        <div className="flex w-1/2 justify-center">
+      <div className="flex justify-center py-6">
+        <div className="flex justify-center">
           <Pie data={pieData} options={pieOptions} />
         </div>
-        <div className="flex w-1/2 justify-center">
+        <div className="flex justify-center">
           <Doughnut data={doughnutData} options={doughnutOptions} />
         </div>
       </div>
-      <div className="flex h-1/2 justify-center py-4">
-        <div className="flex w-full justify-center p-6">
+      <div className="flex justify-center">
+        <div className="flex h-96 w-1/2 justify-center p-2">
           <Bar data={barData} options={barOptions} />
         </div>
       </div>

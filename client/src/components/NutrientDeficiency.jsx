@@ -43,8 +43,8 @@ export default function NutrientDeficiency() {
   const barOptions1 = {
     indexAxis: "x",
     responsive: true,
-    maintainAspectRatio: true,
-    aspectRatio: 2.8, //affects the height by adjusting ratio
+    maintainAspectRatio: false,
+    aspectRatio: 1, //affects the height by adjusting ratio
     plugins: {
       legend: {
         display: false,
@@ -108,8 +108,8 @@ export default function NutrientDeficiency() {
   const barOptions2 = {
     indexAxis: "x",
     responsive: true,
-    maintainAspectRatio: true,
-    aspectRatio: 2.8, //affects the height by adjusting ratio
+    maintainAspectRatio: false,
+    aspectRatio: 1, //affects the height by adjusting ratio
     plugins: {
       legend: {
         display: false,
@@ -171,9 +171,13 @@ export default function NutrientDeficiency() {
   };
 
   return (
-    <div className="flex flex-col p-5 justify-center space-y-12 mt-8">
-      <Bar data={barData1} options={barOptions1} className="rounded-xl" />
-      <Bar data={barData2} options={barOptions2} className="rounded-xl" />
+    <div className="flex flex-col justify-center p-5">
+      <div className="h-96 mb-4">
+        <Bar data={barData1} options={barOptions1} className="rounded-xl" />
+      </div>
+      <div className="h-96">
+        <Bar data={barData2} options={barOptions2} className="rounded-xl" />
+      </div>
     </div>
   );
 }

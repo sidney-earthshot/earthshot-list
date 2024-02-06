@@ -32,10 +32,10 @@ export default function CostFood() {
   };
 
   const barOptions1 = {
-    indexAxis: "y",
+    indexAxis: "x",
     responsive: true,
-    maintainAspectRatio: true,
-    aspectRatio: 2.8, //affects the height by adjusting ratio
+    maintainAspectRatio: false,
+    aspectRatio: 1, //affects the height by adjusting ratio
     plugins: {
       legend: {
         display: true,
@@ -96,10 +96,10 @@ export default function CostFood() {
   };
 
   const barOptions2 = {
-    indexAxis: "y",
+    indexAxis: "x",
     responsive: true,
-    maintainAspectRatio: true,
-    aspectRatio: 2.8, //affects the height by adjusting ratio
+    maintainAspectRatio: false,
+    aspectRatio: 1, //affects the height by adjusting ratio
     plugins: {
       legend: {
         display: true,
@@ -161,7 +161,7 @@ export default function CostFood() {
   };
 
   return (
-    <div className="flex flex-col mx-4 my-6">
+    <div className="mx-4 my-6 flex flex-col">
       <div className="grid grid-cols-3 gap-3 p-4">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-red-100 p-3">
@@ -201,9 +201,12 @@ export default function CostFood() {
       </div>
 
       <div className="p-5">
-        <Bar data={barData1} options={barOptions1} className="rounded-xl" />
-
-        <Bar data={barData2} options={barOptions2} className="rounded-xl" />
+        <div className="h-64">
+          <Bar data={barData1} options={barOptions1} className="rounded-xl" />
+        </div>
+        <div className="h-64">
+          <Bar data={barData2} options={barOptions2} className="rounded-xl" />
+        </div>
       </div>
     </div>
   );
