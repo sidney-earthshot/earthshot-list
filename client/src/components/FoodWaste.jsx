@@ -4,13 +4,24 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function FoodWaste() {
+export default function FoodWaste({ info }) {
+  function gramsToNumber(string) {
+    // Use a regular expression to match numbers with optional decimal places
+    const match = string.match(/(\d+(\.\d+)?)/);
+    // The first captured group is the number, convert it to a float
+    return match ? parseFloat(match[0]) : null;
+  }
+
   const pieData = {
     labels: ["Retail", "Out of Home Consumption", "Household"],
     datasets: [
       {
         label: "Amount",
-        data: [15.64, 45.6, 63.92],
+        data: [
+          gramsToNumber(info["Retail"]),
+          gramsToNumber(info["Out of home consumption"]),
+          gramsToNumber(info["Household"]),
+        ],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",

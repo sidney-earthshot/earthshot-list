@@ -47,8 +47,8 @@ export default function Productivity() {
   const barOptions = {
     indexAxis: "x",
     responsive: true,
-    maintainAspectRatio: true,
-    aspectRatio: 1.8, //affects the height by adjusting ratio
+    maintainAspectRatio: false,
+    aspectRatio: 1, //affects the height by adjusting ratio
     plugins: {
       legend: {
         display: true,
@@ -82,7 +82,7 @@ export default function Productivity() {
         },
         title: {
           display: true,
-          text: "Yield",
+          text: "Crop",
           color: "white",
         },
       },
@@ -96,7 +96,7 @@ export default function Productivity() {
         },
         title: {
           display: true,
-          text: "Crop",
+          text: "Yield",
           color: "white",
         },
       },
@@ -105,12 +105,14 @@ export default function Productivity() {
 
   return (
     <>
-      <div className="flex flex-col p-3">
+      <div className="flex flex-col p-6">
         {/* rounded removes top left artefact */}
-        <Bar data={barData} options={barOptions} className="rounded-xl" /> 
+        <div className="h-96">
+          <Bar data={barData} options={barOptions} className="rounded-xl" />
+        </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-3 mx-6">
+      <div className="mx-6 grid grid-cols-3 gap-3">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-red-100 p-3">
             <h2 className="text-lg font-bold underline">

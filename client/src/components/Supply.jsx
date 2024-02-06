@@ -37,6 +37,9 @@ export default function Supply({ info }) {
   };
 
   const pieOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 1,
     plugins: {
       title: {
         display: true,
@@ -85,6 +88,9 @@ export default function Supply({ info }) {
   };
 
   const doughnutOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 1,
     plugins: {
       title: {
         display: true,
@@ -134,8 +140,8 @@ export default function Supply({ info }) {
 
   const barOptions = {
     responsive: true,
-    maintainAspectRatio: true,
-    aspectRatio: 2,
+    maintainAspectRatio: false,
+    aspectRatio: 1,
     plugins: {
       legend: {
         labels: {
@@ -184,14 +190,20 @@ export default function Supply({ info }) {
   };
 
   return (
-    <>
-      <div className="flex h-1/2 justify-center py-4">
-        <Pie data={pieData} options={pieOptions} />
-        <Doughnut data={doughnutData} options={doughnutOptions} />
+    <div className="">
+      <div className="flex h-96 justify-center py-4">
+        <div className="flex w-1/2 justify-center">
+          <Pie data={pieData} options={pieOptions} />
+        </div>
+        <div className="flex w-1/2 justify-center">
+          <Doughnut data={doughnutData} options={doughnutOptions} />
+        </div>
       </div>
       <div className="flex h-1/2 justify-center py-4">
-        <Bar data={barData} options={barOptions} />
+        <div className="flex w-full justify-center p-6">
+          <Bar data={barData} options={barOptions} />
+        </div>
       </div>
-    </>
+    </div>
   );
 }
