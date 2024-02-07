@@ -4,7 +4,17 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function NutrientDeficiency() {
+export default function NutrientDeficiency({ info }) {
+  function percentToNumber(string) {
+    if (string === "") {
+      return "N/A";
+    }
+
+    // Remove the percentage sign and convert to a floating-point number
+    const number = parseFloat(string.replace("%", ""));
+    return number;
+  }
+
   const barData1 = {
     labels: [
       "Vitamin A",
@@ -16,6 +26,7 @@ export default function NutrientDeficiency() {
       "Iron",
       "Calcium",
       "Magnesium",
+      "Zinc",
       "Iodine",
       "Selenium",
       "Folate",
@@ -23,7 +34,21 @@ export default function NutrientDeficiency() {
     datasets: [
       {
         label: "Prevalence",
-        data: [1, 2, 4, 6, 7, 10, 2, 3, 6, 10, 2, 3],
+        data: [
+          percentToNumber(info["Vitamin A"]),
+          percentToNumber(info["Vitamin B complex"]),
+          percentToNumber(info["Vitamin C"]),
+          percentToNumber(info["Vitamin D"]),
+          percentToNumber(info["Vitamin E"]),
+          percentToNumber(info["Vitamin K"]),
+          percentToNumber(info["Iron"]),
+          percentToNumber(info["Calcium"]),
+          percentToNumber(info["Magnesium"]),
+          percentToNumber(info["Zinc"]),
+          percentToNumber(info["Iodine"]),
+          percentToNumber(info["Selenium"]),
+          percentToNumber(info["Folate"]),
+        ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
     ],
@@ -34,7 +59,11 @@ export default function NutrientDeficiency() {
     datasets: [
       {
         label: "Prevalence",
-        data: [2.46, 1.18, 20.0],
+        data: [
+          percentToNumber(info["Carbohydrates"]),
+          percentToNumber(info["Proteins"]),
+          percentToNumber(info["Fats"]),
+        ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
     ],
@@ -100,7 +129,6 @@ export default function NutrientDeficiency() {
           text: "Prevalence",
           color: "white",
         },
-        max: 14,
       },
     },
   };
@@ -165,18 +193,17 @@ export default function NutrientDeficiency() {
           text: "Prevalence",
           color: "white",
         },
-        max: 21,
       },
     },
   };
 
   return (
     <div className="flex flex-col justify-center p-5">
-      <div className="h-96 mb-4">
-        <Bar data={barData1} options={barOptions1} className="rounded-xl" />
+      <div className="mb-4 h-96">
+        <Bar data={barData1} options={barOptions1} className="rounded-3xl" />
       </div>
       <div className="h-96">
-        <Bar data={barData2} options={barOptions2} className="rounded-xl" />
+        <Bar data={barData2} options={barOptions2} className="rounded-3xl" />
       </div>
     </div>
   );

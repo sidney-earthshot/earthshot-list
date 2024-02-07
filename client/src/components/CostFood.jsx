@@ -4,13 +4,28 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function CostFood() {
+export default function CostFood({ info }) {
+  function currencyToNumber(string) {
+    // Remove the dollar sign and commas, then convert to a floating-point number
+    const number = parseFloat(string.replace(/[\$,]/g, ""));
+    return number;
+  }
+
+  function percentToNumber(string) {
+    // Remove the percentage sign and convert to a floating-point number
+    const number = parseFloat(string.replace("%", ""));
+    return number;
+  }
+
   const barData1 = {
     labels: ["Food Expenditure", "Consumer Expenditure"],
     datasets: [
       {
         label: "USD",
-        data: [936.0, 4680.0],
+        data: [
+          currencyToNumber(info["Food expenditure in $"]),
+          currencyToNumber(info["Consumer expenditure"]),
+        ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
     ],
@@ -25,7 +40,11 @@ export default function CostFood() {
     datasets: [
       {
         label: "Amount",
-        data: [2.46, 1.18, 20.0],
+        data: [
+          percentToNumber(info["Percent of average income (CoNA)"]),
+          percentToNumber(info["Percent of average income (CoCA)"]),
+          percentToNumber(info["Food percent of consumer expenditure"]),
+        ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
     ],
@@ -171,7 +190,11 @@ export default function CostFood() {
           </div>
 
           <div className="p-3">
-            <h3 className="mb-3 text-sm">1.29</h3>
+            <h3 className="mb-3 text-sm">
+              {info["Cost of Nutrient Adequacy"]
+                ? info["Cost of Nutrient Adequacy"]
+                : "N/A"}
+            </h3>
           </div>
         </div>
 
@@ -183,7 +206,11 @@ export default function CostFood() {
           </div>
 
           <div className="p-3">
-            <h3 className="mb-3 text-sm">0.62</h3>
+            <h3 className="mb-3 text-sm">
+              {info["Cost of Caloric Adequacy"]
+                ? info["Cost of Caloric Adequacy"]
+                : "N/A"}
+            </h3>
           </div>
         </div>
 
@@ -195,7 +222,11 @@ export default function CostFood() {
           </div>
 
           <div className="p-3">
-            <h3 className="mb-3 text-sm">210%</h3>
+            <h3 className="mb-3 text-sm">
+              {info["Premium of CoNA vs CoCA"]
+                ? info["Premium of CoNA vs CoCA"]
+                : "N/A"}
+            </h3>
           </div>
         </div>
       </div>

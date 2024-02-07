@@ -4,7 +4,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function Productivity() {
+export default function Productivity({ info }) {
   const barData = {
     labels: [
       "Maize",
@@ -30,14 +30,48 @@ export default function Productivity() {
       {
         label: "Rainfed",
         data: [
-          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+          Math.round(info["Rainfed Maize"] * 100) / 100,
+          Math.round(info["Rainfed Rice"] * 100) / 100,
+          Math.round(info["Rainfed Wheat"] * 100) / 100,
+          Math.round(info["Rainfed Sorghum"] * 100) / 100,
+          Math.round(info["Rainfed Millet"] * 100) / 100,
+          Math.round(info["Rainfed Barley"] * 100) / 100,
+          Math.round(info["Rainfed Soybean"] * 100) / 100,
+          Math.round(info["Rainfed Common Bean"] * 100) / 100,
+          Math.round(info["Rainfed Faba Bean"] * 100) / 100,
+          Math.round(info["Rainfed Pea"] * 100) / 100,
+          Math.round(info["Rainfed Chickpea"] * 100) / 100,
+          Math.round(info["Rainfed Cowpea"] * 100) / 100,
+          Math.round(info["Rainfed Pigeonpea"] * 100) / 100,
+          Math.round(info["Rainfed Groundnut"] * 100) / 100,
+          Math.round(info["Rainfed Potato"] * 100) / 100,
+          Math.round(info["Rainfed Sugarcane"] * 100) / 100,
+          Math.round(info["Rainfed Rapeseed"] * 100) / 100,
+          Math.round(info["Rainfed Oil Palm"] * 100) / 100,
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
       {
         label: "Irrigation",
         data: [
-          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+          Math.round(info["Irrigated Maize"] * 100) / 100,
+          Math.round(info["Irrigated Rice"] * 100) / 100,
+          Math.round(info["Irrigated Wheat"] * 100) / 100,
+          Math.round(0),
+          Math.round(0),
+          Math.round(info["Irrigated Barley"] * 100) / 100,
+          Math.round(info["Irrigated Soybean"] * 100) / 100,
+          Math.round(info["Irrigated Common Bean"] * 100) / 100,
+          Math.round(0),
+          Math.round(info["Irrigated Pea"] * 100) / 100,
+          Math.round(0),
+          Math.round(0),
+          Math.round(0),
+          Math.round(0),
+          Math.round(info["Irrigated Potato"] * 100) / 100,
+          Math.round(info["Irrigated Sugarcane"] * 100) / 100,
+          Math.round(info["Irrigated Rapeseed"] * 100) / 100,
+          Math.round(0),
         ],
         backgroundColor: ["rgba(54, 162, 235, 1)"],
       },
@@ -121,7 +155,11 @@ export default function Productivity() {
           </div>
 
           <div className="p-3">
-            <h3 className="mb-3 text-sm">N/A</h3>
+            <h3 className="mb-3 text-sm">
+              {info["Agricultural water withdrawal"]
+                ? info["Agricultural water withdrawal"]
+                : "N/A"}
+            </h3>
           </div>
         </div>
 
@@ -133,7 +171,11 @@ export default function Productivity() {
           </div>
 
           <div className="p-3">
-            <h3 className="mb-3 text-sm">393.22kg</h3>
+            <h3 className="mb-3 text-sm">
+              {info["Fertilizer use per unit of land"]
+                ? info["Fertilizer use per unit of land"]
+                : "N/A"}
+            </h3>
           </div>
         </div>
 
@@ -143,7 +185,9 @@ export default function Productivity() {
           </div>
 
           <div className="p-3">
-            <h3 className="mb-3 text-sm">527,714,000.00 ha</h3>
+            <h3 className="mb-3 text-sm">
+              {info["Crop land percent"] ? info["Crop land percent"] : "N/A"}
+            </h3>
           </div>
         </div>
 
@@ -155,7 +199,11 @@ export default function Productivity() {
           </div>
 
           <div className="p-3">
-            <h3 className="mb-3 text-sm">0.97</h3>
+            <h3 className="mb-3 text-sm">
+              {info["Agriculture factor productivity"]
+                ? info["Agriculture factor productivity"]
+                : "N/A"}
+            </h3>
           </div>
         </div>
 
@@ -167,7 +215,11 @@ export default function Productivity() {
           </div>
 
           <div className="p-3">
-            <h3 className="mb-3 text-sm">East Asia and Pacific</h3>
+            <h3 className="mb-3 text-sm">
+              {info["Agricultural R&D in millions USD"]
+                ? info["Agricultural R&D in millions USD"]
+                : "N/A"}
+            </h3>
           </div>
         </div>
 
@@ -177,7 +229,9 @@ export default function Productivity() {
           </div>
 
           <div className="p-3">
-            <h3 className="mb-3 text-sm">N/A</h3>
+            <h3 className="mb-3 text-sm">
+              {info["Soil erosion"] ? info["Soil erosion"] : "N/A"}
+            </h3>
           </div>
         </div>
       </div>

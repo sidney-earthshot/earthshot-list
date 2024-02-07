@@ -4,7 +4,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function FoodSpoilage() {
+export default function FoodSpoilage({ info }) {
   const pieData = {
     labels: [
       "Production & Processing",
@@ -15,7 +15,12 @@ export default function FoodSpoilage() {
     datasets: [
       {
         label: "Food Waste",
-        data: [41.25, 64.04, 10, 15.1],
+        data: [
+          info["Production & Processing"] ? info["Production & Processing"] : 0,
+          info["Transportation"] ? info["Transportation"] : 0,
+          info["Retailers"] ? info["Retailers"] : 0,
+          info["In house"] ? info["In house"] : 0,
+        ],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -38,7 +43,7 @@ export default function FoodSpoilage() {
     plugins: {
       title: {
         display: true,
-        text: "% Food Waste Due to Spoilage",
+        text: "Food Waste Due to Spoilage",
         color: "white",
       },
       legend: {
@@ -49,7 +54,8 @@ export default function FoodSpoilage() {
       datalabels: {
         color: "white",
         formatter: function (value, context) {
-          return `${Math.round((value / (context.dataset.data[0] + context.dataset.data[1])) * 100)} %`;
+          console.log(value)
+          return `${Math.round((value / (context.dataset.data[0] + context.dataset.data[1] + context.dataset.data[2] + context.dataset.data[3])) * 100)} %`;
         },
         font: {
           size: 20,
@@ -63,7 +69,7 @@ export default function FoodSpoilage() {
       subtitle: {
         display: true,
         color: "white",
-        text: "Total Waste % from Initial Production",
+        text: `Total Waste from Initial Production: ${info["Percent of food wasted from moment of production"] ? info["Percent of food wasted from moment of production"] : "N/A"}`,
       },
     },
   };

@@ -4,17 +4,33 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function Malnutrition() {
+export default function Malnutrition({ info }) {
+  function percentToNumber(string) {
+    if (string === "") {
+      return "N/A";
+    }
+
+    // Remove the percentage sign and convert to a floating-point number
+    const number = parseFloat(string.replace("%", ""));
+    return number;
+  }
+
   const barData1 = {
     labels: [
       "Prevalence of Undernourishment",
       "Prevalence of Stunting",
       "Prevalence of Wasting",
+      "Underweight",
     ],
     datasets: [
       {
         label: "Prevalence",
-        data: [3.0, 4.7, 1.9],
+        data: [
+          percentToNumber(info["Prevalence of undernourishment"]),
+          info["Prevalence of stunting"],
+          info["Prevalence of wasting"],
+          percentToNumber(info["Underweight"]),
+        ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
     ],
@@ -84,7 +100,7 @@ export default function Malnutrition() {
     },
   };
   return (
-    <div className="mt-12 mx-3">
+    <div className="mx-3 mt-12">
       <div className="grid grid-cols-3 gap-3 p-4">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-red-100 p-3">
@@ -94,7 +110,11 @@ export default function Malnutrition() {
           </div>
 
           <div className="p-3">
-            <h3 className="mb-3 text-sm">N/A</h3>
+            <h3 className="mb-3 text-sm">
+              {info["Severe food insecurity"]
+                ? info["Severe food insecurity"]
+                : "N/A"}
+            </h3>
           </div>
         </div>
 
@@ -106,7 +126,11 @@ export default function Malnutrition() {
           </div>
 
           <div className="p-3">
-            <h3 className="mb-3 text-sm">N/A</h3>
+            <h3 className="mb-3 text-sm">
+              {info["Micro/macro nutrient deficiency"]
+                ? info["Micro/macro nutrient deficiency"]
+                : "N/A"}
+            </h3>
           </div>
         </div>
 
@@ -118,12 +142,16 @@ export default function Malnutrition() {
           </div>
 
           <div className="p-3">
-            <h3 className="mb-3 text-sm">N/A</h3>
+            <h3 className="mb-3 text-sm">
+              {info["Global Hunger Index Score"]
+                ? info["Global Hunger Index Score"]
+                : "N/A"}
+            </h3>
           </div>
         </div>
       </div>
 
-      <div className="mt-20 flex justify-center p-5 h-96">
+      <div className="mt-20 flex h-96 justify-center p-5">
         <Bar data={barData1} options={barOptions1} className="rounded-xl" />
       </div>
     </div>
