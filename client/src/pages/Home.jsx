@@ -14,12 +14,15 @@ import {
   IconCaretDownFilled,
   IconPlus,
   IconTorii,
-  IconCurrencyEuro,
+  IconPray,
+  IconYoga,
   IconBallAmericanFootball,
   IconBallFootball,
   IconMountain,
   IconRipple,
+  IconCurrencyEuro,
   IconCactus,
+  IconPyramid,
 } from "@tabler/icons-react";
 
 import ".././App.css";
@@ -70,12 +73,12 @@ const filters = [
 
 const continentButtons = [
   { name: "East Asia and Pacific", icon: <IconTorii /> },
-  { name: "South Asia", icon: <IconCurrencyEuro /> },
+  { name: "South Asia", icon: <IconYoga /> },
   { name: "North America", icon: <IconBallAmericanFootball /> },
   { name: "Latin America and the Caribbean", icon: <IconBallFootball /> },
   { name: "Sub-Saharan Africa", icon: <IconMountain /> },
-  { name: "Europe and Central Asia", icon: <IconRipple /> },
-  { name: "Middle East and North Africa", icon: <IconCactus /> },
+  { name: "Europe and Central Asia", icon: <IconCurrencyEuro /> },
+  { name: "Middle East and North Africa", icon: <IconPyramid /> },
 ];
 
 const logos = [
@@ -107,6 +110,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
 
   const [search, setSearch] = useState("");
+  const [selectedContinents, setSelectedContinents] = useState([]);
 
   const [visibleModal, setVisibleModal] = useState(false);
 
@@ -124,51 +128,108 @@ export default function Home() {
     e.preventDefault();
   };
 
-  const handleSearch = (e) => {
+  const handleSearchBar = (e) => {
     e.preventDefault();
 
     setSearch(e.target.value);
   };
 
-  const handleFilterContinent = (continent) => {
-    setSearch((prevSearch) => {
-      // Split the search string into words, reduce has accumulator as [], word as current word, if previous was north of south, will add america and append to item in array, same logic for middle east
+  // const handleFilterContinent = (continent) => {
+  //   setSearch((prevSearch) => {
+  //     // Split the search string into words, reduce has accumulator as [], word as current word, if previous was north of south, will add america and append to item in array, same logic for middle east
 
-      let searchTerms = prevSearch
-        .split(" ")
-        .reduce((acc, word) => {
-          console.log(acc);
-          if (
-            acc.length > 0 &&
-            (acc[acc.length - 1] === "North" ||
-              acc[acc.length - 1] === "South") &&
-            word === "America"
-          ) {
-            acc[acc.length - 1] += ` ${word}`;
-          } else if (
-            acc.length > 0 &&
-            acc[acc.length - 1] === "Middle" &&
-            word === "East"
-          ) {
-            acc[acc.length - 1] += ` ${word}`;
-          } else {
-            acc.push(word);
-          }
-          return acc;
-        }, [])
-        .filter(Boolean);
+  //     let searchTerms = prevSearch
+  //       .split(" ")
+  //       .reduce((acc, word) => {
+  //         console.log(acc);
+  //         if (
+  //           acc.length > 0 &&
+  //           (acc[acc.length - 1] === "North" ||
+  //             acc[acc.length - 1] === "South") &&
+  //           word === "America"
+  //         ) {
+  //           acc[acc.length - 1] += ` ${word}`;
+  //         } else if (
+  //           acc.length > 0 &&
+  //           acc[acc.length - 1] === "Middle" &&
+  //           word === "East"
+  //         ) {
+  //           acc[acc.length - 1] += ` ${word}`;
+  //         } else {
+  //           acc.push(word);
+  //         }
+  //         return acc;
+  //       }, [])
+  //       .filter(Boolean);
 
-      const index = searchTerms.indexOf(continent);
+  //     const index = searchTerms.indexOf(continent);
 
-      if (index !== -1) {
-        // remove continent if found in search
-        searchTerms.splice(index, 1);
+  //     if (index !== -1) {
+  //       // remove continent if found in search
+  //       searchTerms.splice(index, 1);
+  //     } else {
+  //       // Add the continent if not found in search
+  //       searchTerms.push(continent);
+  //     }
+
+  //     return searchTerms.join(" ");
+  //   });
+  // };
+
+  // const handleFilterContinent = (continent) => {
+  //   setSearch((prevSearch) => {
+  //     // Split the search string into words, reduce has accumulator as [], word as current word, if previous was north of south, will add america and append to item in array, same logic for middle east
+
+  //     let searchTerms = prevSearch
+  //       .split(" ")
+  //       .reduce((acc, word) => {
+  //         console.log(acc);
+  //         if (acc.length > 0 && acc[acc.length - 1] === "North") {
+  //           acc[acc.length - 1] += ` America`;
+  //         } else if (acc.length > 0 && acc[acc.length - 1] === "Middle") {
+  //           acc[acc.length - 1] += ` East and North Africa`;
+  //         } else if (acc.length > 0 && acc[acc.length - 1] === "East") {
+  //           acc[acc.length - 1] += ` Asia and Pacific`;
+  //         } else if (acc.length > 0 && acc[acc.length - 1] === "South") {
+  //           acc[acc.length - 1] += ` Asia`;
+  //         } else if (acc.length > 0 && acc[acc.length - 1] === "Latin") {
+  //           acc[acc.length - 1] += ` America and the Caribbean`;
+  //         } else if (acc.length > 0 && acc[acc.length - 1] === "Sub-Saharan") {
+  //           acc[acc.length - 1] += ` Africa`;
+  //         } else if (acc.length > 0 && acc[acc.length - 1] === "Europe") {
+  //           acc[acc.length - 1] += ` and Central Asia`;
+  //         } else {
+  //           acc.push(word);
+  //         }
+  //         return acc;
+  //       }, [])
+  //       .filter(Boolean);
+
+  //     const index = searchTerms.indexOf(continent);
+
+  //     if (index !== -1) {
+  //       // remove continent if found in search
+  //       searchTerms.splice(index, 1);
+  //     } else {
+  //       // Add the continent if not found in search
+  //       searchTerms.push(continent);
+  //     }
+
+  //     return searchTerms.join(" ");
+  //   });
+  // };
+
+  const handleFilterContinent = (selectedContinent) => {
+    setSelectedContinents((prevSelectedContinents) => {
+      if (prevSelectedContinents.includes(selectedContinent)) {
+        // Remove the continent if it's already selected
+        return prevSelectedContinents.filter(
+          (continent) => continent !== selectedContinent
+        );
       } else {
-        // Add the continent if not found in search
-        searchTerms.push(continent);
+        // Add the continent if it's not already selected
+        return [...prevSelectedContinents, selectedContinent];
       }
-
-      return searchTerms.join(" ");
     });
   };
 
@@ -222,7 +283,7 @@ export default function Home() {
       <div className="">Something went wrong! Please refresh the page.</div>
     );
   }
-  
+
   return (
     <>
       {/* gif background */}
@@ -313,14 +374,14 @@ export default function Home() {
             >
               Filters
             </button>
-            <form onSubmit={handleSearch}>
+            <form onSubmit={handleSearchBar}>
               <input
                 type="text"
                 ref={filterRef}
                 placeholder="Search or filter..."
                 value={search}
                 className="my-5 flex w-96 rounded-full border border-gray-300 px-3 py-3 font-bold shadow-md hover:bg-gray-100 focus:border-red-300 focus:outline-none focus:ring-2 focus:ring-red-300"
-                onChange={handleSearch}
+                onChange={handleSearchBar}
               ></input>
             </form>
             <button
@@ -377,7 +438,8 @@ export default function Home() {
           })}
         </div>
 
-        <div className="ml-16 flex space-x-4 overflow-x-auto xs:ml-8 [&>*]:flex-shrink-0 [&>*]:px-3 [&>*]:py-2 [&>*]:font-bold">
+        {/* continent buttons */}
+        <div className="mr-8 flex space-x-4 overflow-x-auto xs:ml-8 [&>*]:flex-shrink-0 [&>*]:px-3 [&>*]:py-2 [&>*]:font-bold">
           {continentButtons.map((button) => {
             //regex tests for whole expression, i for insensitive case
 
@@ -438,19 +500,17 @@ export default function Home() {
           <div className="mx-8 mb-8 grid min-h-96 place-items-center gap-y-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {locations
               .filter((item) => {
+                // If no continents are selected, show all locations
+
+                if (selectedContinents.length === 0) {
+                  return true;
+                }
+
+                // Otherwise, only show locations that match one of the selected continents
+                return selectedContinents.includes(item["Region"]);
+              })
+              .filter((item) => {
                 const searchWords = search.toLowerCase().split(" ");
-
-                // return search.toLowerCase() === ""
-                //   ? item
-                //   : item.city.toLowerCase().includes(search) ||
-                //       item.country.toLowerCase().includes(search) ||
-                //       item.continent.toLowerCase().includes(search);
-
-                // return searchWords.every(word =>
-                //   item.city.toLowerCase().includes(word) ||
-                //   item.country.toLowerCase().includes(word) ||
-                //   item.continent.toLowerCase().includes(word)
-                // );
 
                 return checkNestedItem(item, searchWords);
               })

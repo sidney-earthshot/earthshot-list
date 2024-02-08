@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
           Country: 1,
           "Image URL": 1,
           "Image author": 1,
+          "Region": 1
         },
       }
     )
