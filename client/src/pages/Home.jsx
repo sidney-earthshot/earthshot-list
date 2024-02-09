@@ -31,45 +31,7 @@ import CountryCard from ".././components/CountryCard";
 import CountryModal from ".././components/CountryModal";
 
 import { checkNestedItem } from ".././functions/check";
-
-const filters = [
-  {
-    category: "General",
-    buttons: ["Income Class", "Population > 1 000 000", "LDC Group"],
-  },
-  {
-    category: "Food and Agriculture",
-    buttons: ["Retail Food Waste", "Cost of Nutrient Adequacy"],
-  },
-  {
-    category: "Healthcare",
-    buttons: ["Travel Time", "Life Expectancy"],
-  },
-  {
-    category: "Water",
-    buttons: ["Drinking Water Quality", "Fecal Amount"],
-  },
-  {
-    category: "Energy",
-    buttons: ["Primary Consumption", "Coal", "Solar"],
-  },
-  {
-    category: "Affordable Housing",
-    buttons: [
-      "Price per Sqft",
-      "Average Household Income",
-      "Building Code Compliance Rate",
-    ],
-  },
-  {
-    category: "Environment",
-    buttons: ["Option 1"],
-  },
-  {
-    category: "Economic Prosperity",
-    buttons: ["Option 2"],
-  },
-];
+import { filtersCategories, logos } from ".././constants/constants";
 
 const continentButtons = [
   { name: "East Asia and Pacific", icon: <IconTorii /> },
@@ -81,27 +43,6 @@ const continentButtons = [
   { name: "Middle East and North Africa", icon: <IconPyramid /> },
 ];
 
-const logos = [
-  {
-    url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
-  },
-  {
-    url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
-  },
-  {
-    url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
-  },
-  {
-    url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
-  },
-  {
-    url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
-  },
-  {
-    url: "https://p7.hiclipart.com/preview/717/662/409/cnbc-logo-of-nbc-business-business.jpg",
-  },
-];
-
 export default function Home() {
   const navigate = useNavigate();
 
@@ -111,6 +52,7 @@ export default function Home() {
 
   const [search, setSearch] = useState("");
   const [selectedContinents, setSelectedContinents] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const [visibleModal, setVisibleModal] = useState(false);
 
@@ -134,91 +76,6 @@ export default function Home() {
     setSearch(e.target.value);
   };
 
-  // const handleFilterContinent = (continent) => {
-  //   setSearch((prevSearch) => {
-  //     // Split the search string into words, reduce has accumulator as [], word as current word, if previous was north of south, will add america and append to item in array, same logic for middle east
-
-  //     let searchTerms = prevSearch
-  //       .split(" ")
-  //       .reduce((acc, word) => {
-  //         console.log(acc);
-  //         if (
-  //           acc.length > 0 &&
-  //           (acc[acc.length - 1] === "North" ||
-  //             acc[acc.length - 1] === "South") &&
-  //           word === "America"
-  //         ) {
-  //           acc[acc.length - 1] += ` ${word}`;
-  //         } else if (
-  //           acc.length > 0 &&
-  //           acc[acc.length - 1] === "Middle" &&
-  //           word === "East"
-  //         ) {
-  //           acc[acc.length - 1] += ` ${word}`;
-  //         } else {
-  //           acc.push(word);
-  //         }
-  //         return acc;
-  //       }, [])
-  //       .filter(Boolean);
-
-  //     const index = searchTerms.indexOf(continent);
-
-  //     if (index !== -1) {
-  //       // remove continent if found in search
-  //       searchTerms.splice(index, 1);
-  //     } else {
-  //       // Add the continent if not found in search
-  //       searchTerms.push(continent);
-  //     }
-
-  //     return searchTerms.join(" ");
-  //   });
-  // };
-
-  // const handleFilterContinent = (continent) => {
-  //   setSearch((prevSearch) => {
-  //     // Split the search string into words, reduce has accumulator as [], word as current word, if previous was north of south, will add america and append to item in array, same logic for middle east
-
-  //     let searchTerms = prevSearch
-  //       .split(" ")
-  //       .reduce((acc, word) => {
-  //         console.log(acc);
-  //         if (acc.length > 0 && acc[acc.length - 1] === "North") {
-  //           acc[acc.length - 1] += ` America`;
-  //         } else if (acc.length > 0 && acc[acc.length - 1] === "Middle") {
-  //           acc[acc.length - 1] += ` East and North Africa`;
-  //         } else if (acc.length > 0 && acc[acc.length - 1] === "East") {
-  //           acc[acc.length - 1] += ` Asia and Pacific`;
-  //         } else if (acc.length > 0 && acc[acc.length - 1] === "South") {
-  //           acc[acc.length - 1] += ` Asia`;
-  //         } else if (acc.length > 0 && acc[acc.length - 1] === "Latin") {
-  //           acc[acc.length - 1] += ` America and the Caribbean`;
-  //         } else if (acc.length > 0 && acc[acc.length - 1] === "Sub-Saharan") {
-  //           acc[acc.length - 1] += ` Africa`;
-  //         } else if (acc.length > 0 && acc[acc.length - 1] === "Europe") {
-  //           acc[acc.length - 1] += ` and Central Asia`;
-  //         } else {
-  //           acc.push(word);
-  //         }
-  //         return acc;
-  //       }, [])
-  //       .filter(Boolean);
-
-  //     const index = searchTerms.indexOf(continent);
-
-  //     if (index !== -1) {
-  //       // remove continent if found in search
-  //       searchTerms.splice(index, 1);
-  //     } else {
-  //       // Add the continent if not found in search
-  //       searchTerms.push(continent);
-  //     }
-
-  //     return searchTerms.join(" ");
-  //   });
-  // };
-
   const handleFilterContinent = (selectedContinent) => {
     setSelectedContinents((prevSelectedContinents) => {
       if (prevSelectedContinents.includes(selectedContinent)) {
@@ -229,6 +86,48 @@ export default function Home() {
       } else {
         // Add the continent if it's not already selected
         return [...prevSelectedContinents, selectedContinent];
+      }
+    });
+  };
+
+  // const handleFilterCategories = (selectedCategory) => {
+  //   setSelectedCategories((prevSelectedCategories) => {
+  //     if (prevSelectedCategories.includes(selectedCategory)) {
+  //       // Remove the category if it's already selected
+  //       return prevSelectedCategories.filter(
+  //         (category) => category !== selectedCategory
+  //       );
+  //     } else {
+  //       // Add the category if it's not already selected
+  //       return [...prevSelectedCategories, selectedCategory];
+  //     }
+  //   });
+  // };
+
+  const handleFilterCategories = (
+    categoryName,
+    categoryValue,
+    categoryOperation
+  ) => {
+    setSelectedCategories((prevSelectedCategories) => {
+      const categoryIndex = prevSelectedCategories.findIndex(
+        (category) => category.name === categoryName
+      );
+      if (categoryIndex > -1) {
+        // If the category is already selected, remove it
+        return prevSelectedCategories.filter(
+          (_, index) => index !== categoryIndex
+        );
+      } else {
+        // Otherwise, add the category
+        return [
+          ...prevSelectedCategories,
+          {
+            name: categoryName,
+            value: categoryValue,
+            operation: categoryOperation,
+          },
+        ];
       }
     });
   };
@@ -409,26 +308,26 @@ export default function Home() {
         <div
           className={`transition-all duration-500 ease-in-out ${isFilterExpanded ? "h-96 opacity-100" : "invisible h-0 opacity-0 "} overflow-y-auto bg-red-500`}
         >
-          {filters.map((filter, filterInd) => {
+          {filtersCategories.map((filter) => {
             return (
               <React.Fragment key={`filter_${filter.category}`}>
-                <div
-                  key={`filter_${filterInd}_header`}
-                  className="mx-4 flex border-b-2 p-4 text-xl text-white"
-                >
+                <div className="mx-4 flex border-b-2 p-4 text-xl text-white">
                   {filter.category}
                 </div>
-                <div
-                  key={`filter_${filterInd}_buttons`}
-                  className="ml-4 mt-4 flex items-center overflow-x-auto pb-4 [&>*]:mx-1 [&>*]:p-2"
-                >
-                  {filter.buttons.map((button, buttonInd) => {
+                <div className="ml-4 mt-4 flex items-center overflow-x-auto pb-4 [&>*]:mx-1 [&>*]:p-2">
+                  {filter.filters.map((button) => {
                     return (
                       <button
-                        key={`filter_${filterInd}_button_${buttonInd}`}
                         className="flex-shrink-0 rounded-full border-2 text-white shadow-md"
+                        onClick={() =>
+                          handleFilterCategories(
+                            button.name,
+                            button.value,
+                            button.operation
+                          )
+                        }
                       >
-                        {button}
+                        {button.name}
                       </button>
                     );
                   })}
@@ -439,17 +338,11 @@ export default function Home() {
         </div>
 
         {/* continent buttons */}
-        <div className="mr-8 flex space-x-4 overflow-x-auto xs:ml-8 [&>*]:flex-shrink-0 [&>*]:px-3 [&>*]:py-2 [&>*]:font-bold">
+        <div className="mx-8 mb-8 flex space-x-4 overflow-x-auto [&>*]:flex-shrink-0 [&>*]:px-3 [&>*]:py-2 [&>*]:font-bold">
           {continentButtons.map((button) => {
-            //regex tests for whole expression, i for insensitive case
-
-            const regex = new RegExp(`\\b${button.name}\\b`, "i");
-
-            // test looks for name in search
-            const isActive = regex.test(search);
-
+            const isActive = selectedContinents.includes(button.name);
             const buttonClasses = isActive
-              ? "border-solid border-red-600 bg-red-600 text-white "
+              ? "border-solid border-red-600 bg-red-600 text-white"
               : "border-gray-300 text-gray-400 hover:bg-gray-200 hover:text-black";
 
             return (
@@ -509,6 +402,25 @@ export default function Home() {
                 // Otherwise, only show locations that match one of the selected continents
                 return selectedContinents.includes(item["Region"]);
               })
+
+              .filter((item) => {
+                // If no categories are selected, show all locations
+
+                if (selectedCategories.length === 0) {
+                  return true;
+                }
+
+                return selectedCategories.every((selectedCategory) => {
+                  if (selectedCategory.operation === "equals") {
+                    return (
+                      item["Income classification"] === selectedCategory.value
+                    );
+                  } else if (selectedCategory.operation === "greaterThan") {
+                    return item["2021 population"] > selectedCategory.value;
+                  }
+                });
+              })
+
               .filter((item) => {
                 const searchWords = search.toLowerCase().split(" ");
 
