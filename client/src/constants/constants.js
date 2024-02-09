@@ -29,7 +29,7 @@ const filtersCategories = [
       },
       {
         name: "LDC Group",
-        operation: "equals",
+        operation: "boolean",
         value: true,
       },
       ,

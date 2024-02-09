@@ -90,24 +90,11 @@ export default function Home() {
     });
   };
 
-  // const handleFilterCategories = (selectedCategory) => {
-  //   setSelectedCategories((prevSelectedCategories) => {
-  //     if (prevSelectedCategories.includes(selectedCategory)) {
-  //       // Remove the category if it's already selected
-  //       return prevSelectedCategories.filter(
-  //         (category) => category !== selectedCategory
-  //       );
-  //     } else {
-  //       // Add the category if it's not already selected
-  //       return [...prevSelectedCategories, selectedCategory];
-  //     }
-  //   });
-  // };
-
   const handleFilterCategories = (
     categoryName,
     categoryValue,
-    categoryOperation
+    categoryOperation,
+    categoryGroupName
   ) => {
     setSelectedCategories((prevSelectedCategories) => {
       const categoryIndex = prevSelectedCategories.findIndex(
@@ -126,10 +113,21 @@ export default function Home() {
             name: categoryName,
             value: categoryValue,
             operation: categoryOperation,
+            category: categoryGroupName,
           },
         ];
       }
     });
+  };
+
+  const handleGeneralFilter = (location, operation, value) => {
+    if (operation === "equals") {
+      return location["Income classification"] === value;
+    } else if (operation === "greaterThan") {
+      return location["2021 population"] > value;
+    } else if (operation === "boolean") {
+      return location["LDC"] === value;
+    }
   };
 
   const focusFilter = () => {
@@ -310,20 +308,34 @@ export default function Home() {
         >
           {filtersCategories.map((filter) => {
             return (
-              <React.Fragment key={`filter_${filter.category}`}>
+              <React.Fragment key={`${filter.category}`}>
                 <div className="mx-4 flex border-b-2 p-4 text-xl text-white">
                   {filter.category}
                 </div>
                 <div className="ml-4 mt-4 flex items-center overflow-x-auto pb-4 [&>*]:mx-1 [&>*]:p-2">
                   {filter.filters.map((button) => {
+                    const isActive = selectedCategories.some(
+                      (selectedCategory) =>
+                        selectedCategory.name === button.name &&
+                        selectedCategory.value === button.value &&
+                        selectedCategory.operation === button.operation
+                    );
+
+                    const buttonClasses = `flex-shrink-0 rounded-full border-2 shadow-md ${
+                      isActive
+                        ? "bg-blue-500 text-white"
+                        : "bg-white text-black"
+                    }`;
                     return (
                       <button
-                        className="flex-shrink-0 rounded-full border-2 text-white shadow-md"
+                        key={button.name}
+                        className={buttonClasses}
                         onClick={() =>
                           handleFilterCategories(
                             button.name,
                             button.value,
-                            button.operation
+                            button.operation,
+                            filter.category
                           )
                         }
                       >
@@ -392,7 +404,7 @@ export default function Home() {
         <>
           <div className="mx-8 mb-8 grid min-h-96 place-items-center gap-y-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {locations
-              .filter((item) => {
+              .filter((location) => {
                 // If no continents are selected, show all locations
 
                 if (selectedContinents.length === 0) {
@@ -400,10 +412,10 @@ export default function Home() {
                 }
 
                 // Otherwise, only show locations that match one of the selected continents
-                return selectedContinents.includes(item["Region"]);
+                return selectedContinents.includes(location["Region"]);
               })
 
-              .filter((item) => {
+              .filter((location) => {
                 // If no categories are selected, show all locations
 
                 if (selectedCategories.length === 0) {
@@ -411,20 +423,20 @@ export default function Home() {
                 }
 
                 return selectedCategories.every((selectedCategory) => {
-                  if (selectedCategory.operation === "equals") {
-                    return (
-                      item["Income classification"] === selectedCategory.value
+                  if (selectedCategory.category === "General") {
+                    return handleGeneralFilter(
+                      location,
+                      selectedCategory.operation,
+                      selectedCategory.value
                     );
-                  } else if (selectedCategory.operation === "greaterThan") {
-                    return item["2021 population"] > selectedCategory.value;
                   }
                 });
               })
 
-              .filter((item) => {
+              .filter((location) => {
                 const searchWords = search.toLowerCase().split(" ");
 
-                return checkNestedItem(item, searchWords);
+                return checkNestedItem(location, searchWords);
               })
               .map((location, i) => {
                 return (
