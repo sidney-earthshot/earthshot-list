@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import {
   Routes,
@@ -53,6 +54,8 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [selectedContinents, setSelectedContinents] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const [hasMore, setHasMore] = useState(true);
 
   const [visibleModal, setVisibleModal] = useState(false);
 
@@ -144,10 +147,27 @@ export default function Home() {
     setIsFilterExpanded(!isFilterExpanded);
   };
 
+  const fetchMorePosts = async (numberOfLocations) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/countries/${numberOfLocations}`
+      );
+      const cleaned = await response.json();
+
+      // adds onto the locations list
+
+      setLocations((prevItems) => [...prevItems, ...cleaned]);
+    } catch (err) {
+      setError(err);
+    } finally {
+    }
+  };
+
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
 
+      // if URL has country name
       if (countryName) {
         const response = await fetch(
           `http://localhost:3000/api/country/${countryName}`
@@ -175,11 +195,11 @@ export default function Home() {
     fetchPosts();
   }, [countryName]);
 
-  if (error) {
-    return (
-      <div className="">Something went wrong! Please refresh the page.</div>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <div className="">Something went wrong! Please refresh the page.</div>
+  //   );
+  // }
 
   return (
     <>
@@ -402,56 +422,90 @@ export default function Home() {
         </div>
       ) : (
         <>
-          <div className="mx-8 mb-8 grid min-h-96 place-items-center gap-y-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {locations
-              .filter((location) => {
-                // If no continents are selected, show all locations
+          <InfiniteScroll
+            dataLength={locations.length}
+            hasMore={locations.length >= 218 ? false : true}
+            next={fetchMorePosts(locations.length)}
+            loader={
+              <div className="mx-8 grid min-h-96 place-items-center gap-y-4 sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7">
+                <div
+                  className={`flex h-72 w-11/12 animate-pulse flex-col items-center justify-center rounded-xl border-4`}
+                >
+                  <div className="mb-2 h-5 w-6/12 animate-pulse rounded-xl border-4"></div>
+                  <div className="h-4 w-5/12 animate-pulse rounded-xl border-4"></div>
+                </div>
+                <div
+                  className={`flex h-72 w-11/12 animate-pulse flex-col items-center justify-center rounded-xl border-4`}
+                >
+                  <div className="mb-2 h-5 w-6/12 animate-pulse rounded-xl border-4"></div>
+                  <div className="h-4 w-5/12 animate-pulse rounded-xl border-4"></div>
+                </div>
+                <div
+                  className={`flex h-72 w-11/12 animate-pulse flex-col items-center justify-center rounded-xl border-4`}
+                >
+                  <div className="mb-2 h-5 w-6/12 animate-pulse rounded-xl border-4"></div>
+                  <div className="h-4 w-5/12 animate-pulse rounded-xl border-4"></div>
+                </div>
+                <div
+                  className={`flex h-72 w-11/12 animate-pulse flex-col items-center justify-center rounded-xl border-4`}
+                >
+                  <div className="mb-2 h-5 w-6/12 animate-pulse rounded-xl border-4"></div>
+                  <div className="h-4 w-5/12 animate-pulse rounded-xl border-4"></div>
+                </div>
+              </div>
+            }
+          >
+            <div className="mx-8 mb-8 grid min-h-96 place-items-center gap-y-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {locations
+                .filter((location) => {
+                  // If no continents are selected, show all locations
 
-                if (selectedContinents.length === 0) {
-                  return true;
-                }
-
-                // Otherwise, only show locations that match one of the selected continents
-                return selectedContinents.includes(location["Region"]);
-              })
-
-              .filter((location) => {
-                // If no categories are selected, show all locations
-
-                if (selectedCategories.length === 0) {
-                  return true;
-                }
-
-                return selectedCategories.every((selectedCategory) => {
-                  if (selectedCategory.category === "General") {
-                    return handleGeneralFilter(
-                      location,
-                      selectedCategory.operation,
-                      selectedCategory.value
-                    );
+                  if (selectedContinents.length === 0) {
+                    return true;
                   }
-                });
-              })
 
-              .filter((location) => {
-                const searchWords = search.toLowerCase().split(" ");
+                  // Otherwise, only show locations that match one of the selected continents
+                  return selectedContinents.includes(location["Region"]);
+                })
 
-                return checkNestedItem(location, searchWords);
-              })
-              .map((location, i) => {
-                return (
-                  <CountryCard
-                    key={location.Country + " Card"}
-                    handleModal={() => {
-                      setVisibleModal(true);
-                      setCurrentLocation(location);
-                      navigate(`${location.Country}`);
-                    }}
-                    info={location}
-                  />
-                );
-              })}
-          </div>
+                .filter((location) => {
+                  // If no categories are selected, show all locations
+
+                  if (selectedCategories.length === 0) {
+                    return true;
+                  }
+
+                  return selectedCategories.every((selectedCategory) => {
+                    if (selectedCategory.category === "General") {
+                      return handleGeneralFilter(
+                        location,
+                        selectedCategory.operation,
+                        selectedCategory.value
+                      );
+                    }
+                  });
+                })
+
+                .filter((location) => {
+                  const searchWords = search.toLowerCase().split(" ");
+
+                  return checkNestedItem(location, searchWords);
+                })
+                .map((location, i) => {
+                  return (
+                    <CountryCard
+                      key={location.Country + " Card"}
+                      handleModal={() => {
+                        setVisibleModal(true);
+                        setCurrentLocation(location);
+                        navigate(`${location.Country}`);
+                      }}
+                      info={location}
+                    />
+                  );
+                })}
+            </div>
+          </InfiniteScroll>
 
           <CountryModal
             key={location.Country + " Modal"}
