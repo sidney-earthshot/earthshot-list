@@ -193,7 +193,7 @@ export default function Home() {
     };
 
     fetchPosts();
-  }, [countryName]);
+  }, []);
 
   // if (error) {
   //   return (
