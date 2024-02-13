@@ -20,44 +20,15 @@ export default function CountryCard({ handleModal, info }) {
       onClick={handleModal}
     >
       {/* top */}
-      {/* <div className="flex justify-between m-4 group-hover:hidden">
-        <h1 className="text-white font-bold text-2xl underline underline-offset-8">
-          {"Rank 1"}
-        </h1>
-
-        <div className="flex items-center">
-          <IconWifi color="white" />
-          <div className="flex flex-col items-center">
-            <div className="text-white font-bold text-xl">{"89"}</div>
-            <p className="text-white font-bold text-xs">Mbps</p>
-          </div>
-        </div>
-      </div> */}
 
       {/* tittle */}
       <div className="flex flex-col items-center justify-center group-hover:hidden">
-        <h1 className="font-medium text-white xs:text-2xl 2xl:text-3xl">
+        <h1 className="font-medium text-white xs:text-2xl md:text-xl lg:text-xl xl:text-xl 2xl:text-2xl">
           {info["Country"]}
         </h1>
       </div>
 
       {/* bottom */}
-      {/* <div className="group-hover:hidden">
-        <div className="flex justify-between m-4">
-          <div className="flex items-center">
-            <IconSun color="yellow" />
-            <div className="">
-              <p className="text-white font-semibold text-[10px]">Feels 34°</p>
-              <p className="text-white font-semibold text-xl">33°</p>
-            </div>
-          </div>
-
-          <div className="flex flex-col items-end">
-            <p className="text-white font-semibold text-xl">{`$500`} / mo</p>
-            <p className="text-white font-medium text-[10px]">FOR A NOMAD</p>
-          </div>
-        </div>
-      </div> */}
 
       {/* stats hidden */}
       <div className="hidden h-full rounded-lg bg-black bg-opacity-70 group-hover:block">
