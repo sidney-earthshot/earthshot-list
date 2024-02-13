@@ -55,8 +55,6 @@ export default function Home() {
   const [selectedContinents, setSelectedContinents] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const [hasMore, setHasMore] = useState(true);
-
   const [visibleModal, setVisibleModal] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -148,6 +146,7 @@ export default function Home() {
   };
 
   const fetchMorePosts = async (numberOfLocations) => {
+    console.log(numberOfLocations)
     try {
       const response = await fetch(
         `http://localhost:3000/api/countries/${numberOfLocations}`
@@ -425,7 +424,7 @@ export default function Home() {
           <InfiniteScroll
             dataLength={locations.length}
             hasMore={locations.length >= 218 ? false : true}
-            next={fetchMorePosts(locations.length)}
+            next={() => fetchMorePosts(locations.length)}
             loader={
               <div className="mx-8 grid min-h-96 place-items-center gap-y-4 sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7">
                 <div
@@ -491,7 +490,7 @@ export default function Home() {
 
                   return checkNestedItem(location, searchWords);
                 })
-                .map((location, i) => {
+                .map((location) => {
                   return (
                     <CountryCard
                       key={location.Country + " Card"}
