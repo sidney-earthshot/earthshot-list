@@ -147,7 +147,6 @@ export default function Home() {
   };
 
   const fetchMorePosts = async (numberOfLocations) => {
-    console.log(numberOfLocations);
     try {
       const response = await fetch(
         `http://localhost:3000/api/countries/${numberOfLocations}`
@@ -221,7 +220,7 @@ export default function Home() {
         </div>
         {/* holds title and right sign in */}
         <div className="flex h-screen w-full items-center justify-evenly p-5 xs:flex-col lg:flex-row ">
-          <div className="flex w-[600px] flex-col items-start [&>*]:m-2">
+          <div className="flex md:w-3/6 flex-col items-start [&>*]:m-2">
             <p className="text-5xl font-medium text-white">
               🌎 Learn more about our world
             </p>
@@ -246,7 +245,7 @@ export default function Home() {
           </div>
 
           {/* card sign in */}
-          <div className="m-2 w-80 rounded-xl bg-white p-6 shadow-lg">
+          {/* <div className="m-2 w-80 rounded-xl bg-white p-6 shadow-lg">
             <img
               className="h-[150px] w-full rounded-xl object-cover hover:cursor-pointer hover:opacity-80"
               src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -268,7 +267,7 @@ export default function Home() {
                 Go nomad
               </button>
             </form>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -297,12 +296,12 @@ export default function Home() {
                 ref={filterRef}
                 placeholder="Search or filter..."
                 value={search}
-                className="my-5 flex w-96 rounded-full border border-gray-300 px-3 py-3 font-bold shadow-md hover:bg-gray-100 focus:border-red-300 focus:outline-none focus:ring-2 focus:ring-red-300"
+                className="my-5 flex rounded-full border border-gray-300 px-3 py-3 font-bold shadow-md hover:bg-gray-100 focus:border-red-300 focus:outline-none focus:ring-2 focus:ring-red-300 xs:w-36 lg:w-96"
                 onChange={handleSearchBar}
               ></input>
             </form>
             <button
-              className="absolute left-[480px] flex items-center rounded-full bg-red-600 p-1"
+              className="absolute xs:left-[240px] lg:left-[480px] flex items-center rounded-full bg-red-600 p-1"
               onClick={focusFilter}
             >
               <IconPlus className="" color="white" />
@@ -310,14 +309,14 @@ export default function Home() {
           </div>
 
           {/* view buttons */}
-          <div className="mr-16 items-center space-x-4 xs:hidden sm:flex [&>*]:px-8 [&>*]:py-2 [&>*]:font-bold">
+          {/* <div className="mr-16 items-center space-x-4 xs:hidden sm:flex [&>*]:px-8 [&>*]:py-2 [&>*]:font-bold">
             <button className="my-5 rounded-xl border border-gray-300 px-3 shadow-md hover:bg-gray-100 focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-600">
               Grid View
             </button>
             <button className="my-5 rounded-xl border border-gray-300 px-3 shadow-md hover:bg-gray-100 focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-600">
               Sort by
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* expanded filter and filter buttons */}
@@ -401,6 +400,7 @@ export default function Home() {
             dataLength={locations.length}
             hasMore={locations.length >= 218 ? false : true}
             next={() => fetchMorePosts(locations.length)}
+            scrollThreshold={0}
             loader={<CardLoading />}
           >
             <div className="mx-8 mb-8 grid min-h-96 place-items-center gap-y-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">

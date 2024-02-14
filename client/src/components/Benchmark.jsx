@@ -11,7 +11,7 @@ export default function Benchmark({ info }) {
     <div className="flex h-5/6 flex-col">
       {/* top */}
       <div className="bg-gray-600 px-4">
-        <h1 className="m-4 rounded-b-lg border-b-4 p-4 text-3xl font-bold text-white">
+        <h1 className="m-4 rounded-b-lg border-b-4 p-4 font-bold text-white text-3xl">
           <p className="">Benchmark Stats</p>
         </h1>
 
