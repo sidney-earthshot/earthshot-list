@@ -8,14 +8,14 @@ import {
 
 export default function Benchmark({ info }) {
   return (
-    <div className="flex h-5/6 flex-col">
+    <div className="flex h-full flex-col">
       {/* top */}
-      <div className="bg-gray-600 px-4">
-        <h1 className="m-4 rounded-b-lg border-b-4 p-4 font-bold text-white text-3xl">
+      <div className="h-1/2 overflow-y-auto bg-gray-600 px-4">
+        <h1 className="m-4 rounded-b-lg border-b-4 p-4 text-3xl font-bold text-white">
           <p className="">Benchmark Stats</p>
         </h1>
 
-        <div className="m-4 grid grid-flow-col grid-rows-3 gap-x-2 gap-y-3 p-3">
+        <div className="m-4 gap-x-2 gap-y-3 overflow-y-auto p-3 xs:grid lg:grid-flow-col lg:grid-rows-3">
           <div className="flex flex-col justify-between rounded-lg bg-sky-200">
             <div className="rounded-t-lg bg-red-100 p-3">
               <h2 className="text-lg font-bold underline">
@@ -200,7 +200,7 @@ export default function Benchmark({ info }) {
       </div>
 
       {/* bottom */}
-      <div className="h-2/6 rounded-b-xl bg-gray-600">
+      <div className="h-1/4 rounded-b-xl bg-gray-600">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207446.33037958093!2d139.57572017964438!3d35.66840983669444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b857628235d%3A0xcdd8aef709a2b520!2sTokyo%2C%20Japan!5e0!3m2!1sen!2sca!4v1704922916435!5m2!1sen!2sca"
           width="800"
