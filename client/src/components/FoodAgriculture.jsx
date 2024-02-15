@@ -28,7 +28,7 @@ export default function FoodAgriculture({ info }) {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   return (
-    <div className="flex flex-col md:flex-row ">
+    <div className="flex h-full flex-col md:flex-row">
       {/* desktop subtabs */}
       <div className="hidden w-1/6 flex-col overflow-y-auto rounded-bl-lg bg-gray-400 md:flex">
         {subCategories.map((subCategory) => {
@@ -74,7 +74,7 @@ export default function FoodAgriculture({ info }) {
       </div>
 
       {/* content */}
-      <div className="w-full rounded-b-lg bg-gray-600 md:w-5/6 md:rounded-br-lg ">
+      <div className="w-full bg-gray-600 md:w-5/6 md:rounded-br-lg h-full">
         {currentSubTab === "Supply" ? (
           <Supply info={info} />
         ) : currentSubTab === "Food Waste per Capita" ? (

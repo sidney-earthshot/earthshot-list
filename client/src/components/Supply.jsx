@@ -144,6 +144,7 @@ export default function Supply({ info }) {
     aspectRatio: 1,
     plugins: {
       legend: {
+        position: "bottom",
         labels: {
           color: "white",
         },
@@ -152,6 +153,7 @@ export default function Supply({ info }) {
         display: true,
         text: "Dietary Supply Breakdown",
         color: "white",
+        padding: 20
       },
       datalabels: {
         color: "white",
@@ -190,17 +192,17 @@ export default function Supply({ info }) {
   };
 
   return (
-    <div className="">
-      <div className="flex justify-center py-6">
-        <div className="flex justify-center">
+    <div className="h-full overflow-y-auto">
+      <div className="flex justify-center py-6 xs:flex-col xs:space-y-4 md:h-1/2 md:flex-row">
+        <div className="flex justify-center xs:w-full md:w-1/2">
           <Pie data={pieData} options={pieOptions} />
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center xs:w-full md:w-1/2">
           <Doughnut data={doughnutData} options={doughnutOptions} />
         </div>
       </div>
-      <div className="flex justify-center">
-        <div className="flex h-96 w-1/2 justify-center p-2">
+      <div className="flex h-1/2 justify-center">
+        <div className="flex justify-center p-2 xs:w-[90%] md:w-1/2">
           <Bar data={barData} options={barOptions} />
         </div>
       </div>

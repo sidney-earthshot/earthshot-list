@@ -74,7 +74,7 @@ export default function CountryModal({ visible, onClose, info }) {
         </div>
 
         {/* tabs */}
-        <div className="flex h-[6%] w-full border-b-2 shadow-sm">
+        <div className="flex h-[7%] w-full border-b-2 shadow-sm">
           <div className="flex justify-center bg-gray-100 hover:bg-gray-300">
             <button
               className="flex w-10 items-center justify-center"
@@ -144,7 +144,7 @@ export default function CountryModal({ visible, onClose, info }) {
         </button>
 
         {/* tab content */}
-        <div className="bg-black h-[74%] rounded-b-lg">
+        <div className="bg-black h-[73%] rounded-b-lg">
           {currentTab === "Benchmark" ? (
             <Benchmark info={info} />
           ) : currentTab === "Food and Agriculture" ? (
