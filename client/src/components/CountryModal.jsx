@@ -49,22 +49,19 @@ export default function CountryModal({ visible, onClose, info }) {
           style={{ "--image-url": `url(${info["Image URL"]})` }}
           className={`h-1/5 w-full rounded-t-lg bg-[image:var(--image-url)] bg-cover bg-[center_bottom_400px]`}
         >
-          <div
-            className={`flex h-full justify-between rounded-t-lg bg-[rgba(0,0,0,0.5)]`}
-          >
-            <div className="flex w-1/3 items-end text-xs text-white">
+          <div className={`h-full rounded-t-lg bg-[rgba(0,0,0,0.5)] lg:flex`}>
+            <div className="text-xs text-white xs:h-1/3 lg:h-full lg:w-1/3">
               <p className="p-1 text-gray-400">Information Updated: 2024</p>
             </div>
 
-            <div className=" flex w-1/3 flex-col items-center justify-center space-y-2">
+            <div className="flex flex-col items-center justify-center space-y-2 xs:h-1/3 lg:h-full lg:w-1/3">
               <h1 className="text-5xl font-bold text-white">{info.Country}</h1>
-              <p className="text-white">{info.country}</p>
-              <button className="my-5 rounded-lg border border-red-600 bg-red-600 px-3 py-2 font-bold text-white shadow-sm hover:bg-transparent hover:text-red-600">
+              {/* <button className="my-5 rounded-lg border border-red-600 bg-red-600 px-3 py-2 font-bold text-white shadow-sm hover:bg-transparent hover:text-red-600">
                 Favourite
-              </button>
+              </button> */}
             </div>
 
-            <div className="flex w-1/3 flex-col items-end justify-end p-1">
+            <div className="flex flex-col items-end justify-end p-1 xs:h-1/3 lg:h-full lg:w-1/3">
               <div className="flex space-x-1">
                 <p className="text-white">Photo</p>
                 <p className="text-gray-400">By</p>
@@ -77,7 +74,7 @@ export default function CountryModal({ visible, onClose, info }) {
         </div>
 
         {/* tabs */}
-        <div className="flex w-full border-b-2 shadow-sm">
+        <div className="flex h-[6%] w-full border-b-2 shadow-sm">
           <div className="flex justify-center bg-gray-100 hover:bg-gray-300">
             <button
               className="flex w-10 items-center justify-center"
@@ -147,16 +144,17 @@ export default function CountryModal({ visible, onClose, info }) {
         </button>
 
         {/* tab content */}
-
-        {currentTab === "Benchmark" ? (
-          <Benchmark info={info} />
-        ) : currentTab === "Food and Agriculture" ? (
-          <FoodAgriculture info={info} />
-        ) : currentTab === "Healthcare" ? (
-          <Healthcare info={info} />
-        ) : (
-          <TabContent />
-        )}
+        <div className="bg-black h-[74%] rounded-b-lg">
+          {currentTab === "Benchmark" ? (
+            <Benchmark info={info} />
+          ) : currentTab === "Food and Agriculture" ? (
+            <FoodAgriculture info={info} />
+          ) : currentTab === "Healthcare" ? (
+            <Healthcare info={info} />
+          ) : (
+            <TabContent />
+          )}
+        </div>
       </div>
     </div>
   );

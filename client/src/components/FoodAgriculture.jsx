@@ -28,9 +28,9 @@ export default function FoodAgriculture({ info }) {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   return (
-    <div className="flex h-[815px] flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row ">
       {/* desktop subtabs */}
-      <div className="hidden w-1/6 flex-col overflow-y-auto bg-gray-400 md:flex">
+      <div className="hidden w-1/6 flex-col overflow-y-auto rounded-bl-lg bg-gray-400 md:flex">
         {subCategories.map((subCategory) => {
           return (
             <button
@@ -56,11 +56,11 @@ export default function FoodAgriculture({ info }) {
           {isDropDownOpen ? <IconCaretUpFilled /> : <IconCaretDownFilled />}
         </button>
         {isDropDownOpen && (
-          <div className=" bg-gray-400 absolute">
+          <div className=" absolute bg-gray-400">
             {subCategories.map((subCategory) => (
               <button
                 key={subCategory}
-                className={`w-32 flex px-2 py-4 text-left text-lg font-bold ${currentSubTab === subCategory ? "bg-gray-600 text-red-600" : "text-white hover:bg-gray-300"}`}
+                className={`flex w-32 px-2 py-4 text-left text-lg font-bold ${currentSubTab === subCategory ? "bg-gray-600 text-red-600" : "text-white hover:bg-gray-300"}`}
                 onClick={() => {
                   setCurrentSubTab(subCategory);
                   setIsDropDownOpen(false);
@@ -74,7 +74,7 @@ export default function FoodAgriculture({ info }) {
       </div>
 
       {/* content */}
-      <div className="h-full w-full rounded-b-lg bg-gray-600 md:w-5/6 md:rounded-br-lg ">
+      <div className="w-full rounded-b-lg bg-gray-600 md:w-5/6 md:rounded-br-lg ">
         {currentSubTab === "Supply" ? (
           <Supply info={info} />
         ) : currentSubTab === "Food Waste per Capita" ? (
