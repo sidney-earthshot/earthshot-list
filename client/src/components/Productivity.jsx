@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
 export default function Productivity({ info }) {
+  const [indexAxis, setIndexAxis] = useState("x");
+
+  useEffect(() => {
+    // Function to update indexAxis based on window width
+    const updateAxis = () => {
+      const newIndexAxis = window.innerWidth < 768 ? "y" : "x"; // Assuming 768px is the breakpoint for mobile devices
+      setIndexAxis(newIndexAxis);
+    };
+
+    // Call updateAxis to set initial value
+    updateAxis();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", updateAxis);
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener("resize", updateAxis);
+  }, []);
+
   const barData = {
     labels: [
       "Maize",
@@ -79,7 +98,7 @@ export default function Productivity({ info }) {
   };
 
   const barOptions = {
-    indexAxis: "x",
+    indexAxis: indexAxis,
     responsive: true,
     maintainAspectRatio: false,
     aspectRatio: 1, //affects the height by adjusting ratio
@@ -138,15 +157,15 @@ export default function Productivity({ info }) {
   };
 
   return (
-    <>
-      <div className="flex flex-col p-6">
+    <div className="h-full overflow-y-auto">
+      <div className="flex flex-col xs:h-[120%] xs:p-2 md:h-1/2 md:p-4">
         {/* rounded removes top left artefact */}
-        <div className="h-96">
-          <Bar data={barData} options={barOptions} className="rounded-xl" />
+        <div className="h-full">
+          <Bar data={barData} options={barOptions} className="rounded-lg" />
         </div>
       </div>
 
-      <div className="mx-6 grid grid-cols-3 gap-3">
+      <div className="grid h-1/2 gap-3 p-6 md:grid-cols-3">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-red-100 p-3">
             <h2 className="text-lg font-bold underline">
@@ -235,6 +254,6 @@ export default function Productivity({ info }) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

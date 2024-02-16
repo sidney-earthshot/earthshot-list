@@ -74,7 +74,7 @@ export default function FoodAgriculture({ info }) {
       </div>
 
       {/* content */}
-      <div className="w-full bg-gray-600 md:w-5/6 md:rounded-br-lg h-full">
+      <div className="h-full w-full bg-gray-600 xs:rounded-b-lg md:w-5/6 md:rounded-br-lg">
         {currentSubTab === "Supply" ? (
           <Supply info={info} />
         ) : currentSubTab === "Food Waste per Capita" ? (

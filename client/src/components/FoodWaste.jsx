@@ -59,7 +59,7 @@ export default function FoodWaste({ info }) {
           return `${Math.round((value / (context.dataset.data[0] + context.dataset.data[1] + context.dataset.data[2])) * 100)} %`;
         },
         font: {
-          size: 20,
+          size: 15,
         },
       },
       tooltip: {
@@ -70,7 +70,7 @@ export default function FoodWaste({ info }) {
     },
   };
   return (
-    <div className="flex h-full justify-center py-10">
+    <div className="flex h-full items-center justify-center md:py-10">
       <Pie data={pieData} options={pieOptions} />
     </div>
   );
