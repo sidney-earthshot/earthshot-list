@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
 export default function Malnutrition({ info }) {
+  const [indexAxis, setIndexAxis] = useState("x");
+
+  useEffect(() => {
+    // Function to update indexAxis based on window width
+    const updateAxis = () => {
+      const newIndexAxis = window.innerWidth < 768 ? "y" : "x"; // Assuming 768px is the breakpoint for mobile devices
+      setIndexAxis(newIndexAxis);
+    };
+
+    // Call updateAxis to set initial value
+    updateAxis();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", updateAxis);
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener("resize", updateAxis);
+  }, []);
+
   function percentToNumber(string) {
     if (string === "") {
       return "N/A";
@@ -37,13 +56,13 @@ export default function Malnutrition({ info }) {
   };
 
   const barOptions1 = {
-    indexAxis: "x",
+    indexAxis: indexAxis,
     responsive: true,
     maintainAspectRatio: false,
     aspectRatio: 1, //affects the height by adjusting ratio
     plugins: {
       legend: {
-        display: false,
+        display: true,
         labels: {
           color: "white",
         },
@@ -55,7 +74,7 @@ export default function Malnutrition({ info }) {
       },
       datalabels: {
         color: "white",
-        anchor: "end",
+        anchor: "center",
         align: "end",
         offset: 5,
         formatter: function (value) {
@@ -86,6 +105,9 @@ export default function Malnutrition({ info }) {
       y: {
         ticks: {
           color: "white", // Y-axis labels (ticks)
+          font: {
+            size: 9.5,
+          },
         },
         grid: {
           color: "rgba(255, 255, 255, 0.1)", // Y-axis lines
@@ -100,11 +122,11 @@ export default function Malnutrition({ info }) {
     },
   };
   return (
-    <div className="mx-3 mt-12">
-      <div className="grid grid-cols-3 gap-3 p-4">
+    <div className="flex h-full w-full flex-col p-5 xs:p-2">
+      <div className="grid gap-3 p-4 xs:h-2/5 xs:overflow-y-auto md:h-1/5 md:grid-cols-3 md:overflow-visible">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-red-100 p-3">
-            <h2 className="text-lg font-bold underline">
+            <h2 className="font-bold underline xs:text-sm md:text-lg">
               Severe food insecurity
             </h2>
           </div>
@@ -120,7 +142,7 @@ export default function Malnutrition({ info }) {
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-red-100 p-3">
-            <h2 className="text-lg font-bold underline">
+            <h2 className="font-bold underline xs:text-sm md:text-lg">
               Micro/Macro Nutrient Deficiency
             </h2>
           </div>
@@ -136,7 +158,7 @@ export default function Malnutrition({ info }) {
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-red-100 p-3">
-            <h2 className="text-lg font-bold underline">
+            <h2 className="font-bold underline xs:text-sm md:text-lg">
               Global Hunger Index Score
             </h2>
           </div>
@@ -151,7 +173,7 @@ export default function Malnutrition({ info }) {
         </div>
       </div>
 
-      <div className="mt-20 flex h-96 justify-center p-5">
+      <div className="mt-12 flex h-3/5 justify-center">
         <Bar data={barData1} options={barOptions1} className="rounded-xl" />
       </div>
     </div>
