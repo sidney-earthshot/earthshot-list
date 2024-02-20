@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
 export default function NutrientDeficiency({ info }) {
+  const [indexAxis, setIndexAxis] = useState("x");
+
+  useEffect(() => {
+    // Function to update indexAxis based on window width
+    const updateAxis = () => {
+      const newIndexAxis = window.innerWidth < 768 ? "y" : "x"; // Assuming 768px is the breakpoint for mobile devices
+      setIndexAxis(newIndexAxis);
+    };
+
+    // Call updateAxis to set initial value
+    updateAxis();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", updateAxis);
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener("resize", updateAxis);
+  }, []);
+
   function percentToNumber(string) {
     if (string === "") {
       return "N/A";
@@ -70,7 +89,7 @@ export default function NutrientDeficiency({ info }) {
   };
 
   const barOptions1 = {
-    indexAxis: "x",
+    indexAxis: indexAxis,
     responsive: true,
     maintainAspectRatio: false,
     aspectRatio: 1, //affects the height by adjusting ratio
@@ -89,7 +108,7 @@ export default function NutrientDeficiency({ info }) {
       datalabels: {
         color: "white",
         anchor: "end",
-        align: "end",
+        align: "center",
         offset: 10,
         formatter: function (value) {
           return `${value}%`;
@@ -198,11 +217,11 @@ export default function NutrientDeficiency({ info }) {
   };
 
   return (
-    <div className="flex flex-col justify-center p-5">
-      <div className="mb-4 h-96">
+    <div className="flex h-full flex-col p-6">
+      <div className="h-1/2">
         <Bar data={barData1} options={barOptions1} className="rounded-3xl" />
       </div>
-      <div className="h-96">
+      <div className="h-1/2">
         <Bar data={barData2} options={barOptions2} className="rounded-3xl" />
       </div>
     </div>
