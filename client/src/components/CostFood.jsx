@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
 export default function CostFood({ info }) {
+  const [indexAxis, setIndexAxis] = useState("x");
+
+  useEffect(() => {
+    // Function to update indexAxis based on window width
+    const updateAxis = () => {
+      const newIndexAxis = window.innerWidth < 768 ? "y" : "x"; // Assuming 768px is the breakpoint for mobile devices
+      setIndexAxis(newIndexAxis);
+    };
+
+    // Call updateAxis to set initial value
+    updateAxis();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", updateAxis);
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener("resize", updateAxis);
+  }, []);
+
   function currencyToNumber(string) {
     // Remove the dollar sign and commas, then convert to a floating-point number
     const number = parseFloat(string.replace(/[\$,]/g, ""));
@@ -51,7 +70,7 @@ export default function CostFood({ info }) {
   };
 
   const barOptions1 = {
-    indexAxis: "x",
+    indexAxis: indexAxis,
     responsive: true,
     maintainAspectRatio: false,
     aspectRatio: 1, //affects the height by adjusting ratio
@@ -115,7 +134,7 @@ export default function CostFood({ info }) {
   };
 
   const barOptions2 = {
-    indexAxis: "x",
+    indexAxis: indexAxis,
     responsive: true,
     maintainAspectRatio: false,
     aspectRatio: 1, //affects the height by adjusting ratio
@@ -128,7 +147,7 @@ export default function CostFood({ info }) {
       },
       title: {
         display: true,
-        text: "Crop Yield Gap",
+        text: "Food-Income Cost",
         color: "white",
       },
       datalabels: {
@@ -157,7 +176,7 @@ export default function CostFood({ info }) {
         },
         title: {
           display: true,
-          text: "Yield",
+          text: "Related Cost",
           color: "white",
         },
         max: 21,
@@ -165,6 +184,9 @@ export default function CostFood({ info }) {
       y: {
         ticks: {
           color: "white", // Y-axis labels (ticks)
+          font: {
+            size: 10
+          }
         },
         grid: {
           color: "rgba(255, 255, 255, 0.1)", // Y-axis lines
@@ -172,7 +194,7 @@ export default function CostFood({ info }) {
         },
         title: {
           display: true,
-          text: "Crop",
+          text: "",
           color: "white",
         },
       },
@@ -180,11 +202,12 @@ export default function CostFood({ info }) {
   };
 
   return (
-    <div className="mx-4 my-6 flex flex-col">
-      <div className="grid grid-cols-3 gap-3 p-4">
+    <div className="flex h-full w-full flex-col xs:p-2 md:p-6">
+      {/* grid */}
+      <div className="grid h-1/4 gap-3 overflow-y-auto p-4 md:grid-cols-3">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-red-100 p-3">
-            <h2 className="text-lg font-bold underline">
+            <h2 className="font-bold underline xs:text-sm md:text-lg">
               Cost of Nutrient Adequacy (CoNA)
             </h2>
           </div>
@@ -200,7 +223,7 @@ export default function CostFood({ info }) {
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-red-100 p-3">
-            <h2 className="text-lg font-bold underline">
+            <h2 className="font-bold underline xs:text-sm md:text-lg">
               Cost of Caloric Adequacy (CoCA)
             </h2>
           </div>
@@ -216,7 +239,7 @@ export default function CostFood({ info }) {
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-red-100 p-3">
-            <h2 className="text-lg font-bold underline">
+            <h2 className="font-bold underline xs:text-sm md:text-lg">
               Premium of CoNA vs. CoCA
             </h2>
           </div>
@@ -231,11 +254,11 @@ export default function CostFood({ info }) {
         </div>
       </div>
 
-      <div className="p-5">
-        <div className="h-64">
+      <div className="h-3/4">
+        <div className="h-1/2">
           <Bar data={barData1} options={barOptions1} className="rounded-xl" />
         </div>
-        <div className="h-64">
+        <div className="h-1/2">
           <Bar data={barData2} options={barOptions2} className="rounded-xl" />
         </div>
       </div>
