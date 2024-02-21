@@ -10,14 +10,14 @@ export default function Benchmark({ info }) {
   return (
     <div className="h-full">
       {/* top */}
-      <div className="h-4/6 overflow-y-auto rounded-b-lg bg-gray-600 px-4">
-        <h1 className="m-4 rounded-b-lg border-b-4 p-4 text-3xl font-bold text-white">
+      <div className="rounded-b-lg bg-gray-600 px-4 xs:h-3/5 md:h-4/6">
+        <h1 className="mx-4 rounded-b-lg border-b-4 p-4 text-3xl font-bold text-white">
           <p className="">Benchmark Stats</p>
         </h1>
 
-        <div className="m-4 gap-x-2 gap-y-3 overflow-y-auto p-3 xs:grid lg:grid-flow-col lg:grid-rows-3">
-          <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-            <div className="rounded-t-lg bg-red-100 p-3">
+        <div className="m-4 gap-x-2 gap-y-3 overflow-x-auto p-3 xs:flex md:grid md:grid-flow-col md:grid-rows-3">
+          <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
+            <div className="rounded-t-lg bg-red-100 p-3 xs:w-[250px] md:w-full">
               <h2 className="text-lg font-bold underline">
                 Income Classification
               </h2>
@@ -57,8 +57,8 @@ export default function Benchmark({ info }) {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-            <div className="rounded-t-lg bg-red-100 p-3">
+          <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
+            <div className="rounded-t-lg bg-red-100 p-3 xs:w-[170px] md:w-full">
               <h2 className="text-lg font-bold underline">Region</h2>
             </div>
 
@@ -67,8 +67,8 @@ export default function Benchmark({ info }) {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-            <div className="rounded-t-lg bg-red-100 p-3">
+          <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
+            <div className="rounded-t-lg bg-red-100 p-3 xs:w-[200px] md:w-full">
               <h2 className="text-lg font-bold underline">2021 Population</h2>
             </div>
 
@@ -81,8 +81,8 @@ export default function Benchmark({ info }) {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-            <div className="rounded-t-lg bg-red-100 p-3">
+          <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
+            <div className="rounded-t-lg bg-red-100 p-3 xs:w-[240px] md:w-full">
               <h2 className="text-lg font-bold underline">
                 GNI per Capita(Atlas)
               </h2>
@@ -100,8 +100,8 @@ export default function Benchmark({ info }) {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-            <div className="rounded-t-lg bg-red-100 p-3">
+          <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
+            <div className="rounded-t-lg bg-red-100 p-3 xs:w-[230px] md:w-full">
               <h2 className="text-lg font-bold underline">
                 GNI per Capita(PPP)
               </h2>
@@ -119,8 +119,8 @@ export default function Benchmark({ info }) {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-            <div className="rounded-t-lg bg-red-100 p-3">
+          <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
+            <div className="rounded-t-lg bg-red-100 p-3 xs:w-[100px] md:w-full">
               <h2 className="text-lg font-bold underline">UN LDC</h2>
             </div>
 
@@ -133,7 +133,7 @@ export default function Benchmark({ info }) {
 
           {/* urban stats */}
           <div className="row-span-3 grid grid-rows-subgrid rounded-lg bg-sky-200 shadow-md">
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col xs:w-[200px] md:w-full">
               <h2 className="rounded-t-lg bg-red-100 p-3 text-lg font-bold underline">
                 Urban Stats
               </h2>
@@ -145,7 +145,7 @@ export default function Benchmark({ info }) {
               </div>
             </div>
 
-            <div className="mt-12 px-3">
+            <div className="px-3 md:mt-12">
               <h2 className="font-medium underline">Electricity Access</h2>
               <h3 className="">
                 {info["Urban electricity access"]
@@ -154,7 +154,7 @@ export default function Benchmark({ info }) {
               </h3>
             </div>
 
-            <div className="mt-6 px-3">
+            <div className="px-3 md:mt-6">
               <h2 className="font-medium underline">Internet Connectivity</h2>
               <h3 className="">
                 {info["Urban internet connectivity"]
@@ -166,7 +166,7 @@ export default function Benchmark({ info }) {
 
           {/* rural stats */}
           <div className="row-span-3 grid grid-rows-subgrid rounded-lg bg-sky-200 shadow-md">
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col justify-between xs:w-[200px] md:w-full">
               <h2 className="rounded-t-lg bg-red-100 p-3 text-lg font-bold underline">
                 Rural Stats
               </h2>
@@ -178,7 +178,7 @@ export default function Benchmark({ info }) {
               </div>
             </div>
 
-            <div className="mt-12 px-3">
+            <div className="px-3 md:mt-12">
               <h2 className="font-medium underline">Electricity Access</h2>
               <h3 className="">
                 {info["Rural electricity access"]
@@ -187,7 +187,7 @@ export default function Benchmark({ info }) {
               </h3>
             </div>
 
-            <div className="mt-6 px-3">
+            <div className="px-3 md:mt-6">
               <h2 className="font-medium underline">Internet Connectivity</h2>
               <h3 className="">
                 {info["Rural internet connectivity"]
@@ -199,7 +199,7 @@ export default function Benchmark({ info }) {
         </div>
       </div>
       {/* bottom */}
-      <div className="h-2/6 rounded-b-lg bg-gray-600">
+      <div className="rounded-b-lg bg-gray-600 xs:h-2/5 md:h-2/6">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207446.33037958093!2d139.57572017964438!3d35.66840983669444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b857628235d%3A0xcdd8aef709a2b520!2sTokyo%2C%20Japan!5e0!3m2!1sen!2sca!4v1704922916435!5m2!1sen!2sca"
           width="800"
