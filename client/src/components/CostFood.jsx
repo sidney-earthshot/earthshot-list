@@ -185,8 +185,8 @@ export default function CostFood({ info }) {
         ticks: {
           color: "white", // Y-axis labels (ticks)
           font: {
-            size: 10
-          }
+            size: 10,
+          },
         },
         grid: {
           color: "rgba(255, 255, 255, 0.1)", // Y-axis lines
@@ -204,9 +204,9 @@ export default function CostFood({ info }) {
   return (
     <div className="flex h-full w-full flex-col xs:p-2 md:p-6">
       {/* grid */}
-      <div className="grid h-1/4 gap-3 overflow-y-auto p-4 md:grid-cols-3">
+      <div className="h-1/4 gap-3 overflow-y-auto p-4 xs:flex md:grid md:grid-cols-3">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-          <div className="rounded-t-lg bg-red-100 p-3">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[270px] md:w-full">
             <h2 className="font-bold underline xs:text-sm md:text-lg">
               Cost of Nutrient Adequacy (CoNA)
             </h2>
@@ -222,7 +222,7 @@ export default function CostFood({ info }) {
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-          <div className="rounded-t-lg bg-red-100 p-3">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[270px] md:w-full">
             <h2 className="font-bold underline xs:text-sm md:text-lg">
               Cost of Caloric Adequacy (CoCA)
             </h2>
@@ -238,7 +238,7 @@ export default function CostFood({ info }) {
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-          <div className="rounded-t-lg bg-red-100 p-3">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[230px] md:w-full">
             <h2 className="font-bold underline xs:text-sm md:text-lg">
               Premium of CoNA vs. CoCA
             </h2>

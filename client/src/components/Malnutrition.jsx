@@ -123,9 +123,9 @@ export default function Malnutrition({ info }) {
   };
   return (
     <div className="flex h-full w-full flex-col p-5 xs:p-2">
-      <div className="grid gap-3 p-4 xs:h-2/5 xs:overflow-y-auto md:h-1/5 md:grid-cols-3 md:overflow-visible">
+      <div className="gap-3 p-4 xs:flex xs:h-2/5 xs:overflow-y-auto md:grid md:h-1/5 md:grid-cols-3 md:overflow-visible">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-          <div className="rounded-t-lg bg-red-100 p-3">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[180px] md:w-full">
             <h2 className="font-bold underline xs:text-sm md:text-lg">
               Severe food insecurity
             </h2>
@@ -141,7 +141,7 @@ export default function Malnutrition({ info }) {
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-          <div className="rounded-t-lg bg-red-100 p-3">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[250px] md:w-full">
             <h2 className="font-bold underline xs:text-sm md:text-lg">
               Micro/Macro Nutrient Deficiency
             </h2>
@@ -157,7 +157,7 @@ export default function Malnutrition({ info }) {
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-          <div className="rounded-t-lg bg-red-100 p-3">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[210px] md:w-full">
             <h2 className="font-bold underline xs:text-sm md:text-lg">
               Global Hunger Index Score
             </h2>

@@ -17,7 +17,7 @@ export default function Benchmark({ info }) {
 
         <div className="m-4 gap-x-2 gap-y-3 overflow-x-auto p-3 xs:flex md:grid md:grid-flow-col md:grid-rows-3">
           <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-            <div className="rounded-t-lg bg-red-100 p-3 xs:w-[250px] md:w-full">
+            <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[250px] md:w-full">
               <h2 className="text-lg font-bold underline">
                 Income Classification
               </h2>
@@ -58,7 +58,7 @@ export default function Benchmark({ info }) {
           </div>
 
           <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-            <div className="rounded-t-lg bg-red-100 p-3 xs:w-[170px] md:w-full">
+            <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[170px] md:w-full">
               <h2 className="text-lg font-bold underline">Region</h2>
             </div>
 
@@ -68,7 +68,7 @@ export default function Benchmark({ info }) {
           </div>
 
           <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-            <div className="rounded-t-lg bg-red-100 p-3 xs:w-[200px] md:w-full">
+            <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[200px] md:w-full">
               <h2 className="text-lg font-bold underline">2021 Population</h2>
             </div>
 
@@ -82,7 +82,7 @@ export default function Benchmark({ info }) {
           </div>
 
           <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-            <div className="rounded-t-lg bg-red-100 p-3 xs:w-[240px] md:w-full">
+            <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[240px] md:w-full">
               <h2 className="text-lg font-bold underline">
                 GNI per Capita(Atlas)
               </h2>
@@ -101,7 +101,7 @@ export default function Benchmark({ info }) {
           </div>
 
           <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-            <div className="rounded-t-lg bg-red-100 p-3 xs:w-[230px] md:w-full">
+            <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[230px] md:w-full">
               <h2 className="text-lg font-bold underline">
                 GNI per Capita(PPP)
               </h2>
@@ -120,7 +120,7 @@ export default function Benchmark({ info }) {
           </div>
 
           <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-            <div className="rounded-t-lg bg-red-100 p-3 xs:w-[100px] md:w-full">
+            <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[100px] md:w-full">
               <h2 className="text-lg font-bold underline">UN LDC</h2>
             </div>
 
@@ -134,7 +134,7 @@ export default function Benchmark({ info }) {
           {/* urban stats */}
           <div className="row-span-3 grid grid-rows-subgrid rounded-lg bg-sky-200 shadow-md">
             <div className="flex flex-col xs:w-[200px] md:w-full">
-              <h2 className="rounded-t-lg bg-red-100 p-3 text-lg font-bold underline">
+              <h2 className="rounded-t-lg bg-[#FDD1BA] p-3 text-lg font-bold underline">
                 Urban Stats
               </h2>
               <div className="px-3">
@@ -167,7 +167,7 @@ export default function Benchmark({ info }) {
           {/* rural stats */}
           <div className="row-span-3 grid grid-rows-subgrid rounded-lg bg-sky-200 shadow-md">
             <div className="flex flex-col justify-between xs:w-[200px] md:w-full">
-              <h2 className="rounded-t-lg bg-red-100 p-3 text-lg font-bold underline">
+              <h2 className="rounded-t-lg bg-[#FDD1BA] p-3 text-lg font-bold underline">
                 Rural Stats
               </h2>
               <div className="px-3">

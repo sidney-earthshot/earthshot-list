@@ -167,7 +167,7 @@ export default function Productivity({ info }) {
 
       <div className="h-1/2 gap-3 p-5 xs:flex xs:overflow-x-auto md:grid md:grid-cols-3">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-          <div className="rounded-t-lg bg-red-100 p-3 xs:w-[300px] md:w-full">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[300px] md:w-full">
             <h2 className="text-lg font-bold underline">
               Agricultural Water Withdrawal
             </h2>
@@ -183,7 +183,7 @@ export default function Productivity({ info }) {
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-          <div className="rounded-t-lg bg-red-100 p-3 xs:w-[300px] md:w-full">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[300px] md:w-full">
             <h2 className="text-lg font-bold underline">
               Fertilizer Use per Unit of Land
             </h2>
@@ -199,7 +199,7 @@ export default function Productivity({ info }) {
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-          <div className="rounded-t-lg bg-red-100 p-3 xs:w-[150px] md:w-full">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[150px] md:w-full">
             <h2 className="text-lg font-bold underline">Crop land</h2>
           </div>
 
@@ -211,7 +211,7 @@ export default function Productivity({ info }) {
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-          <div className="rounded-t-lg bg-red-100 p-3 xs:w-[300px] md:w-full">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[300px] md:w-full">
             <h2 className="text-lg font-bold underline">
               Agriculture Factor Productivity
             </h2>
@@ -227,7 +227,7 @@ export default function Productivity({ info }) {
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-          <div className="rounded-t-lg bg-red-100 p-3 xs:w-[320px] md:w-full">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[320px] md:w-full">
             <h2 className="text-lg font-bold underline">
               Agricultural R&D (USD Million)
             </h2>
@@ -243,7 +243,7 @@ export default function Productivity({ info }) {
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-          <div className="rounded-t-lg bg-red-100 p-3 xs:w-[150px] md:w-full">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[150px] md:w-full">
             <h2 className="text-lg font-bold underline">Soil Erosion</h2>
           </div>
 
