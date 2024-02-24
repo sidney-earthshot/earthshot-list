@@ -133,7 +133,7 @@ export default function Benchmark({ info }) {
 
           {/* urban stats */}
           <div className="row-span-3 grid grid-rows-subgrid rounded-lg bg-sky-200 shadow-md">
-            <div className="flex flex-col xs:w-[200px] md:w-full">
+            <div className="flex flex-col justify-between xs:w-[200px] md:w-full">
               <h2 className="rounded-t-lg bg-[#FDD1BA] p-3 text-lg font-bold underline">
                 Urban Stats
               </h2>
@@ -149,7 +149,7 @@ export default function Benchmark({ info }) {
               <h2 className="font-medium underline">Electricity Access</h2>
               <h3 className="">
                 {info["Urban electricity access"]
-                  ? info["Urban electricity access"]
+                  ? `${Math.round(info["Urban electricity access"])}%`
                   : "N/A"}
               </h3>
             </div>
@@ -158,7 +158,7 @@ export default function Benchmark({ info }) {
               <h2 className="font-medium underline">Internet Connectivity</h2>
               <h3 className="">
                 {info["Urban internet connectivity"]
-                  ? info["Urban internet connectivity"]
+                  ? `${Math.round(info["Urban internet connectivity"])}%`
                   : "N/A"}
               </h3>
             </div>
@@ -182,7 +182,7 @@ export default function Benchmark({ info }) {
               <h2 className="font-medium underline">Electricity Access</h2>
               <h3 className="">
                 {info["Rural electricity access"]
-                  ? info["Rural electricity access"]
+                  ? `${Math.round(info["Rural electricity access"])}%`
                   : "N/A"}
               </h3>
             </div>
@@ -191,7 +191,7 @@ export default function Benchmark({ info }) {
               <h2 className="font-medium underline">Internet Connectivity</h2>
               <h3 className="">
                 {info["Rural internet connectivity"]
-                  ? info["Rural internet connectivity"]
+                  ? `${Math.round(info["Rural internet connectivity"])}%`
                   : "N/A"}
               </h3>
             </div>
