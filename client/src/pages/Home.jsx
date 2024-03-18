@@ -59,6 +59,7 @@ export default function Home() {
   const [visibleModal, setVisibleModal] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [isModalLoading, setIsModalLoading] = useState(true);
   const [error, setError] = useState(false);
 
   const [locations, setLocations] = useState([]);
@@ -162,18 +163,35 @@ export default function Home() {
     }
   };
 
+  const fetchCountryInfo = async (countryName) => {
+    setIsModalLoading(true);
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/country/${countryName}`
+      );
+      const cleaned = await response.json();
+
+      setCurrentLocation(cleaned[0]);
+    } finally {
+      setIsModalLoading(false);
+    }
+  };
+
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
 
       // if URL has country name
       if (countryName) {
-        const response = await fetch(
-          `http://localhost:3000/api/country/${countryName}`
-        );
-        const cleaned = await response.json();
+        // const response = await fetch(
+        //   `http://localhost:3000/api/country/${countryName}`
+        // );
+        // const cleaned = await response.json();
 
-        setCurrentLocation(cleaned[0]);
+        // setCurrentLocation(cleaned[0]);
+        fetchCountryInfo(countryName);
+
         setVisibleModal(true);
       } else {
         setVisibleModal(false);
@@ -220,7 +238,7 @@ export default function Home() {
         </div>
         {/* holds title and right sign in */}
         <div className="flex h-screen w-full items-center justify-evenly p-5 xs:flex-col lg:flex-row ">
-          <div className="flex md:w-3/6 flex-col items-start [&>*]:m-2">
+          <div className="flex flex-col items-start md:w-3/6 [&>*]:m-2">
             <p className="text-5xl font-medium text-white">
               🌎 Learn more about our world
             </p>
@@ -301,7 +319,7 @@ export default function Home() {
               ></input>
             </form>
             <button
-              className="absolute xs:left-[240px] lg:left-[480px] flex items-center rounded-full bg-red-600 p-1"
+              className="absolute flex items-center rounded-full bg-red-600 p-1 xs:left-[240px] lg:left-[480px]"
               onClick={focusFilter}
             >
               <IconPlus className="" color="white" />
@@ -446,6 +464,7 @@ export default function Home() {
                       handleModal={() => {
                         setVisibleModal(true);
                         setCurrentLocation(location);
+                        fetchCountryInfo(location["Country"]);
                         navigate(`${location.Country}`);
                       }}
                       info={location}
@@ -459,6 +478,7 @@ export default function Home() {
             key={location.Country + " Modal"}
             visible={visibleModal}
             onClose={handleClose}
+            isModalLoading={isModalLoading}
             info={currentLocation}
           />
         </>

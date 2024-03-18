@@ -8,7 +8,12 @@ import Benchmark from "./Benchmark";
 import FoodAgriculture from "./FoodAgriculture";
 import Healthcare from "./Healthcare";
 
-export default function CountryModal({ visible, onClose, info }) {
+export default function CountryModal({
+  visible,
+  onClose,
+  info,
+  isModalLoading,
+}) {
   if (!visible) return null;
 
   const [currentTab, setCurrentTab] = useState("Benchmark");
@@ -144,9 +149,9 @@ export default function CountryModal({ visible, onClose, info }) {
         </button>
 
         {/* tab content */}
-        <div className="bg-black h-[73%] rounded-b-lg">
+        <div className="h-[73%] rounded-b-lg bg-black">
           {currentTab === "Benchmark" ? (
-            <Benchmark info={info} />
+            <Benchmark info={info} isModalLoading={isModalLoading} />
           ) : currentTab === "Food and Agriculture" ? (
             <FoodAgriculture info={info} />
           ) : currentTab === "Healthcare" ? (

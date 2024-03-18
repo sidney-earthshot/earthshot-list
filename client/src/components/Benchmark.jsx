@@ -1,12 +1,8 @@
 import React from "react";
 
-import {
-  IconStarFilled,
-  IconThumbUpFilled,
-  IconHeartFilled,
-} from "@tabler/icons-react";
+import ModalLoading from "./ModalLoading";
 
-export default function Benchmark({ info }) {
+export default function Benchmark({ info, isModalLoading }) {
   return (
     <div className="h-full">
       {/* top */}
@@ -74,9 +70,13 @@ export default function Benchmark({ info }) {
 
             <div className="p-3">
               <h3 className="mb-3 text-sm">
-                {info["2021 population"]
-                  ? info["2021 population"].toLocaleString()
-                  : "N/A"}
+                {isModalLoading ? (
+                  <ModalLoading />
+                ) : info["2021 population"] ? (
+                  info["2021 population"].toLocaleString()
+                ) : (
+                  "N/A"
+                )}
               </h3>
             </div>
           </div>
@@ -90,12 +90,16 @@ export default function Benchmark({ info }) {
 
             <div className="p-3">
               <h3 className="mb-3 text-sm">
-                {info["GNI Atlas"]
-                  ? new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                    }).format(info["GNI Atlas"]) + " USD"
-                  : "N/A"}
+                {isModalLoading ? (
+                  <ModalLoading />
+                ) : info["GNI Atlas"] ? (
+                  new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }).format(info["GNI Atlas"]) + " USD"
+                ) : (
+                  "N/A"
+                )}
               </h3>
             </div>
           </div>
@@ -109,12 +113,16 @@ export default function Benchmark({ info }) {
 
             <div className="p-3">
               <h3 className="mb-3 text-sm">
-                {info["GNI PPP"]
-                  ? new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                    }).format(info["GNI PPP"]) + " USD"
-                  : "N/A"}
+                {isModalLoading ? (
+                  <ModalLoading />
+                ) : info["GNI PPP"] ? (
+                  new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }).format(info["GNI PPP"]) + " USD"
+                ) : (
+                  "N/A"
+                )}
               </h3>
             </div>
           </div>
@@ -126,7 +134,13 @@ export default function Benchmark({ info }) {
 
             <div className="p-3">
               <h3 className="mb-3 text-sm">
-                {info["LDC"] === true ? "Yes" : "No"}
+                {isModalLoading ? (
+                  <ModalLoading />
+                ) : info["LDC"] === true ? (
+                  "Yes"
+                ) : (
+                  "No"
+                )}
               </h3>
             </div>
           </div>
@@ -140,7 +154,13 @@ export default function Benchmark({ info }) {
               <div className="px-3">
                 <h2 className="font-medium underline">Population</h2>
                 <h3 className="">
-                  {info["Urban population"] ? info["Urban population"] : "N/A"}
+                  {isModalLoading ? (
+                    <ModalLoading />
+                  ) : info["Urban population"] ? (
+                    info["Urban population"]
+                  ) : (
+                    "N/A"
+                  )}
                 </h3>
               </div>
             </div>
@@ -148,18 +168,26 @@ export default function Benchmark({ info }) {
             <div className="px-3 md:mt-12">
               <h2 className="font-medium underline">Electricity Access</h2>
               <h3 className="">
-                {info["Urban electricity access"]
-                  ? `${Math.round(info["Urban electricity access"])}%`
-                  : "N/A"}
+                {isModalLoading ? (
+                  <ModalLoading />
+                ) : info["Urban electricity access"] ? (
+                  `${Math.round(info["Urban electricity access"])}%`
+                ) : (
+                  "N/A"
+                )}
               </h3>
             </div>
 
             <div className="px-3 md:mt-6">
               <h2 className="font-medium underline">Internet Connectivity</h2>
               <h3 className="">
-                {info["Urban internet connectivity"]
-                  ? `${Math.round(info["Urban internet connectivity"])}%`
-                  : "N/A"}
+                {isModalLoading ? (
+                  <ModalLoading />
+                ) : info["Urban internet connectivity"] ? (
+                  `${Math.round(info["Urban internet connectivity"])}%`
+                ) : (
+                  "N/A"
+                )}
               </h3>
             </div>
           </div>
@@ -173,7 +201,13 @@ export default function Benchmark({ info }) {
               <div className="px-3">
                 <h2 className="font-medium underline">Population</h2>
                 <h3 className="">
-                  {info["Rural population"] ? info["Rural population"] : "N/A"}
+                  {isModalLoading ? (
+                    <ModalLoading />
+                  ) : info["Rural population"] ? (
+                    info["Rural population"]
+                  ) : (
+                    "N/A"
+                  )}
                 </h3>
               </div>
             </div>
@@ -181,18 +215,26 @@ export default function Benchmark({ info }) {
             <div className="px-3 md:mt-12">
               <h2 className="font-medium underline">Electricity Access</h2>
               <h3 className="">
-                {info["Rural electricity access"]
-                  ? `${Math.round(info["Rural electricity access"])}%`
-                  : "N/A"}
+                {isModalLoading ? (
+                  <ModalLoading />
+                ) : info["Rural electricity access"] ? (
+                  `${Math.round(info["Rural electricity access"])}%`
+                ) : (
+                  "N/A"
+                )}
               </h3>
             </div>
 
             <div className="px-3 md:mt-6">
               <h2 className="font-medium underline">Internet Connectivity</h2>
               <h3 className="">
-                {info["Rural internet connectivity"]
-                  ? `${Math.round(info["Rural internet connectivity"])}%`
-                  : "N/A"}
+                {isModalLoading ? (
+                  <ModalLoading />
+                ) : info["Rural internet connectivity"] ? (
+                  `${Math.round(info["Rural internet connectivity"])}%`
+                ) : (
+                  "N/A"
+                )}
               </h3>
             </div>
           </div>
@@ -201,7 +243,7 @@ export default function Benchmark({ info }) {
       {/* bottom */}
       <div className="rounded-b-lg bg-gray-600 xs:h-2/5 md:h-2/6">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207446.33037958093!2d139.57572017964438!3d35.66840983669444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b857628235d%3A0xcdd8aef709a2b520!2sTokyo%2C%20Japan!5e0!3m2!1sen!2sca!4v1704922916435!5m2!1sen!2sca"
+          src={info["Map URL"]}
           width="800"
           height="500"
           style={{ border: 0 }}
