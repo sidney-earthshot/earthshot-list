@@ -17,38 +17,100 @@ router.get("/", async (req, res) => {
           let urbanPopulationResponse = await axios.get(
             `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/SP.URB.TOTL?format=json&date=2021`
           );
-          // Assume the API response structure is as expected and has the necessary data
+
           let urbanPopulation = urbanPopulationResponse.data[1][0].value;
 
           let ruralPopulationResponse = await axios.get(
             `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/SP.RUR.TOTL?format=json&date=2021`
           );
-          // Assume the API response structure is as expected and has the necessary data
+
           let ruralPopulation = ruralPopulationResponse.data[1][0].value;
 
           let urbanElectricityResponse = await axios.get(
             `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/EG.ELC.ACCS.UR.ZS?format=json&date=2021`
           );
-          // Assume the API response structure is as expected and has the necessary data
+
           let urbanElectricity = urbanElectricityResponse.data[1][0].value;
 
           let ruralElectricityResponse = await axios.get(
             `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/EG.ELC.ACCS.RU.ZS?format=json&date=2021`
           );
-          // Assume the API response structure is as expected and has the necessary data
+
           let ruralElectricity = ruralElectricityResponse.data[1][0].value;
 
           let foodInsecurityResponse = await axios.get(
             `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/SN.ITK.SVFI.ZS?format=json&date=2021`
           );
-          // Assume the API response structure is as expected and has the necessary data
+
           let foodInsecurity = foodInsecurityResponse.data[1][0].value;
+
+          let underweightResponse = await axios.get(
+            `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/SH.STA.MALN.ZS?format=json&date=2021`
+          );
+
+          let underweight = underweightResponse.data[1][0].value;
+
+          let physicianNumberResponse = await axios.get(
+            `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/SH.MED.PHYS.ZS?format=json&date=2021`
+          );
+
+          // physicians per 1000
+          let physicianNumber = physicianNumberResponse.data[1][0].value;
+
+          let hospitalBedResponse = await axios.get(
+            `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/SH.MED.BEDS.ZS?format=json&date=2021`
+          );
+
+          // beds per 1000
+          let hospitalBed = hospitalBedResponse.data[1][0].value;
+
+          let healthcareExpenditureResponse = await axios.get(
+            `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/SH.XPD.CHEX.PC.CD?format=json&date=2021`
+          );
+
+          let healthcareExpenditure = healthcareExpenditureResponse.data[1][0].value;
 
           let lifeExpectancyResponse = await axios.get(
             `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/SP.DYN.LE00.IN?format=json&date=2021`
           );
-          // Assume the API response structure is as expected and has the necessary data
+
           let lifeExpectancy = lifeExpectancyResponse.data[1][0].value;
+
+          let infantMortalityResponse = await axios.get(
+            `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/SP.DYN.IMRT.IN?format=json&date=2021`
+          );
+
+          // per 1000 births
+          let infantMortality = infantMortalityResponse.data[1][0].value;
+
+          let maternalMortalityResponse = await axios.get(
+            `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/SH.STA.MMRT.NE?format=json&date=2021`
+          );
+
+          // per 100 000 births
+          let maternalMortality = maternalMortalityResponse.data[1][0].value;
+
+          let underFiveMortalityResponse = await axios.get(
+            `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/SH.DYN.MORT?format=json&date=2021`
+          );
+
+          // per 1 000 births
+          let underFiveMortality = underFiveMortalityResponse.data[1][0].value;
+
+          let percentPopulationSafeWaterAccessResponse = await axios.get(
+            `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/SH.H2O.SMDW.ZS?format=json&date=2021`
+          );
+
+          let percentPopulationSafeWaterAccess = percentPopulationSafeWaterAccessResponse.data[1][0].value;
+
+          // billion m3
+          let totalWaterWithdrawalResponse = await axios.get(
+            `https://api.worldbank.org/v2/country/${location["Country code"]}/indicator/ER.H2O.FWTL.K3?format=json&date=2021`
+          );
+
+          let totalWaterWithdrawal = totalWaterWithdrawalResponse.data[1][0].value;
+
+
 
           return {
             ...location,
@@ -57,6 +119,17 @@ router.get("/", async (req, res) => {
             ["Urban electricity access"]: urbanElectricity,
             ["Rural electricity access"]: ruralElectricity,
             ["Severe food insecurity"]: foodInsecurity,
+            ["Underweight"]: underweight,
+            ["Number of primary care physicians per 1000"]: physicianNumber,
+            ["Number of hospital beds per 1000"]: hospitalBed,
+            ["Healthcare spending per capita"]: healthcareExpenditure,
+            ["Life expectancy in years"]: lifeExpectancy,
+            ["Infant Mortality Rate"]: infantMortality,
+            ["Maternal Mortality Rate"]: maternalMortality,
+            ["Under 5 Mortality Rate"]: underFiveMortality,
+            ["Percent of population with reliable access to safe drinking water"]: percentPopulationSafeWaterAccess,
+            ["Total annual freshwater withdrawals billion m3"]: totalWaterWithdrawal,
+            
           };
         } catch (error) {
           console.error("Error:", error);

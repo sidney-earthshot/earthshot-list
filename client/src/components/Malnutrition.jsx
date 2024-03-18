@@ -20,12 +20,13 @@ export default function Malnutrition({ info }) {
     // Add event listener for window resize
     window.addEventListener("resize", updateAxis);
 
+    console.log(info);
     // Clean up event listener on component unmount
     return () => window.removeEventListener("resize", updateAxis);
   }, []);
 
   function percentToNumber(string) {
-    if (string === "") {
+    if (string === "" || string === undefined) {
       return "N/A";
     }
 
@@ -69,7 +70,7 @@ export default function Malnutrition({ info }) {
       },
       title: {
         display: true,
-        text: "Malnutrition Prevalence",
+        text: "Malnutrition Prevalence of Children Under 5",
         color: "white",
       },
       datalabels: {
@@ -134,7 +135,7 @@ export default function Malnutrition({ info }) {
           <div className="p-3">
             <h3 className="mb-3 text-sm">
               {info["Severe food insecurity"]
-                ? info["Severe food insecurity"]
+                ? `${info["Severe food insecurity"]}% of population`
                 : "N/A"}
             </h3>
           </div>

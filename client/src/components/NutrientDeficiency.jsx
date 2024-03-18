@@ -25,7 +25,7 @@ export default function NutrientDeficiency({ info }) {
   }, []);
 
   function percentToNumber(string) {
-    if (string === "") {
+    if (string === "" || string === undefined) {
       return "N/A";
     }
 
