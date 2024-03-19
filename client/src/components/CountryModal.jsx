@@ -5,8 +5,8 @@ import { IconX, IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
 import Tab from "./Tab";
 import TabContent from "./TabContent";
 import Benchmark from "./Benchmark";
-import FoodAgriculture from "./FoodAgriculture";
-import Healthcare from "./Healthcare";
+import FoodAgriculture from "./Agriculture/FoodAgriculture";
+import Healthcare from "./Healthcare/Healthcare";
 
 export default function CountryModal({
   visible,

@@ -4,9 +4,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-import ModalLoading from "./ModalLoading";
-
-export default function Productivity({ info, isModalLoading }) {
+export default function IndicatorsHealth({ info }) {
   const [indexAxis, setIndexAxis] = useState("x");
 
   function stringToNumber(string) {
@@ -14,7 +12,7 @@ export default function Productivity({ info, isModalLoading }) {
       const match = string.match(/[+-]?([0-9]*[.])?[0-9]+/); // Regular expression to match a floating point number
       return match ? parseFloat(match[0]) : NaN; // Parse the matched string as a float, or return NaN if no match
     } else {
-      return 0;
+      return "N/A";
     }
   }
 
@@ -37,47 +35,39 @@ export default function Productivity({ info, isModalLoading }) {
 
   const barData = {
     labels: [
-      "Maize",
-      "Rice",
-      "Wheat",
-      "Sorghum",
-      "Millet",
-      "Barley",
-      "Soybean",
-      "Green Bean",
-      "Faba Bean",
-      "Pea",
-      "Chickpea",
-      "Cowpea",
-      "Pigeonpea",
-      "Groundnut",
-      "Potato",
-      "Sugarcane",
-      "Rapeseed",
-      "Sugar Beet",
+      "Tuberculosis (BCG)",
+      "Hep B (HepB3)",
+      "H.influenza type b(Hib3)",
+      "Inactivated Polio (IPV)",
+      "Measles First Dose (MCV1)",
+      "Pneumococcal (PCV3)",
+      "Polio (Pol3)",
+      "Rubella (RCV1)",
+      "Rotavirus (RotaC)",
+      "Yellow Fever)",
+      "Diptheria/Tetanus/Pertussis (DTP3)",
     ],
     datasets: [
       {
-        label: "Yield t/ha",
+        label: "Percentage",
         data: [
-          stringToNumber(info["Maize"]),
-          stringToNumber(info["Rice"]),
-          stringToNumber(info["Wheat"]),
-          stringToNumber(info["Sorghum"]),
-          stringToNumber(info["Millet"]),
-          stringToNumber(info["Barley"]),
-          stringToNumber(info["Soybean"]),
-          stringToNumber(info["Green Bean"]),
-          stringToNumber(info["Faba Bean"]),
-          stringToNumber(info["Pea"]),
-          stringToNumber(info["Chickpea"]),
-          stringToNumber(info["Cowpea"]),
-          stringToNumber(info["Pigeonpea"]),
-          stringToNumber(info["Groundnut"]),
-          stringToNumber(info["Potato"]),
-          stringToNumber(info["Sugarcane"]),
-          stringToNumber(info["Rapeseed"]),
-          stringToNumber(info["Sugar Beet"]),
+          stringToNumber(info["Vaccination Coverage Tuberculosis (BCG)"]),
+          stringToNumber(info["Vaccination Coverage Hep B (HepB3)"]),
+          stringToNumber(
+            info["Vaccination Coverage H"]["influenza type b (Hib3)"]
+          ),
+          stringToNumber(info["Vaccination Coverage Inactivated polio (IPV)"]),
+          stringToNumber(
+            info["Vaccination Coverage Measles first dose (MCV1)"]
+          ),
+          stringToNumber(info["Vaccination Coverage Pneumococcal (PCV3)"]),
+          stringToNumber(info["Vaccination Coverage Polio (Pol3)"]),
+          stringToNumber(info["Vaccination Coverage Rubella (RCV1)"]),
+          stringToNumber(info["Vaccination Coverage Rotavirus (RotaC)"]),
+          stringToNumber(info["Vaccination Coverage Yellow fever (YFV)"]),
+          stringToNumber(
+            info["Vaccination Coverage Diptheria tetanus pertussis (DTP3)"]
+          ),
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
@@ -98,7 +88,7 @@ export default function Productivity({ info, isModalLoading }) {
       },
       title: {
         display: true,
-        text: "Crop Yield",
+        text: "Vaccination Coverage",
         color: "white",
       },
       datalabels: {
@@ -107,7 +97,7 @@ export default function Productivity({ info, isModalLoading }) {
         align: "end",
         offset: 5,
         formatter: function (value, context) {
-          return;
+          return `${value}%`;
         },
       },
     },
@@ -122,7 +112,7 @@ export default function Productivity({ info, isModalLoading }) {
         },
         title: {
           display: true,
-          text: "Crop",
+          text: "Disease",
           color: "white",
         },
       },
@@ -136,13 +126,12 @@ export default function Productivity({ info, isModalLoading }) {
         },
         title: {
           display: true,
-          text: "Yield (t/ha)",
+          text: "Number",
           color: "white",
         },
       },
     },
   };
-
   return (
     <div className="h-full overflow-y-auto">
       <div className="flex flex-col xs:h-[120%] xs:p-2 md:h-1/2 md:p-4">
@@ -156,19 +145,15 @@ export default function Productivity({ info, isModalLoading }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[300px] md:w-full">
             <h2 className="text-md font-bold underline">
-              Agricultural Water Withdrawal
+              Healthcare Spending per Capita (USD)
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {isModalLoading ? (
-                <ModalLoading />
-              ) : info["Agricultural water withdrawal"] ? (
-                info["Agricultural water withdrawal"]
-              ) : (
-                "N/A"
-              )}
+              {info["Healthcare spending per capita"]
+                ? `$${Math.round(info["Healthcare spending per capita"] * 100) / 100}`
+                : "N/A"}
             </h3>
           </div>
         </div>
@@ -176,37 +161,29 @@ export default function Productivity({ info, isModalLoading }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[300px] md:w-full">
             <h2 className="text-md font-bold underline">
-              Fertilizer Use per Unit of Land
+              Cost Effectiveness Analysis Index
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {isModalLoading ? (
-                <ModalLoading />
-              ) : info["Fertilizer use per unit of land"] ? (
-                info["Fertilizer use per unit of land"]
-              ) : (
-                "N/A"
-              )}
+              {info["Cost effectiveness analysis index"]
+                ? info["Cost effectiveness analysis index"]
+                : "N/A"}
             </h3>
           </div>
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[150px] md:w-full">
-            <h2 className="text-md font-bold underline">Crop land</h2>
+            <h2 className="text-md font-bold underline">Life Expectancy</h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {isModalLoading ? (
-                <ModalLoading />
-              ) : info["Crop land percent"] ? (
-                info["Crop land percent"]
-              ) : (
-                "N/A"
-              )}
+              {info["Life expectancy in years"]
+                ? `${Math.round(info["Life expectancy in years"])} years`
+                : "N/A"}
             </h3>
           </div>
         </div>
@@ -214,19 +191,15 @@ export default function Productivity({ info, isModalLoading }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[300px] md:w-full">
             <h2 className="text-md font-bold underline">
-              Agriculture Factor Productivity
+              Wait Times to See Physicians
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {isModalLoading ? (
-                <ModalLoading />
-              ) : info["Agriculture factor productivity"] ? (
-                info["Agriculture factor productivity"]
-              ) : (
-                "N/A"
-              )}
+              {info["Wait times to see primary care physicians"]
+                ? info["Wait times to see primary care physicians"]
+                : "N/A"}
             </h3>
           </div>
         </div>
@@ -234,37 +207,31 @@ export default function Productivity({ info, isModalLoading }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[320px] md:w-full">
             <h2 className="text-md font-bold underline">
-              Agricultural R&D (USD Million)
+              Wait Times to See Specialist
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {isModalLoading ? (
-                <ModalLoading />
-              ) : info["Agricultural R&D in millions USD"] ? (
-                info["Agricultural R&D in millions USD"]
-              ) : (
-                "N/A"
-              )}
+              {info["Wait times to see specialists"]
+                ? info["Wait times to see specialists"]
+                : "N/A"}
             </h3>
           </div>
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[150px] md:w-full">
-            <h2 className="text-md font-bold underline">Soil Erosion</h2>
+            <h2 className="text-md font-bold underline">
+              Wait Times for Elective Surgery
+            </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {isModalLoading ? (
-                <ModalLoading />
-              ) : info["Soil erosion"] ? (
-                info["Soil erosion"]
-              ) : (
-                "N/A"
-              )}
+              {info["Wait times for elective surgery"]
+                ? info["Wait times for elective surgery"]
+                : "N/A"}
             </h3>
           </div>
         </div>

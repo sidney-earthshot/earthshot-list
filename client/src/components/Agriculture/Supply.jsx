@@ -12,7 +12,7 @@ export default function Supply({ info }) {
       // The first captured group is the number, convert it to a float
       return match ? parseFloat(match[0]) : null;
     } else {
-      return 0;
+      return "N/A";
     }
   }
 
@@ -23,7 +23,7 @@ export default function Supply({ info }) {
       // Convert the cleaned string to a number
       return parseFloat(numericString);
     } else {
-      return 0;
+      return "N/A";
     }
   }
 
