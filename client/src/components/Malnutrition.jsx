@@ -20,13 +20,12 @@ export default function Malnutrition({ info }) {
     // Add event listener for window resize
     window.addEventListener("resize", updateAxis);
 
-    console.log(info);
     // Clean up event listener on component unmount
     return () => window.removeEventListener("resize", updateAxis);
   }, []);
 
   function percentToNumber(string) {
-    if (string === "" || string === undefined) {
+    if (string === "" || string === undefined || string === null) {
       return "N/A";
     }
 
@@ -127,7 +126,7 @@ export default function Malnutrition({ info }) {
       <div className="gap-3 p-4 xs:flex xs:h-2/5 xs:overflow-y-auto md:grid md:h-1/5 md:grid-cols-3 md:overflow-visible">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[180px] md:w-full">
-            <h2 className="font-bold underline xs:text-sm md:text-lg">
+            <h2 className="md:text-md font-bold underline xs:text-sm">
               Severe food insecurity
             </h2>
           </div>
@@ -143,7 +142,7 @@ export default function Malnutrition({ info }) {
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[250px] md:w-full">
-            <h2 className="font-bold underline xs:text-sm md:text-lg">
+            <h2 className="md:text-md font-bold underline xs:text-sm">
               Micro/Macro Nutrient Deficiency
             </h2>
           </div>
@@ -159,15 +158,15 @@ export default function Malnutrition({ info }) {
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[210px] md:w-full">
-            <h2 className="font-bold underline xs:text-sm md:text-lg">
-              Global Hunger Index Score
+            <h2 className="md:text-md font-bold underline xs:text-sm">
+              Hidden Hunger Index Score
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Global Hunger Index Score"]
-                ? info["Global Hunger Index Score"]
+              {info["Hidden Hunger Index Score"]
+                ? info["Hidden Hunger Index Score"]
                 : "N/A"}
             </h3>
           </div>

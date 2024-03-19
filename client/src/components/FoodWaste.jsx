@@ -6,10 +6,14 @@ import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
 export default function FoodWaste({ info }) {
   function gramsToNumber(string) {
-    // Use a regular expression to match numbers with optional decimal places
-    const match = string.match(/(\d+(\.\d+)?)/);
-    // The first captured group is the number, convert it to a float
-    return match ? parseFloat(match[0]) : null;
+    if (string) {
+      // Use a regular expression to match numbers with optional decimal places
+      const match = string.match(/(\d+(\.\d+)?)/);
+      // The first captured group is the number, convert it to a float
+      return match ? parseFloat(match[0]) : null;
+    } else {
+      return 0;
+    }
   }
 
   const pieData = {

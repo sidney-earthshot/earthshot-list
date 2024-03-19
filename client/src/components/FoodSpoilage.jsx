@@ -16,10 +16,12 @@ export default function FoodSpoilage({ info }) {
       {
         label: "Food Waste",
         data: [
-          info["Production & Processing"] ? info["Production & Processing"] : 0,
-          info["Transportation"] ? info["Transportation"] : 0,
-          info["Retailers"] ? info["Retailers"] : 0,
-          info["In house"] ? info["In house"] : 0,
+          info["Production & Processing"]
+            ? info["Production & Processing"]
+            : "",
+          info["Transportation"] ? info["Transportation"] : "",
+          info["Retailers"] ? info["Retailers"] : "",
+          info["In house"] ? info["In house"] : "",
         ],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -53,9 +55,18 @@ export default function FoodSpoilage({ info }) {
       },
       datalabels: {
         color: "white",
+        // formatter: function (value, context) {
+        //   return `${Math.round((value / (context.dataset.data[0] + context.dataset.data[1] + context.dataset.data[2] + context.dataset.data[3])) * 100)} %`;
+        // },
         formatter: function (value, context) {
-          console.log(value)
-          return `${Math.round((value / (context.dataset.data[0] + context.dataset.data[1] + context.dataset.data[2] + context.dataset.data[3])) * 100)} %`;
+          const dataSum = context.dataset.data.reduce(
+            (acc, curr) => acc + curr,
+            0
+          );
+          if (!value || dataSum === 0) {
+            return ""; // Return an empty string if the value is falsy or the sum of the data is 0
+          }
+          return `${Math.round((value / dataSum) * 100)} %`;
         },
         font: {
           size: 20,
@@ -63,7 +74,9 @@ export default function FoodSpoilage({ info }) {
       },
       tooltip: {
         callbacks: {
-          label: (item) => `${item.dataset.label}: ${item.formattedValue}%`,
+          label: (item) => {
+            `${item.dataset.label}: ${item.formattedValue}%` || "";
+          },
         },
       },
       subtitle: {

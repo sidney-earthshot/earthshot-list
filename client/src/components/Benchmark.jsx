@@ -21,34 +21,42 @@ export default function Benchmark({ info, isModalLoading }) {
 
             <div className="p-3">
               <h3 className="text-sm">
-                {info["Income classification"] ===
-                "[HIC's] High-income economies (GNI $13205 or more)"
-                  ? "High-Income Economies"
-                  : info["Income classification"] ===
-                      "[UMIC's] Upper-middle-income economies (GNI $4256 to $13205)"
-                    ? "Upper-Middle-Income Economies"
-                    : info["Income classification"] ===
-                        "[LMIC's] Lower-middle-income economies (GNI $1086 to $4255)"
-                      ? "Lower-Middle-Income Economies"
-                      : info["Income classification"] ===
-                          "[LIC's] Low-income economies (GNI $1085 or less)"
-                        ? "Low-Income Economies"
-                        : "N/A"}
+                {isModalLoading ? (
+                  <ModalLoading />
+                ) : info["Income classification"] ===
+                  "[HIC's] High-income economies (GNI $13205 or more)" ? (
+                  "High-Income Economies"
+                ) : info["Income classification"] ===
+                  "[UMIC's] Upper-middle-income economies (GNI $4256 to $13205)" ? (
+                  "Upper-Middle-Income Economies"
+                ) : info["Income classification"] ===
+                  "[LMIC's] Lower-middle-income economies (GNI $1086 to $4255)" ? (
+                  "Lower-Middle-Income Economies"
+                ) : info["Income classification"] ===
+                  "[LIC's] Low-income economies (GNI $1085 or less)" ? (
+                  "Low-Income Economies"
+                ) : (
+                  "N/A"
+                )}
               </h3>
               <h3 className="text-sm">
-                {info["Income classification"] ===
-                "[HIC's] High-income economies (GNI $13205 or more)"
-                  ? "(GNI $13205 or more)"
-                  : info["Income classification"] ===
-                      "[UMIC's] Upper-middle-income economies (GNI $4256 to $13205)"
-                    ? "(GNI $4256 to $13205)"
-                    : info["Income classification"] ===
-                        "[LMIC's] Lower-middle-income economies (GNI $1086 to $4255)"
-                      ? "(GNI $1086 to $4255)"
-                      : info["Income classification"] ===
-                          "[LIC's] Low-income economies (GNI $1085 or less)"
-                        ? "(GNI $1085 or less)"
-                        : "N/A"}
+                {isModalLoading ? (
+                  <ModalLoading />
+                ) : info["Income classification"] ===
+                  "[HIC's] High-income economies (GNI $13205 or more)" ? (
+                  "(GNI $13205 or more)"
+                ) : info["Income classification"] ===
+                  "[UMIC's] Upper-middle-income economies (GNI $4256 to $13205)" ? (
+                  "(GNI $4256 to $13205)"
+                ) : info["Income classification"] ===
+                  "[LMIC's] Lower-middle-income economies (GNI $1086 to $4255)" ? (
+                  "(GNI $1086 to $4255)"
+                ) : info["Income classification"] ===
+                  "[LIC's] Low-income economies (GNI $1085 or less)" ? (
+                  "(GNI $1085 or less)"
+                ) : (
+                  "N/A"
+                )}
               </h3>
             </div>
           </div>
@@ -59,7 +67,9 @@ export default function Benchmark({ info, isModalLoading }) {
             </div>
 
             <div className="p-3">
-              <h3 className="mb-3 text-sm">{info["Region"]}</h3>
+              <h3 className="mb-3 text-sm">
+                {isModalLoading ? <ModalLoading /> : info["Region"]}
+              </h3>
             </div>
           </div>
 

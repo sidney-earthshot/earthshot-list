@@ -2,14 +2,10 @@ import { useState } from "react";
 import React from "react";
 
 const subCategories = [
-  "Supply",
-  "Food Waste per Capita",
-  "Productivity",
-  "Food Spoilage",
-  "Cost of Food",
-  "Current Expenditure",
-  "Nutrient Deficiency Prevalency",
-  "Malnutrition",
+  "Access",
+  "Indicators",
+  "Quality",
+  "Death Rate of Conditions",
 ];
 
 export default function Healthcare() {

@@ -6,17 +6,25 @@ import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
 export default function Supply({ info }) {
   function gramsToNumber(string) {
-    // Use a regular expression to match numbers with optional decimal places
-    const match = string.match(/(\d+(\.\d+)?)/);
-    // The first captured group is the number, convert it to a float
-    return match ? parseFloat(match[0]) : null;
+    if (string) {
+      // Use a regular expression to match numbers with optional decimal places
+      const match = string.match(/(\d+(\.\d+)?)/);
+      // The first captured group is the number, convert it to a float
+      return match ? parseFloat(match[0]) : null;
+    } else {
+      return 0;
+    }
   }
 
   function calToNumber(string) {
-    // Remove commas and any non-digit characters except for the decimal point
-    const numericString = string.replace(/[^0-9.]+/g, "");
-    // Convert the cleaned string to a number
-    return parseFloat(numericString);
+    if (string) {
+      // Remove commas and any non-digit characters except for the decimal point
+      const numericString = string.replace(/[^0-9.]+/g, "");
+      // Convert the cleaned string to a number
+      return parseFloat(numericString);
+    } else {
+      return 0;
+    }
   }
 
   const pieData = {
@@ -54,7 +62,6 @@ export default function Supply({ info }) {
       datalabels: {
         color: "white",
         formatter: function (value, context) {
-          console.log(context);
           return `${Math.round((value / (context.dataset.data[0] + context.dataset.data[1])) * 100)} %`;
         },
         font: {
@@ -153,7 +160,7 @@ export default function Supply({ info }) {
         display: true,
         text: "Dietary Supply Breakdown",
         color: "white",
-        padding: 20
+        padding: 20,
       },
       datalabels: {
         color: "white",

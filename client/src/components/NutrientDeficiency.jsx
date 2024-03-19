@@ -25,7 +25,7 @@ export default function NutrientDeficiency({ info }) {
   }, []);
 
   function percentToNumber(string) {
-    if (string === "" || string === undefined) {
+    if (string === "" || string === undefined || string === null) {
       return "N/A";
     }
 
@@ -37,12 +37,11 @@ export default function NutrientDeficiency({ info }) {
   const barData1 = {
     labels: [
       "Vitamin A",
-      "Vitamin B",
       "Vitamin C",
       "Vitamin D",
       "Vitamin E",
       "Vitamin K",
-      "Iron",
+      "Iron/B12",
       "Calcium",
       "Magnesium",
       "Zinc",
@@ -55,16 +54,20 @@ export default function NutrientDeficiency({ info }) {
         label: "Prevalence",
         data: [
           percentToNumber(info["Vitamin A"]),
-          percentToNumber(info["Vitamin B complex"]),
           percentToNumber(info["Vitamin C"]),
           percentToNumber(info["Vitamin D"]),
           percentToNumber(info["Vitamin E"]),
           percentToNumber(info["Vitamin K"]),
-          percentToNumber(info["Iron"]),
+          percentToNumber(info["Iron or B12"]),
           percentToNumber(info["Calcium"]),
           percentToNumber(info["Magnesium"]),
           percentToNumber(info["Zinc"]),
-          percentToNumber(info["Iodine"]),
+          Math.round(
+            100 -
+              percentToNumber(
+                info["Iodized salt consumption household percent"]
+              )
+          ),
           percentToNumber(info["Selenium"]),
           percentToNumber(info["Folate"]),
         ],

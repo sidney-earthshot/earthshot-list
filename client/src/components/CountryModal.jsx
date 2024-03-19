@@ -96,41 +96,49 @@ export default function CountryModal({
               name={"Benchmark"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
+              disabled={isModalLoading}
             />
             <Tab
               name={"Food and Agriculture"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
+              disabled={isModalLoading}
             />
             <Tab
               name={"Healthcare"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
+              disabled={isModalLoading}
             />
             <Tab
               name={"Water"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
+              disabled={isModalLoading}
             />
             <Tab
               name={"Energy"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
+              disabled={isModalLoading}
             />
             <Tab
               name={"Affordable Housing"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
+              disabled={isModalLoading}
             />
             <Tab
               name={"Environment"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
+              disabled={isModalLoading}
             />
             <Tab
               name={"Economic Prosperity"}
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
+              disabled={isModalLoading}
             />
           </div>
 

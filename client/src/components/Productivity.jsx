@@ -4,8 +4,19 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function Productivity({ info }) {
+import ModalLoading from "./ModalLoading";
+
+export default function Productivity({ info, isModalLoading }) {
   const [indexAxis, setIndexAxis] = useState("x");
+
+  function stringToNumber(string) {
+    if (string) {
+      const match = string.match(/[+-]?([0-9]*[.])?[0-9]+/); // Regular expression to match a floating point number
+      return match ? parseFloat(match[0]) : NaN; // Parse the matched string as a float, or return NaN if no match
+    } else {
+      return 0;
+    }
+  }
 
   useEffect(() => {
     // Function to update indexAxis based on window width
@@ -33,7 +44,7 @@ export default function Productivity({ info }) {
       "Millet",
       "Barley",
       "Soybean",
-      "Common Bean",
+      "Green Bean",
       "Faba Bean",
       "Pea",
       "Chickpea",
@@ -43,56 +54,32 @@ export default function Productivity({ info }) {
       "Potato",
       "Sugarcane",
       "Rapeseed",
-      "Oil Palm",
+      "Sugar Beet",
     ],
     datasets: [
       {
-        label: "Rainfed",
+        label: "Yield t/ha",
         data: [
-          Math.round(info["Rainfed Maize"] * 100) / 100,
-          Math.round(info["Rainfed Rice"] * 100) / 100,
-          Math.round(info["Rainfed Wheat"] * 100) / 100,
-          Math.round(info["Rainfed Sorghum"] * 100) / 100,
-          Math.round(info["Rainfed Millet"] * 100) / 100,
-          Math.round(info["Rainfed Barley"] * 100) / 100,
-          Math.round(info["Rainfed Soybean"] * 100) / 100,
-          Math.round(info["Rainfed Common Bean"] * 100) / 100,
-          Math.round(info["Rainfed Faba Bean"] * 100) / 100,
-          Math.round(info["Rainfed Pea"] * 100) / 100,
-          Math.round(info["Rainfed Chickpea"] * 100) / 100,
-          Math.round(info["Rainfed Cowpea"] * 100) / 100,
-          Math.round(info["Rainfed Pigeonpea"] * 100) / 100,
-          Math.round(info["Rainfed Groundnut"] * 100) / 100,
-          Math.round(info["Rainfed Potato"] * 100) / 100,
-          Math.round(info["Rainfed Sugarcane"] * 100) / 100,
-          Math.round(info["Rainfed Rapeseed"] * 100) / 100,
-          Math.round(info["Rainfed Oil Palm"] * 100) / 100,
+          stringToNumber(info["Maize"]),
+          stringToNumber(info["Rice"]),
+          stringToNumber(info["Wheat"]),
+          stringToNumber(info["Sorghum"]),
+          stringToNumber(info["Millet"]),
+          stringToNumber(info["Barley"]),
+          stringToNumber(info["Soybean"]),
+          stringToNumber(info["Green Bean"]),
+          stringToNumber(info["Faba Bean"]),
+          stringToNumber(info["Pea"]),
+          stringToNumber(info["Chickpea"]),
+          stringToNumber(info["Cowpea"]),
+          stringToNumber(info["Pigeonpea"]),
+          stringToNumber(info["Groundnut"]),
+          stringToNumber(info["Potato"]),
+          stringToNumber(info["Sugarcane"]),
+          stringToNumber(info["Rapeseed"]),
+          stringToNumber(info["Sugar Beet"]),
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
-      },
-      {
-        label: "Irrigation",
-        data: [
-          Math.round(info["Irrigated Maize"] * 100) / 100,
-          Math.round(info["Irrigated Rice"] * 100) / 100,
-          Math.round(info["Irrigated Wheat"] * 100) / 100,
-          Math.round(0),
-          Math.round(0),
-          Math.round(info["Irrigated Barley"] * 100) / 100,
-          Math.round(info["Irrigated Soybean"] * 100) / 100,
-          Math.round(info["Irrigated Common Bean"] * 100) / 100,
-          Math.round(0),
-          Math.round(info["Irrigated Pea"] * 100) / 100,
-          Math.round(0),
-          Math.round(0),
-          Math.round(0),
-          Math.round(0),
-          Math.round(info["Irrigated Potato"] * 100) / 100,
-          Math.round(info["Irrigated Sugarcane"] * 100) / 100,
-          Math.round(info["Irrigated Rapeseed"] * 100) / 100,
-          Math.round(0),
-        ],
-        backgroundColor: ["rgba(54, 162, 235, 1)"],
       },
     ],
   };
@@ -111,7 +98,7 @@ export default function Productivity({ info }) {
       },
       title: {
         display: true,
-        text: "Crop Yield Gap",
+        text: "Crop Yield",
         color: "white",
       },
       datalabels: {
@@ -149,7 +136,7 @@ export default function Productivity({ info }) {
         },
         title: {
           display: true,
-          text: "Yield",
+          text: "Yield (t/ha)",
           color: "white",
         },
       },
@@ -168,88 +155,116 @@ export default function Productivity({ info }) {
       <div className="h-1/2 gap-3 p-5 xs:flex xs:overflow-x-auto md:grid md:grid-cols-3">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[300px] md:w-full">
-            <h2 className="text-lg font-bold underline">
+            <h2 className="text-md font-bold underline">
               Agricultural Water Withdrawal
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Agricultural water withdrawal"]
-                ? info["Agricultural water withdrawal"]
-                : "N/A"}
+              {isModalLoading ? (
+                <ModalLoading />
+              ) : info["Agricultural water withdrawal"] ? (
+                info["Agricultural water withdrawal"]
+              ) : (
+                "N/A"
+              )}
             </h3>
           </div>
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[300px] md:w-full">
-            <h2 className="text-lg font-bold underline">
+            <h2 className="text-md font-bold underline">
               Fertilizer Use per Unit of Land
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Fertilizer use per unit of land"]
-                ? info["Fertilizer use per unit of land"]
-                : "N/A"}
+              {isModalLoading ? (
+                <ModalLoading />
+              ) : info["Fertilizer use per unit of land"] ? (
+                info["Fertilizer use per unit of land"]
+              ) : (
+                "N/A"
+              )}
             </h3>
           </div>
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[150px] md:w-full">
-            <h2 className="text-lg font-bold underline">Crop land</h2>
+            <h2 className="text-md font-bold underline">Crop land</h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Crop land percent"] ? info["Crop land percent"] : "N/A"}
+              {isModalLoading ? (
+                <ModalLoading />
+              ) : info["Crop land percent"] ? (
+                info["Crop land percent"]
+              ) : (
+                "N/A"
+              )}
             </h3>
           </div>
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[300px] md:w-full">
-            <h2 className="text-lg font-bold underline">
+            <h2 className="text-md font-bold underline">
               Agriculture Factor Productivity
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Agriculture factor productivity"]
-                ? info["Agriculture factor productivity"]
-                : "N/A"}
+              {isModalLoading ? (
+                <ModalLoading />
+              ) : info["Agriculture factor productivity"] ? (
+                info["Agriculture factor productivity"]
+              ) : (
+                "N/A"
+              )}
             </h3>
           </div>
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[320px] md:w-full">
-            <h2 className="text-lg font-bold underline">
+            <h2 className="text-md font-bold underline">
               Agricultural R&D (USD Million)
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Agricultural R&D in millions USD"]
-                ? info["Agricultural R&D in millions USD"]
-                : "N/A"}
+              {isModalLoading ? (
+                <ModalLoading />
+              ) : info["Agricultural R&D in millions USD"] ? (
+                info["Agricultural R&D in millions USD"]
+              ) : (
+                "N/A"
+              )}
             </h3>
           </div>
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[150px] md:w-full">
-            <h2 className="text-lg font-bold underline">Soil Erosion</h2>
+            <h2 className="text-md font-bold underline">Soil Erosion</h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Soil erosion"] ? info["Soil erosion"] : "N/A"}
+              {isModalLoading ? (
+                <ModalLoading />
+              ) : info["Soil erosion"] ? (
+                info["Soil erosion"]
+              ) : (
+                "N/A"
+              )}
             </h3>
           </div>
         </div>

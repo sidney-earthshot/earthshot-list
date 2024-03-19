@@ -25,15 +25,23 @@ export default function CostFood({ info }) {
   }, []);
 
   function currencyToNumber(string) {
-    // Remove the dollar sign and commas, then convert to a floating-point number
-    const number = parseFloat(string.replace(/[\$,]/g, ""));
-    return number;
+    if (string) {
+      // Remove the dollar sign and commas, then convert to a floating-point number
+      const number = parseFloat(string.replace(/[\$,]/g, ""));
+      return number;
+    } else {
+      return "N/A";
+    }
   }
 
   function percentToNumber(string) {
-    // Remove the percentage sign and convert to a floating-point number
-    const number = parseFloat(string.replace("%", ""));
-    return number;
+    if (string) {
+      // Remove the percentage sign and convert to a floating-point number
+      const number = parseFloat(string.replace("%", ""));
+      return number;
+    } else {
+      return "N/A";
+    }
   }
 
   const barData1 = {
@@ -54,7 +62,7 @@ export default function CostFood({ info }) {
     labels: [
       "% of Average Income (CoNA)",
       "% of Average Income (CoCA)",
-      "Food % of Consumer Expenditure",
+      "Food percentage of Consumer Expenditure",
     ],
     datasets: [
       {
