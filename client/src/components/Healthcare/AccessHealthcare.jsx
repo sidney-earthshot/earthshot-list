@@ -8,11 +8,15 @@ export default function AccessHealthcare({ info }) {
   const [indexAxis, setIndexAxis] = useState("x");
 
   function stringToNumber(string) {
-    if (string) {
-      const match = string.match(/[+-]?([0-9]*[.])?[0-9]+/); // Regular expression to match a floating point number
-      return match ? parseFloat(match[0]) : NaN; // Parse the matched string as a float, or return NaN if no match
-    } else {
+    if (string === null || string === undefined || string === "") {
       return "N/A";
+    } else if (typeof string === "number") {
+      return string; // Return the number directly if the input is already a number
+    } else if (typeof string === "string") {
+      const match = string.match(/[+-]?([0-9]*[.])?[0-9]+/); // Match a floating point number in the string
+      return match ? parseFloat(match[0]) : "N/A"; // Parse the matched string as a float, or return "N/A" if no match
+    } else {
+      return "N/A"; // Return "N/A" for any other type of input
     }
   }
 
@@ -39,8 +43,8 @@ export default function AccessHealthcare({ info }) {
       {
         label: "Number",
         data: [
-          info["Number of primary care physicians per 1000"],
-          info["Number of hospital beds per 1000"],
+          stringToNumber(info["Number of primary care physicians per 1000"]),
+          stringToNumber(info["Number of hospital beds per 1000"]),
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },

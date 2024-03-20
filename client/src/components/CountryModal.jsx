@@ -7,6 +7,7 @@ import TabContent from "./TabContent";
 import Benchmark from "./Benchmark";
 import FoodAgriculture from "./Agriculture/FoodAgriculture";
 import Healthcare from "./Healthcare/Healthcare";
+import Water from "./Water/Water";
 
 export default function CountryModal({
   visible,
@@ -164,6 +165,8 @@ export default function CountryModal({
             <FoodAgriculture info={info} />
           ) : currentTab === "Healthcare" ? (
             <Healthcare info={info} />
+          ) : currentTab === "Water" ? (
+            <Water info={info} />
           ) : (
             <TabContent />
           )}

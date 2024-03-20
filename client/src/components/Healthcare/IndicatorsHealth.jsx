@@ -132,6 +132,7 @@ export default function IndicatorsHealth({ info }) {
       },
     },
   };
+  
   return (
     <div className="h-full overflow-y-auto">
       <div className="flex flex-col xs:h-[120%] xs:p-2 md:h-1/2 md:p-4">
@@ -191,14 +192,14 @@ export default function IndicatorsHealth({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[300px] md:w-full">
             <h2 className="text-md font-bold underline">
-              Wait Times to See Physicians
+              Burden of Disease (DALY) per 100 000 People
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Wait times to see primary care physicians"]
-                ? info["Wait times to see primary care physicians"]
+              {info["Burden of Disease in DALY per 100,000"]
+                ? info["Burden of Disease in DALY per 100,000"]
                 : "N/A"}
             </h3>
           </div>
@@ -207,14 +208,14 @@ export default function IndicatorsHealth({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[320px] md:w-full">
             <h2 className="text-md font-bold underline">
-              Wait Times to See Specialist
+              Prescription Drug Utilization
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Wait times to see specialists"]
-                ? info["Wait times to see specialists"]
+              {info["Prescription drug utilization"]
+                ? info["Prescription drug utilization"]
                 : "N/A"}
             </h3>
           </div>
@@ -223,14 +224,14 @@ export default function IndicatorsHealth({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[150px] md:w-full">
             <h2 className="text-md font-bold underline">
-              Wait Times for Elective Surgery
+              Patient Satisfaction Rate
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Wait times for elective surgery"]
-                ? info["Wait times for elective surgery"]
+              {info["Patient satisfaction rate"]
+                ? info["Patient satisfaction rate"]
                 : "N/A"}
             </h3>
           </div>

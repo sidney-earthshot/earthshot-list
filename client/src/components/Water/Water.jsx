@@ -2,23 +2,12 @@ import { useState } from "react";
 import React from "react";
 
 import { IconCaretDownFilled, IconCaretUpFilled } from "@tabler/icons-react";
+import WaterQuality from "./WaterQuality";
 
-import AccessHealthcare from "./AccessHealthcare";
-import IndicatorsHealth from "./IndicatorsHealth";
-import QualityHealth from "./QualityHealth";
-import IncidenceRate from "./IncidenceRate";
-import DeathRateConditions from "./DeathRateConditions";
+const subCategories = ["Water Quality"];
 
-const subCategories = [
-  "Access to Healthcare",
-  "Indicators of Health",
-  "Quality of Health",
-  "Incidence Rate of Disease",
-  "Death Rate of Conditions",
-];
-
-export default function Healthcare({ info }) {
-  const [currentSubTab, setCurrentSubTab] = useState("Access to Healthcare");
+export default function Water({ info }) {
+  const [currentSubTab, setCurrentSubTab] = useState("Water Quality");
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   return (
@@ -69,16 +58,8 @@ export default function Healthcare({ info }) {
 
       {/* content */}
       <div className="h-full w-full bg-gray-600 xs:rounded-b-lg md:w-5/6 md:rounded-br-lg">
-        {currentSubTab === "Access to Healthcare" ? (
-          <AccessHealthcare info={info} />
-        ) : currentSubTab === "Indicators of Health" ? (
-          <IndicatorsHealth info={info} />
-        ) : currentSubTab === "Quality of Health" ? (
-          <QualityHealth info={info} />
-        ) : currentSubTab === "Death Rate of Conditions" ? (
-          <DeathRateConditions info={info} />
-        ) : currentSubTab === "Incidence Rate of Disease" ? (
-          <IncidenceRate info={info} />
+        {currentSubTab === "Water Quality" ? (
+          <WaterQuality info={info} />
         ) : (
           <p>Error! Please Refresh</p>
         )}
