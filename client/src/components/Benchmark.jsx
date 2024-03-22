@@ -250,18 +250,23 @@ export default function Benchmark({ info, isModalLoading }) {
           </div>
         </div>
       </div>
+
       {/* bottom */}
-      <div className="rounded-b-lg bg-gray-600 xs:h-2/5 md:h-2/6">
-        <iframe
-          src={info["Map URL"]}
-          width="800"
-          height="500"
-          style={{ border: 0 }}
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          className="h-full w-full rounded-b-lg"
-        ></iframe>
+      <div className="flex justify-center rounded-b-lg bg-gray-600 xs:h-2/5 md:h-2/6">
+        {isModalLoading ? (
+          <div className="h-32 w-32 mt-6 animate-spin rounded-full border-b-4 border-t-4 border-blue-500"></div>
+        ) : (
+          <iframe
+            src={info["Map URL"]}
+            width="800"
+            height="500"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="h-full w-full rounded-b-lg"
+          ></iframe>
+        )}
       </div>
     </div>
   );

@@ -142,7 +142,7 @@ export default function Immigration({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[250px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Emigration from City
+              Total Emigration from City
             </h2>
           </div>
 

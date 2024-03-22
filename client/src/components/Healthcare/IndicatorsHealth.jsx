@@ -205,7 +205,7 @@ export default function IndicatorsHealth({ info }) {
           <div className="p-3">
             <h3 className="mb-3 text-sm">
               {info["Burden of Disease in DALY per 100,000"]
-                ? info["Burden of Disease in DALY per 100,000"]
+                ? `${info["Burden of Disease in DALY per 100,000"]} deaths`
                 : "N/A"}
             </h3>
           </div>

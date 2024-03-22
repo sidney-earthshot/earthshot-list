@@ -44,6 +44,7 @@ export default function QualityHealth({ info }) {
       "Infant Mortality Rate",
       "Maternal Mortality Rate",
       "Under 5 Mortality Rate",
+      "Neonatal Mortality Rate per 100 Live Births",
     ],
     datasets: [
       {
@@ -52,6 +53,11 @@ export default function QualityHealth({ info }) {
           stringToNumber(info["Infant Mortality Rate"]),
           stringToNumber(info["Maternal Mortality Rate"]),
           stringToNumber(info["Under 5 Mortality Rate"]),
+          Math.round(
+            stringToNumber(
+              info["Neonatal mortality rate per 100 live births"]
+            ) * 100
+          ) / 100,
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
@@ -72,7 +78,7 @@ export default function QualityHealth({ info }) {
       },
       title: {
         display: true,
-        text: "Vaccination Coverage",
+        text: "Mortality Rates",
         color: "white",
       },
       datalabels: {
@@ -96,7 +102,7 @@ export default function QualityHealth({ info }) {
         },
         title: {
           display: true,
-          text: "Disease",
+          text: "Age Bracket",
           color: "white",
         },
       },
@@ -110,7 +116,7 @@ export default function QualityHealth({ info }) {
         },
         title: {
           display: true,
-          text: "Number",
+          text: "Percentage",
           color: "white",
         },
       },
@@ -119,106 +125,10 @@ export default function QualityHealth({ info }) {
 
   return (
     <div className="h-full overflow-y-auto">
-      <div className="flex flex-col xs:h-[120%] xs:p-2 md:h-1/2 md:p-4">
+      <div className="flex flex-col xs:h-[120%] xs:p-2 md:h-full md:p-4">
         {/* rounded removes top left artefact */}
         <div className="h-full">
           <Bar data={barData} options={barOptions} className="rounded-lg" />
-        </div>
-      </div>
-
-      <div className="h-1/2 gap-3 p-5 xs:flex xs:overflow-x-auto md:grid md:grid-cols-3">
-        <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[300px] md:w-full">
-            <h2 className="text-md font-bold underline">
-              Healthcare Spending per Capita (USD)
-            </h2>
-          </div>
-
-          <div className="p-3">
-            <h3 className="mb-3 text-sm">
-              {info["Healthcare spending per capita"]
-                ? `$${Math.round(info["Healthcare spending per capita"] * 100) / 100}`
-                : "N/A"}
-            </h3>
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[300px] md:w-full">
-            <h2 className="text-md font-bold underline">
-              Cost Effectiveness Analysis Index
-            </h2>
-          </div>
-
-          <div className="p-3">
-            <h3 className="mb-3 text-sm">
-              {info["Cost effectiveness analysis index"]
-                ? info["Cost effectiveness analysis index"]
-                : "N/A"}
-            </h3>
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[150px] md:w-full">
-            <h2 className="text-md font-bold underline">Life Expectancy</h2>
-          </div>
-
-          <div className="p-3">
-            <h3 className="mb-3 text-sm">
-              {info["Life expectancy in years"]
-                ? `${Math.round(info["Life expectancy in years"])} years`
-                : "N/A"}
-            </h3>
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[300px] md:w-full">
-            <h2 className="text-md font-bold underline">
-              Burden of Disease (DALY) per 100 000 People
-            </h2>
-          </div>
-
-          <div className="p-3">
-            <h3 className="mb-3 text-sm">
-              {info["Burden of Disease in DALY per 100,000"]
-                ? info["Burden of Disease in DALY per 100,000"]
-                : "N/A"}
-            </h3>
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[320px] md:w-full">
-            <h2 className="text-md font-bold underline">
-              Prescription Drug Utilization
-            </h2>
-          </div>
-
-          <div className="p-3">
-            <h3 className="mb-3 text-sm">
-              {info["Prescription drug utilization"]
-                ? info["Prescription drug utilization"]
-                : "N/A"}
-            </h3>
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-between rounded-lg bg-sky-200 xs:h-2/3 md:h-full">
-          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[150px] md:w-full">
-            <h2 className="text-md font-bold underline">
-              Patient Satisfaction Rate
-            </h2>
-          </div>
-
-          <div className="p-3">
-            <h3 className="mb-3 text-sm">
-              {info["Patient satisfaction rate"]
-                ? info["Patient satisfaction rate"]
-                : "N/A"}
-            </h3>
-          </div>
         </div>
       </div>
     </div>

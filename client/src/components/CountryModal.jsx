@@ -67,9 +67,6 @@ export default function CountryModal({
 
             <div className="flex flex-col items-center justify-center space-y-2 xs:h-1/3 lg:h-full lg:w-1/3">
               <h1 className="text-5xl font-bold text-white">{info.Country}</h1>
-              {/* <button className="my-5 rounded-lg border border-red-600 bg-red-600 px-3 py-2 font-bold text-white shadow-sm hover:bg-transparent hover:text-red-600">
-                Favourite
-              </button> */}
             </div>
 
             <div className="flex flex-col items-end justify-end p-1 xs:h-1/3 lg:h-full lg:w-1/3">

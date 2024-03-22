@@ -178,7 +178,7 @@ export default function Education({ info }) {
           <div className="p-3">
             <h3 className="mb-3 text-sm">
               {info["Literacy rate percent"]
-                ? `${info["Literacy rate percent"]}`
+                ? `${info["Literacy rate percent"]} %`
                 : "N/A"}
             </h3>
           </div>

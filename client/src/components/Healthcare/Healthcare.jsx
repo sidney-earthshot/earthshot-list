@@ -6,14 +6,12 @@ import { IconCaretDownFilled, IconCaretUpFilled } from "@tabler/icons-react";
 import AccessHealthcare from "./AccessHealthcare";
 import IndicatorsHealth from "./IndicatorsHealth";
 import QualityHealth from "./QualityHealth";
-import IncidenceRate from "./IncidenceRate";
 import DeathRateConditions from "./DeathRateConditions";
 
 const subCategories = [
   "Access to Healthcare",
   "Indicators of Health",
   "Quality of Health",
-  "Incidence Rate of Disease",
   "Death Rate of Conditions",
 ];
 
@@ -77,8 +75,6 @@ export default function Healthcare({ info }) {
           <QualityHealth info={info} />
         ) : currentSubTab === "Death Rate of Conditions" ? (
           <DeathRateConditions info={info} />
-        ) : currentSubTab === "Incidence Rate of Disease" ? (
-          <IncidenceRate info={info} />
         ) : (
           <p>Error! Please Refresh</p>
         )}

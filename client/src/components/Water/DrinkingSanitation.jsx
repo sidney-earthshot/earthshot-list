@@ -137,7 +137,7 @@ export default function DrinkingSanitation({ info }) {
           <div className="p-3">
             <h3 className="mb-3 text-sm">
               {info["Deaths attributed to unsafe water sources"]
-                ? `${info["Deaths attributed to unsafe water sources"]}`
+                ? `${info["Deaths attributed to unsafe water sources"]} deaths`
                 : "N/A"}
             </h3>
           </div>
@@ -155,9 +155,7 @@ export default function DrinkingSanitation({ info }) {
               {info[
                 "Death per 100 000 from no access to hand-washing facilities"
               ]
-                ? info[
-                    "Death per 100 000 from no access to hand-washing facilities"
-                  ]
+                ? `${info["Death per 100 000 from no access to hand-washing facilities"]} deaths`
                 : "N/A"}
             </h3>
           </div>

@@ -45,15 +45,17 @@ export default function Malnutrition({ info }) {
       "Prevalence of Stunting",
       "Prevalence of Wasting",
       "Underweight",
+      "Overweight"
     ],
     datasets: [
       {
         label: "Prevalence",
         data: [
-          stringToNumber(info["Prevalence of undernourishment"]),
-          info["Prevalence of stunting"],
-          info["Prevalence of wasting"],
-          stringToNumber(info["Underweight"]),
+          stringToNumber(info["Prevalence of undernourishment children"]),
+          stringToNumber(info["Prevalence of stunting children"]),
+          stringToNumber(info["Prevalence of wasting children"]),
+          stringToNumber(info["Underweight children"]),
+          stringToNumber(info["Overweight children"]),
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },

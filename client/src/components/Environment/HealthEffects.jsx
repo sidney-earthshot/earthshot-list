@@ -156,7 +156,7 @@ export default function HealthEffects({ info }) {
           <div className="p-3">
             <h3 className="mb-3 text-sm">
               {info["Death rate from lead exposure per 100 000"]
-                ? `${info["Death rate from lead exposure per 100 000"]}`
+                ? `${info["Death rate from lead exposure per 100 000"]} deaths`
                 : "N/A"}
             </h3>
           </div>
