@@ -4,7 +4,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function WaterQuality({ info }) {
+export default function Emissions({ info }) {
   const [indexAxis, setIndexAxis] = useState("x");
 
   useEffect(() => {
@@ -40,14 +40,17 @@ export default function WaterQuality({ info }) {
   }
 
   const barData = {
-    labels: ["Ammonia", "Nitrate", "Phosphorus"],
+    labels: ["Cement", "Coal", "Flaring", "Gas", "Oil", "Aviation"],
     datasets: [
       {
-        label: "Concentration mg/L",
+        label: "CO₂ in tons",
         data: [
-          stringToNumber(info["Ammonia concentration in rivers"]),
-          stringToNumber(info["Nitrate concentrations in rivers"]),
-          stringToNumber(info["Average phosphorus concentration in rivers"]),
+          stringToNumber(info["Annual co2 emissions from cement"]),
+          stringToNumber(info["Annual co2 emissions from coal"]),
+          stringToNumber(info["Annual co2 emissions from flaring"]),
+          stringToNumber(info["Annual co2 emissions from gas"]),
+          stringToNumber(info["Annual co2 emissions from oil"]),
+          stringToNumber(info["Annual co2 emissions from aviation"]),
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
@@ -68,7 +71,7 @@ export default function WaterQuality({ info }) {
       },
       title: {
         display: true,
-        text: "Pollutant Concentrations in Rivers",
+        text: "Annual CO₂ Emissions",
         color: "white",
       },
       datalabels: {
@@ -77,7 +80,7 @@ export default function WaterQuality({ info }) {
         align: "end",
         offset: 5,
         formatter: function (value) {
-          return `${value}mg/L`;
+          return `${value} t`;
         },
       },
       tooltip: {
@@ -97,7 +100,7 @@ export default function WaterQuality({ info }) {
         },
         title: {
           display: true,
-          text: "Pollutant",
+          text: "Source",
           color: "white",
         },
       },
@@ -114,7 +117,7 @@ export default function WaterQuality({ info }) {
         },
         title: {
           display: true,
-          text: "Concentration",
+          text: "CO₂ in tons",
           color: "white",
         },
       },
@@ -127,14 +130,14 @@ export default function WaterQuality({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[180px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Drinking Water Quality Index
+              CO₂ Emissions per Capita
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Drinking Water Quality Index"]
-                ? `${info["Drinking Water Quality Index"]}`
+              {info["CO2 emissions per capita"]
+                ? `${info["CO2 emissions per capita"]}`
                 : "N/A"}
             </h3>
           </div>
@@ -143,37 +146,37 @@ export default function WaterQuality({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[250px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Health Water Quality Index
+              Annual Greenhouse Gas Emissions
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Health Water Quality Index"]
-                ? info["Health Water Quality Index"]
+              {info["Annual greenhouse gas emissions"]
+                ? `${info["Annual greenhouse gas emissions"]}`
                 : "N/A"}
             </h3>
           </div>
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[210px] md:w-full">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[250px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Acceptability Water Quality Index
+              Carbon Intensity of Energy Production
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Acceptability Water Quality Index"]
-                ? info["Acceptability Water Quality Index"]
+              {info["Carbon intensity of energy production"]
+                ? `${info["Carbon intensity of energy production"]}`
                 : "N/A"}
             </h3>
           </div>
         </div>
       </div>
 
-      <div className="mt-12 flex h-3/5 justify-center">
+      <div className="mt-16 flex h-3/5 justify-center">
         <Bar data={barData} options={barOptions} className="rounded-[100px]" />
       </div>
     </div>

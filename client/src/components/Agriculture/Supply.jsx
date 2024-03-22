@@ -5,25 +5,40 @@ Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
 export default function Supply({ info }) {
-  function gramsToNumber(string) {
-    if (string) {
-      // Use a regular expression to match numbers with optional decimal places
-      const match = string.match(/(\d+(\.\d+)?)/);
-      // The first captured group is the number, convert it to a float
-      return match ? parseFloat(match[0]) : null;
-    } else {
-      return "N/A";
-    }
-  }
+  // function gramsToNumber(string) {
+  //   if (string) {
+  //     // Use a regular expression to match numbers with optional decimal places
+  //     const match = string.match(/(\d+(\.\d+)?)/);
+  //     // The first captured group is the number, convert it to a float
+  //     return match ? parseFloat(match[0]) : null;
+  //   } else {
+  //     return "N/A";
+  //   }
+  // }
 
-  function calToNumber(string) {
-    if (string) {
-      // Remove commas and any non-digit characters except for the decimal point
-      const numericString = string.replace(/[^0-9.]+/g, "");
-      // Convert the cleaned string to a number
-      return parseFloat(numericString);
-    } else {
+  // function calToNumber(string) {
+  //   if (string) {
+  //     // Remove commas and any non-digit characters except for the decimal point
+  //     const numericString = string.replace(/[^0-9.]+/g, "");
+  //     // Convert the cleaned string to a number
+  //     return parseFloat(numericString);
+  //   } else {
+  //     return "N/A";
+  //   }
+  // }
+
+  function stringToNumber(string) {
+    if (string === null || string === undefined || string === "") {
       return "N/A";
+    } else if (typeof string === "number") {
+      return string; // Return the number directly if the input is already a number
+    } else if (typeof string === "string") {
+      // Remove non-numeric characters except decimal point and sign, and also remove commas
+      const numericString = string.replace(/[^0-9.-]+/g, "").replace(/,/g, "");
+      const match = numericString.match(/[+-]?([0-9]*[.])?[0-9]+/); // Match a floating point number in the string
+      return match ? parseFloat(match[0]) : "N/A"; // Parse the matched string as a float, or return "N/A" if no match
+    } else {
+      return "N/A"; // Return "N/A" for any other type of input
     }
   }
 
@@ -33,8 +48,8 @@ export default function Supply({ info }) {
       {
         label: "Amount",
         data: [
-          gramsToNumber(info["Supply from animal-based foods"]),
-          gramsToNumber(info["Supply from plant-based foods"]),
+          stringToNumber(info["Supply from animal-based foods"]),
+          stringToNumber(info["Supply from plant-based foods"]),
         ],
         backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
         borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
@@ -82,9 +97,9 @@ export default function Supply({ info }) {
       {
         label: "Amount",
         data: [
-          calToNumber(info["Minimum dietary energy requirement"]),
-          calToNumber(info["Caloric supply per capita"]) -
-            calToNumber(info["Minimum dietary energy requirement"]),
+          stringToNumber(info["Minimum dietary energy requirement"]),
+          stringToNumber(info["Caloric supply per capita"]) -
+            stringToNumber(info["Minimum dietary energy requirement"]),
         ],
         backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
         borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
@@ -137,8 +152,8 @@ export default function Supply({ info }) {
       {
         label: "Amount",
         data: [
-          gramsToNumber(info["Protein supply per capita"]),
-          gramsToNumber(info["Fat supply per capita"]),
+          stringToNumber(info["Protein supply per capita"]),
+          stringToNumber(info["Fat supply per capita"]),
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },

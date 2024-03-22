@@ -4,7 +4,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function WaterQuality({ info }) {
+export default function WithdrawalTreatment({ info }) {
   const [indexAxis, setIndexAxis] = useState("x");
 
   useEffect(() => {
@@ -40,14 +40,13 @@ export default function WaterQuality({ info }) {
   }
 
   const barData = {
-    labels: ["Ammonia", "Nitrate", "Phosphorus"],
+    labels: ["Industrial Use", "Domestic/City Use"],
     datasets: [
       {
-        label: "Concentration mg/L",
+        label: "Billions of m³ of Water",
         data: [
-          stringToNumber(info["Ammonia concentration in rivers"]),
-          stringToNumber(info["Nitrate concentrations in rivers"]),
-          stringToNumber(info["Average phosphorus concentration in rivers"]),
+          stringToNumber(info["Industrial water withdrawal billion m3"]),
+          stringToNumber(info["Domestic water withdrawal billion m3"]),
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
@@ -68,7 +67,7 @@ export default function WaterQuality({ info }) {
       },
       title: {
         display: true,
-        text: "Pollutant Concentrations in Rivers",
+        text: "Freshwater Withdrawal",
         color: "white",
       },
       datalabels: {
@@ -77,7 +76,7 @@ export default function WaterQuality({ info }) {
         align: "end",
         offset: 5,
         formatter: function (value) {
-          return `${value}mg/L`;
+          return `${value} m³`;
         },
       },
       tooltip: {
@@ -97,7 +96,7 @@ export default function WaterQuality({ info }) {
         },
         title: {
           display: true,
-          text: "Pollutant",
+          text: "Water Withdrawal Use",
           color: "white",
         },
       },
@@ -114,7 +113,7 @@ export default function WaterQuality({ info }) {
         },
         title: {
           display: true,
-          text: "Concentration",
+          text: "Billions of m³ of Water",
           color: "white",
         },
       },
@@ -127,14 +126,14 @@ export default function WaterQuality({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[180px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Drinking Water Quality Index
+              Water Productivity, GDP per m³ of Freshwater Withdrawal
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Drinking Water Quality Index"]
-                ? `${info["Drinking Water Quality Index"]}`
+              {info["Water productivity GDP per m3 freshwater withdrawal"]
+                ? `${info["Water productivity GDP per m3 freshwater withdrawal"]}`
                 : "N/A"}
             </h3>
           </div>
@@ -143,14 +142,18 @@ export default function WaterQuality({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[250px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Health Water Quality Index
+              Deaths From No Access to Hand-Washing Favilities per 100 000
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Health Water Quality Index"]
-                ? info["Health Water Quality Index"]
+              {info[
+                "Death per 100 000 from no access to hand-washing facilities"
+              ]
+                ? `${info[
+                    "Death per 100 000 from no access to hand-washing facilities"
+                  ]} deaths`
                 : "N/A"}
             </h3>
           </div>
@@ -159,14 +162,18 @@ export default function WaterQuality({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[210px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Acceptability Water Quality Index
+              Share of Domestic Wastewater Safely Treated in Treatment Plants
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Acceptability Water Quality Index"]
-                ? info["Acceptability Water Quality Index"]
+              {info[
+                "Percent domestic wastewater safely treated in treatment plants"
+              ]
+                ? info[
+                    "Percent domestic wastewater safely treated in treatment plants"
+                  ]
                 : "N/A"}
             </h3>
           </div>

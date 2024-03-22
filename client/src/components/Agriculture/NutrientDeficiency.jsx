@@ -7,6 +7,31 @@ import { Pie, Doughnut, Bar } from "react-chartjs-2";
 export default function NutrientDeficiency({ info }) {
   const [indexAxis, setIndexAxis] = useState("x");
 
+  function stringToNumber(string) {
+    if (string === null || string === undefined || string === "") {
+      return "N/A";
+    } else if (typeof string === "number") {
+      return string; // Return the number directly if the input is already a number
+    } else if (typeof string === "string") {
+      // Remove non-numeric characters except decimal point and sign, and also remove commas
+      const numericString = string.replace(/[^0-9.-]+/g, "").replace(/,/g, "");
+      const match = numericString.match(/[+-]?([0-9]*[.])?[0-9]+/); // Match a floating point number in the string
+      return match ? parseFloat(match[0]) : "N/A"; // Parse the matched string as a float, or return "N/A" if no match
+    } else {
+      return "N/A"; // Return "N/A" for any other type of input
+    }
+  }
+
+  // function percentToNumber(string) {
+  //   if (string === "" || string === undefined || string === null) {
+  //     return "N/A";
+  //   }
+
+  //   // Remove the percentage sign and convert to a floating-point number
+  //   const number = parseFloat(string.replace("%", ""));
+  //   return number;
+  // }
+
   useEffect(() => {
     // Function to update indexAxis based on window width
     const updateAxis = () => {
@@ -23,16 +48,6 @@ export default function NutrientDeficiency({ info }) {
     // Clean up event listener on component unmount
     return () => window.removeEventListener("resize", updateAxis);
   }, []);
-
-  function percentToNumber(string) {
-    if (string === "" || string === undefined || string === null) {
-      return "N/A";
-    }
-
-    // Remove the percentage sign and convert to a floating-point number
-    const number = parseFloat(string.replace("%", ""));
-    return number;
-  }
 
   const barData1 = {
     labels: [
@@ -53,23 +68,23 @@ export default function NutrientDeficiency({ info }) {
       {
         label: "Prevalence",
         data: [
-          percentToNumber(info["Vitamin A"]),
-          percentToNumber(info["Vitamin C"]),
-          percentToNumber(info["Vitamin D"]),
-          percentToNumber(info["Vitamin E"]),
-          percentToNumber(info["Vitamin K"]),
-          percentToNumber(info["Iron or B12"]),
-          percentToNumber(info["Calcium"]),
-          percentToNumber(info["Magnesium"]),
-          percentToNumber(info["Zinc"]),
+          stringToNumber(info["Vitamin A"]),
+          stringToNumber(info["Vitamin C"]),
+          stringToNumber(info["Vitamin D"]),
+          stringToNumber(info["Vitamin E"]),
+          stringToNumber(info["Vitamin K"]),
+          stringToNumber(info["Iron or B12"]),
+          stringToNumber(info["Calcium"]),
+          stringToNumber(info["Magnesium"]),
+          stringToNumber(info["Zinc"]),
           Math.round(
             100 -
-              percentToNumber(
+              stringToNumber(
                 info["Iodized salt consumption household percent"]
               )
           ),
-          percentToNumber(info["Selenium"]),
-          percentToNumber(info["Folate"]),
+          stringToNumber(info["Selenium"]),
+          stringToNumber(info["Folate"]),
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
@@ -82,9 +97,9 @@ export default function NutrientDeficiency({ info }) {
       {
         label: "Prevalence",
         data: [
-          percentToNumber(info["Carbohydrates"]),
-          percentToNumber(info["Proteins"]),
-          percentToNumber(info["Fats"]),
+          stringToNumber(info["Carbohydrates"]),
+          stringToNumber(info["Proteins"]),
+          stringToNumber(info["Fats"]),
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },

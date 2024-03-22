@@ -4,7 +4,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function WaterQuality({ info }) {
+export default function HealthEffects({ info }) {
   const [indexAxis, setIndexAxis] = useState("x");
 
   useEffect(() => {
@@ -40,14 +40,20 @@ export default function WaterQuality({ info }) {
   }
 
   const barData = {
-    labels: ["Ammonia", "Nitrate", "Phosphorus"],
+    labels: [
+      "0-14 Year olds",
+      "Adults",
+    ],
     datasets: [
       {
-        label: "Concentration mg/L",
+        label: "Lead Levels",
         data: [
-          stringToNumber(info["Ammonia concentration in rivers"]),
-          stringToNumber(info["Nitrate concentrations in rivers"]),
-          stringToNumber(info["Average phosphorus concentration in rivers"]),
+          stringToNumber(
+            info["Mean lead concentrations 0-14 years"]
+          ),
+          stringToNumber(
+            info["Mean lead concentrations adults"]
+          ),
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
@@ -68,7 +74,7 @@ export default function WaterQuality({ info }) {
       },
       title: {
         display: true,
-        text: "Pollutant Concentrations in Rivers",
+        text: "Mean Lead Concentration in Population by Age",
         color: "white",
       },
       datalabels: {
@@ -77,7 +83,7 @@ export default function WaterQuality({ info }) {
         align: "end",
         offset: 5,
         formatter: function (value) {
-          return `${value}mg/L`;
+          return `${value} µg/dL`;
         },
       },
       tooltip: {
@@ -97,7 +103,7 @@ export default function WaterQuality({ info }) {
         },
         title: {
           display: true,
-          text: "Pollutant",
+          text: "Age",
           color: "white",
         },
       },
@@ -114,7 +120,7 @@ export default function WaterQuality({ info }) {
         },
         title: {
           display: true,
-          text: "Concentration",
+          text: "Lead Levels in µg/dL",
           color: "white",
         },
       },
@@ -123,18 +129,18 @@ export default function WaterQuality({ info }) {
 
   return (
     <div className="flex h-full w-full flex-col p-5 xs:p-2">
-      <div className="gap-3 p-4 xs:flex xs:h-2/5 xs:overflow-y-auto md:grid md:h-1/5 md:grid-cols-3 md:overflow-visible">
+      <div className="gap-3 p-4 xs:flex xs:h-2/5 xs:overflow-y-auto md:grid md:h-1/5 md:grid-cols-2 md:overflow-visible">
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[180px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Drinking Water Quality Index
+              Share of Paints with Lead Levels Greater than 90ppm
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Drinking Water Quality Index"]
-                ? `${info["Drinking Water Quality Index"]}`
+              {info["Percent of paints with lead levels greater 90ppm"]
+                ? `${info["Percent of paints with lead levels greater 90ppm"]}`
                 : "N/A"}
             </h3>
           </div>
@@ -143,37 +149,21 @@ export default function WaterQuality({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[250px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Health Water Quality Index
+              Death Rate from Lead Exposure per 100 000 People
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Health Water Quality Index"]
-                ? info["Health Water Quality Index"]
-                : "N/A"}
-            </h3>
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[210px] md:w-full">
-            <h2 className="md:text-md font-bold underline xs:text-sm">
-              Acceptability Water Quality Index
-            </h2>
-          </div>
-
-          <div className="p-3">
-            <h3 className="mb-3 text-sm">
-              {info["Acceptability Water Quality Index"]
-                ? info["Acceptability Water Quality Index"]
+              {info["Death rate from lead exposure per 100 000"]
+                ? `${info["Death rate from lead exposure per 100 000"]}`
                 : "N/A"}
             </h3>
           </div>
         </div>
       </div>
 
-      <div className="mt-12 flex h-3/5 justify-center">
+      <div className="mt-16 flex h-3/5 justify-center">
         <Bar data={barData} options={barOptions} className="rounded-[100px]" />
       </div>
     </div>

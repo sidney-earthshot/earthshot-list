@@ -4,10 +4,15 @@ import { IconX, IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
 
 import Tab from "./Tab";
 import TabContent from "./TabContent";
+
 import Benchmark from "./Benchmark";
 import FoodAgriculture from "./Agriculture/FoodAgriculture";
 import Healthcare from "./Healthcare/Healthcare";
 import Water from "./Water/Water";
+import Energy from "./Energy/Energy";
+import Housing from "./Housing/Housing";
+import Environment from "./Environment/Environment";
+import Economic from "./Economic/Economic";
 
 export default function CountryModal({
   visible,
@@ -167,6 +172,14 @@ export default function CountryModal({
             <Healthcare info={info} />
           ) : currentTab === "Water" ? (
             <Water info={info} />
+          ) : currentTab === "Energy" ? (
+            <Energy info={info} />
+          ) : currentTab === "Affordable Housing" ? (
+            <Housing info={info} />
+          ) : currentTab === "Environment" ? (
+            <Environment info={info} />
+          ) : currentTab === "Economic Prosperity" ? (
+            <Economic info={info} />
           ) : (
             <TabContent />
           )}

@@ -2,18 +2,12 @@ import { useState } from "react";
 import React from "react";
 
 import { IconCaretDownFilled, IconCaretUpFilled } from "@tabler/icons-react";
-import WaterQuality from "./WaterQuality";
-import DrinkingSanitation from "./DrinkingSanitation";
-import WithdrawalTreatment from "./WithdrawalTreatment";
+import Education from "./Education";
 
-const subCategories = [
-  "Water Quality",
-  "Drinking and Sanitation",
-  "Water Withdrawal and Treatment",
-];
+const subCategories = ["Education"];
 
-export default function Water({ info }) {
-  const [currentSubTab, setCurrentSubTab] = useState("Water Quality");
+export default function Economic({ info }) {
+  const [currentSubTab, setCurrentSubTab] = useState("Education");
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   return (
@@ -64,12 +58,8 @@ export default function Water({ info }) {
 
       {/* content */}
       <div className="h-full w-full bg-gray-600 xs:rounded-b-lg md:w-5/6 md:rounded-br-lg">
-        {currentSubTab === "Water Quality" ? (
-          <WaterQuality info={info} />
-        ) : currentSubTab === "Drinking and Sanitation" ? (
-          <DrinkingSanitation info={info} />
-        ) : currentSubTab === "Water Withdrawal and Treatment" ? (
-          <WithdrawalTreatment info={info} />
+        {currentSubTab === "Education" ? (
+          <Education info={info} />
         ) : (
           <p>Error! Please Refresh</p>
         )}

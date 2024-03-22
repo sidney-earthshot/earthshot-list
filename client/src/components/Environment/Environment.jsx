@@ -2,18 +2,15 @@ import { useState } from "react";
 import React from "react";
 
 import { IconCaretDownFilled, IconCaretUpFilled } from "@tabler/icons-react";
-import WaterQuality from "./WaterQuality";
-import DrinkingSanitation from "./DrinkingSanitation";
-import WithdrawalTreatment from "./WithdrawalTreatment";
+import Emissions from "./Emissions";
+import Pollution from "./Pollution";
+import Plastics from "./Plastics";
+import HealthEffects from "./HealthEffects";
 
-const subCategories = [
-  "Water Quality",
-  "Drinking and Sanitation",
-  "Water Withdrawal and Treatment",
-];
+const subCategories = ["Emissions", "Pollution", "Plastics", "Health Effects"];
 
-export default function Water({ info }) {
-  const [currentSubTab, setCurrentSubTab] = useState("Water Quality");
+export default function Environment({ info }) {
+  const [currentSubTab, setCurrentSubTab] = useState("Emissions");
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   return (
@@ -64,12 +61,14 @@ export default function Water({ info }) {
 
       {/* content */}
       <div className="h-full w-full bg-gray-600 xs:rounded-b-lg md:w-5/6 md:rounded-br-lg">
-        {currentSubTab === "Water Quality" ? (
-          <WaterQuality info={info} />
-        ) : currentSubTab === "Drinking and Sanitation" ? (
-          <DrinkingSanitation info={info} />
-        ) : currentSubTab === "Water Withdrawal and Treatment" ? (
-          <WithdrawalTreatment info={info} />
+        {currentSubTab === "Emissions" ? (
+          <Emissions info={info} />
+        ) : currentSubTab === "Pollution" ? (
+          <Pollution info={info} />
+        ) : currentSubTab === "Plastics" ? (
+          <Plastics info={info} />
+        ) : currentSubTab === "Health Effects" ? (
+          <HealthEffects info={info} />
         ) : (
           <p>Error! Please Refresh</p>
         )}

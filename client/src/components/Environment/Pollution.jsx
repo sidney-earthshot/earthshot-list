@@ -4,7 +4,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function WaterQuality({ info }) {
+export default function Pollution({ info }) {
   const [indexAxis, setIndexAxis] = useState("x");
 
   useEffect(() => {
@@ -40,14 +40,24 @@ export default function WaterQuality({ info }) {
   }
 
   const barData = {
-    labels: ["Ammonia", "Nitrate", "Phosphorus"],
+    labels: [
+      "Total Air Pollution",
+      "Indoor Air Pollution",
+      "Outdoor Air Pollution",
+    ],
     datasets: [
       {
-        label: "Concentration mg/L",
+        label: "Percentage",
         data: [
-          stringToNumber(info["Ammonia concentration in rivers"]),
-          stringToNumber(info["Nitrate concentrations in rivers"]),
-          stringToNumber(info["Average phosphorus concentration in rivers"]),
+          stringToNumber(
+            info["Percent of deaths attributed to total air pollution"]
+          ),
+          stringToNumber(
+            info["Percent of deaths attributed to indoor air pollution"]
+          ),
+          stringToNumber(
+            info["Percent of deaths attributed to outdoor air pollution"]
+          ),
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
@@ -68,7 +78,7 @@ export default function WaterQuality({ info }) {
       },
       title: {
         display: true,
-        text: "Pollutant Concentrations in Rivers",
+        text: "Deaths Attributed to Pollution",
         color: "white",
       },
       datalabels: {
@@ -77,7 +87,7 @@ export default function WaterQuality({ info }) {
         align: "end",
         offset: 5,
         formatter: function (value) {
-          return `${value}mg/L`;
+          return `${value}%`;
         },
       },
       tooltip: {
@@ -97,7 +107,7 @@ export default function WaterQuality({ info }) {
         },
         title: {
           display: true,
-          text: "Pollutant",
+          text: "Pollution Share",
           color: "white",
         },
       },
@@ -114,7 +124,7 @@ export default function WaterQuality({ info }) {
         },
         title: {
           display: true,
-          text: "Concentration",
+          text: "Percentage",
           color: "white",
         },
       },
@@ -127,14 +137,14 @@ export default function WaterQuality({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[180px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Drinking Water Quality Index
+              Death Rate from Air Pollution per 100 000 People
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Drinking Water Quality Index"]
-                ? `${info["Drinking Water Quality Index"]}`
+              {info["Death rate from air pollution per 100 000"]
+                ? `${info["Death rate from air pollution per 100 000"]} deaths`
                 : "N/A"}
             </h3>
           </div>
@@ -143,37 +153,40 @@ export default function WaterQuality({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[250px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Health Water Quality Index
+              Share of Population with Access to Clean Fuels for Cooking
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Health Water Quality Index"]
-                ? info["Health Water Quality Index"]
+              {info["Percent population access to clean fuels for cooking"]
+                ? `${info["Percent population access to clean fuels for cooking"]}`
                 : "N/A"}
             </h3>
           </div>
         </div>
 
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
-          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[210px] md:w-full">
+          <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[250px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Acceptability Water Quality Index
+              Share of Population Exposed to Air Pollution Levels Above WHO
+              Guidelines
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Acceptability Water Quality Index"]
-                ? info["Acceptability Water Quality Index"]
+              {info[
+                "Percent population exposed to air pollution levels above WHO guidelines"
+              ]
+                ? `${info["Percent population exposed to air pollution levels above WHO guidelines"]}`
                 : "N/A"}
             </h3>
           </div>
         </div>
       </div>
 
-      <div className="mt-12 flex h-3/5 justify-center">
+      <div className="mt-16 flex h-3/5 justify-center">
         <Bar data={barData} options={barOptions} className="rounded-[100px]" />
       </div>
     </div>

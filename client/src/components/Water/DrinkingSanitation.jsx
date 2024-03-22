@@ -4,7 +4,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function WaterQuality({ info }) {
+export default function DrinkingSanitation({ info }) {
   const [indexAxis, setIndexAxis] = useState("x");
 
   useEffect(() => {
@@ -40,14 +40,17 @@ export default function WaterQuality({ info }) {
   }
 
   const barData = {
-    labels: ["Ammonia", "Nitrate", "Phosphorus"],
+    labels: ["Safe Drinking Sources", "Safe Sanitation Facilities"],
     datasets: [
       {
-        label: "Concentration mg/L",
+        label: "Percentage of population",
         data: [
-          stringToNumber(info["Ammonia concentration in rivers"]),
-          stringToNumber(info["Nitrate concentrations in rivers"]),
-          stringToNumber(info["Average phosphorus concentration in rivers"]),
+          stringToNumber(
+            info["Population percent using safe drinking sources"]
+          ),
+          stringToNumber(
+            info["Population percent using safe sanitation facilities"]
+          ),
         ],
         backgroundColor: ["rgba(255, 99, 132, 1)"],
       },
@@ -68,7 +71,7 @@ export default function WaterQuality({ info }) {
       },
       title: {
         display: true,
-        text: "Pollutant Concentrations in Rivers",
+        text: "Access to Water Sources or Facilities",
         color: "white",
       },
       datalabels: {
@@ -77,7 +80,7 @@ export default function WaterQuality({ info }) {
         align: "end",
         offset: 5,
         formatter: function (value) {
-          return `${value}mg/L`;
+          return `${value}%`;
         },
       },
       tooltip: {
@@ -97,7 +100,7 @@ export default function WaterQuality({ info }) {
         },
         title: {
           display: true,
-          text: "Pollutant",
+          text: "Access",
           color: "white",
         },
       },
@@ -114,7 +117,7 @@ export default function WaterQuality({ info }) {
         },
         title: {
           display: true,
-          text: "Concentration",
+          text: "Percentage",
           color: "white",
         },
       },
@@ -127,14 +130,14 @@ export default function WaterQuality({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[180px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Drinking Water Quality Index
+              Deaths Attributed to Unsafe Water Sources
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Drinking Water Quality Index"]
-                ? `${info["Drinking Water Quality Index"]}`
+              {info["Deaths attributed to unsafe water sources"]
+                ? `${info["Deaths attributed to unsafe water sources"]}`
                 : "N/A"}
             </h3>
           </div>
@@ -143,14 +146,18 @@ export default function WaterQuality({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[250px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Health Water Quality Index
+              Deaths From No Access to Hand-Washing Favilities per 100 000
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Health Water Quality Index"]
-                ? info["Health Water Quality Index"]
+              {info[
+                "Death per 100 000 from no access to hand-washing facilities"
+              ]
+                ? info[
+                    "Death per 100 000 from no access to hand-washing facilities"
+                  ]
                 : "N/A"}
             </h3>
           </div>
@@ -159,14 +166,14 @@ export default function WaterQuality({ info }) {
         <div className="flex flex-col justify-between rounded-lg bg-sky-200">
           <div className="rounded-t-lg bg-[#FDD1BA] p-3 xs:w-[210px] md:w-full">
             <h2 className="md:text-md font-bold underline xs:text-sm">
-              Acceptability Water Quality Index
+              Share of the Population that Practices Open Defecation
             </h2>
           </div>
 
           <div className="p-3">
             <h3 className="mb-3 text-sm">
-              {info["Acceptability Water Quality Index"]
-                ? info["Acceptability Water Quality Index"]
+              {info["Population percent practicing open defecation"]
+                ? info["Population percent practicing open defecation"]
                 : "N/A"}
             </h3>
           </div>

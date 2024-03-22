@@ -8,11 +8,17 @@ export default function IndicatorsHealth({ info }) {
   const [indexAxis, setIndexAxis] = useState("x");
 
   function stringToNumber(string) {
-    if (string) {
-      const match = string.match(/[+-]?([0-9]*[.])?[0-9]+/); // Regular expression to match a floating point number
-      return match ? parseFloat(match[0]) : NaN; // Parse the matched string as a float, or return NaN if no match
-    } else {
+    if (string === null || string === undefined || string === "") {
       return "N/A";
+    } else if (typeof string === "number") {
+      return string; // Return the number directly if the input is already a number
+    } else if (typeof string === "string") {
+      // Remove non-numeric characters except decimal point and sign, and also remove commas
+      const numericString = string.replace(/[^0-9.-]+/g, "").replace(/,/g, "");
+      const match = numericString.match(/[+-]?([0-9]*[.])?[0-9]+/); // Match a floating point number in the string
+      return match ? parseFloat(match[0]) : "N/A"; // Parse the matched string as a float, or return "N/A" if no match
+    } else {
+      return "N/A"; // Return "N/A" for any other type of input
     }
   }
 
@@ -132,7 +138,7 @@ export default function IndicatorsHealth({ info }) {
       },
     },
   };
-  
+
   return (
     <div className="h-full overflow-y-auto">
       <div className="flex flex-col xs:h-[120%] xs:p-2 md:h-1/2 md:p-4">
